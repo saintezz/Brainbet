@@ -1,0 +1,242 @@
+/* Mobile detail and messenger fixes. Loaded last on purpose. */
+@media (max-width: 680px) {
+  body.deal-view-open {
+    overflow: hidden !important;
+  }
+
+  body.deal-view-open > .topbar,
+  body.deal-view-open > .mobile-nav {
+    pointer-events: none;
+  }
+
+  body.deal-view-open > .mobile-nav {
+    visibility: hidden !important;
+  }
+
+  .deal-panel {
+    z-index: 140 !important;
+    inset: var(--exchange-vtop) 0 auto 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: var(--exchange-vh) !important;
+    max-height: var(--exchange-vh) !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    transform: translateX(105%) !important;
+    background: #090e14 !important;
+  }
+
+  .deal-panel.mobile-open {
+    display: grid !important;
+    grid-template-rows: auto minmax(0, 1fr);
+    transform: translateX(0) !important;
+  }
+
+  .mobile-deal-close {
+    position: relative !important;
+    top: auto !important;
+    z-index: 4 !important;
+    width: 100% !important;
+    min-height: calc(56px + var(--exchange-safe-top)) !important;
+    padding: var(--exchange-safe-top) 16px 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 10px !important;
+    border: 0 !important;
+    border-bottom: 1px solid #36414e !important;
+    background: #111821 !important;
+    color: #f4c548 !important;
+    box-shadow: 0 7px 22px rgba(0, 0, 0, .42) !important;
+    font-size: 28px !important;
+    line-height: 1 !important;
+  }
+
+  .mobile-deal-close span {
+    display: inline !important;
+    color: #eef2f5 !important;
+    font: 700 12px 'Space Mono', monospace !important;
+    letter-spacing: 0 !important;
+  }
+
+  .deal-content {
+    min-width: 0;
+    min-height: 0;
+    height: 100%;
+    padding: 14px 12px calc(24px + var(--exchange-safe-bottom)) !important;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .deal-title h2 {
+    margin-top: 4px;
+    font-size: 21px !important;
+    line-height: 1.18;
+    overflow-wrap: anywhere;
+  }
+
+  .deal-seller-trust {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .deal-hero {
+    height: min(58vw, 280px) !important;
+    min-height: 210px;
+  }
+
+  .purchase-methods {
+    display: grid;
+    gap: 8px;
+  }
+
+  .purchase-method {
+    width: 100%;
+    min-height: 66px !important;
+    grid-template-columns: 44px minmax(0, 1fr) 28px;
+    text-align: left;
+  }
+
+  .messenger {
+    z-index: 180 !important;
+  }
+
+  .messenger-shell {
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .conversation-head {
+    min-width: 0;
+    padding-inline: 8px !important;
+  }
+
+  .chat-person,
+  .chat-person b,
+  .chat-person small {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .conversation-summary-bar {
+    position: relative;
+    z-index: 16;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+
+  .conversation-summary-tile {
+    min-width: 0;
+    min-height: 58px !important;
+    padding: 7px 8px !important;
+  }
+
+  .conversation-summary-tile b,
+  .conversation-summary-tile em {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .conversation-drawer {
+    top: calc(var(--exchange-safe-top) + 118px) !important;
+    bottom: calc(116px + var(--exchange-safe-bottom)) !important;
+  }
+
+  .conversation-drawer > header {
+    min-height: 48px;
+  }
+
+  .conversation-drawer .conversation-listing {
+    grid-template-columns: 64px minmax(0, 1fr) !important;
+    padding: 9px 10px !important;
+  }
+
+  .conversation-drawer .conversation-listing-visual {
+    width: 64px !important;
+    min-width: 64px !important;
+    height: 64px !important;
+  }
+
+  .deal-workflow-actions {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+  }
+
+  .deal-workflow-actions button {
+    width: 100%;
+    min-height: 52px !important;
+    padding: 9px 12px !important;
+    white-space: normal;
+    line-height: 1.25;
+  }
+
+  .deal-workflow-actions .primary {
+    border-color: #d3a72e;
+    background: #d39a1d;
+    color: #111;
+  }
+
+  .deal-workflow-actions .trust {
+    border-color: #4f9a68;
+    background: #12261a;
+    color: #9cf6b3;
+  }
+
+  .deal-workflow-actions .plain-trust {
+    border-color: #65707d;
+    background: #171d25;
+    color: #d8dee6;
+  }
+
+  .messenger-compose {
+    grid-template-columns: minmax(0, 1fr) 52px !important;
+    padding: 8px 8px calc(8px + var(--exchange-safe-bottom)) !important;
+  }
+
+  .messenger-compose textarea {
+    min-width: 0;
+    font-size: 16px !important;
+  }
+
+  .messenger-compose button {
+    width: 52px !important;
+    min-width: 52px !important;
+    height: 48px !important;
+  }
+
+  .exchange-head-actions {
+    max-height: calc(var(--exchange-vh) - 64px);
+    overflow-y: auto;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .exchange-head-actions .icon-btn:not(.hidden),
+  .exchange-head-actions .display-currency {
+    min-height: 50px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .conversation-summary-tile {
+    padding-inline: 5px !important;
+  }
+
+  .conversation-summary-tile small {
+    font-size: 6px;
+  }
+
+  .conversation-summary-tile b {
+    font-size: 8px;
+  }
+
+  .deal-hero {
+    min-height: 190px;
+  }
+}

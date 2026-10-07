@@ -1,0 +1,215 @@
+/* Independent visual selector for the upgrader wheel. Game odds never depend on it. */
+#screen-upgrader .upg-style-control {
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr) minmax(0,1fr);
+  gap:5px;
+  align-items:stretch;
+  width:100%;
+  margin:8px 0 0;
+  padding:5px;
+  border:1px solid rgba(137,145,166,.22);
+  border-radius:7px;
+  background:rgba(7,9,14,.86);
+  box-shadow:inset 0 1px rgba(255,255,255,.025);
+}
+
+#screen-upgrader .upg-style-label {
+  display:flex;
+  align-items:center;
+  padding:0 8px 0 5px;
+  color:#727b8e;
+  font:700 8px/1 "IBM Plex Mono",monospace;
+  letter-spacing:.13em;
+  white-space:nowrap;
+}
+
+#screen-upgrader .upg-style-option {
+  display:grid;
+  grid-template-columns:28px minmax(0,1fr);
+  gap:8px;
+  align-items:center;
+  min-width:0;
+  min-height:46px;
+  padding:6px 9px;
+  border:1px solid rgba(137,145,166,.18);
+  border-radius:5px;
+  color:#7e879a;
+  text-align:left;
+  background:#0e1118;
+  box-shadow:inset 0 1px rgba(255,255,255,.025);
+  cursor:pointer;
+  transition:border-color .16s ease,color .16s ease,background .16s ease,box-shadow .16s ease,transform .12s ease;
+}
+
+#screen-upgrader .upg-style-option > span:last-child,
+#screen-upgrader .upg-style-option b,
+#screen-upgrader .upg-style-option small {
+  display:block;
+  min-width:0;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+#screen-upgrader .upg-style-option b {
+  font:700 10px/1.15 "IBM Plex Mono",monospace;
+  letter-spacing:.04em;
+}
+
+#screen-upgrader .upg-style-option small {
+  margin-top:4px;
+  color:#626b7e;
+  font:500 8px/1 "IBM Plex Mono",monospace;
+}
+
+#screen-upgrader .upg-style-swatch {
+  position:relative;
+  width:28px;
+  height:28px;
+  overflow:visible !important;
+  border-radius:50%;
+}
+
+#screen-upgrader .upg-style-swatch::before,
+#screen-upgrader .upg-style-swatch::after,
+#screen-upgrader .upg-style-swatch i {
+  content:"";
+  position:absolute;
+  border-radius:50%;
+}
+
+#screen-upgrader .upg-style-swatch--classic {
+  border:2px solid #a95cff;
+  background:
+    linear-gradient(to top,rgba(34,204,102,.92) 0 39%,transparent 40%),
+    radial-gradient(circle,#151822 0 45%,#281738 46% 57%,#090b11 58%);
+  box-shadow:0 0 9px rgba(169,92,255,.34);
+}
+
+#screen-upgrader .upg-style-swatch--classic::before {
+  inset:4px;
+  border:1px solid rgba(255,215,0,.7);
+}
+
+#screen-upgrader .upg-style-swatch--classic::after {
+  top:1px;
+  left:11px;
+  width:3px;
+  height:11px;
+  border-radius:2px;
+  background:linear-gradient(#fff7b5,#ffd700,#a656f0);
+  transform-origin:50% 13px;
+  transform:rotate(18deg);
+}
+
+#screen-upgrader .upg-style-swatch--neon {
+  border:2px solid #9c56d9;
+  background:radial-gradient(circle,#171321 0 42%,#0b0b12 44% 67%,#261439 69%);
+  box-shadow:0 0 10px rgba(190,103,255,.42);
+}
+
+#screen-upgrader .upg-style-swatch--neon::before {
+  inset:1px;
+  border:4px solid transparent;
+  border-right-color:#c66dff;
+  border-bottom-color:#dd86ff;
+  border-left-color:#a956ea;
+  transform:rotate(42deg);
+  filter:drop-shadow(0 0 2px rgba(215,125,255,.9));
+}
+
+#screen-upgrader .upg-style-swatch--neon::after {
+  top:1px;
+  left:11px;
+  width:3px;
+  height:12px;
+  border-radius:1px;
+  background:linear-gradient(#fff7b5,#ffd700,#a656f0);
+  transform-origin:50% 13px;
+  transform:rotate(0deg);
+}
+
+#screen-upgrader .upg-style-option:hover:not(:disabled) {
+  border-color:rgba(240,201,79,.36);
+  color:#e7d994;
+}
+
+#screen-upgrader .upg-style-option:active:not(:disabled) { transform:translateY(1px); }
+
+#screen-upgrader #upg-style-classic.active {
+  border-color:rgba(183,104,255,.75);
+  color:#efd4ff;
+  background:linear-gradient(180deg,rgba(166,86,240,.2),rgba(103,57,151,.055));
+  box-shadow:inset 0 0 0 1px rgba(222,176,255,.05),0 0 14px rgba(166,86,240,.12);
+}
+
+#screen-upgrader #upg-style-neon.active {
+  border-color:rgba(204,113,255,.82);
+  color:#f3d8ff;
+  background:linear-gradient(180deg,rgba(183,88,244,.23),rgba(81,39,125,.07));
+  box-shadow:inset 0 0 0 1px rgba(236,193,255,.06),0 0 15px rgba(185,91,241,.15);
+}
+
+#screen-upgrader .upg-style-option.active small { color:#aaa1ad; }
+#screen-upgrader .upg-style-control.is-locked { opacity:.56; }
+#screen-upgrader .upg-style-option:disabled { cursor:not-allowed; }
+
+/* The purple wheel stays visually clean even inside the new site skin. */
+#screen-upgrader .upg-wheel-wrap[data-wheel-theme="classic"] {
+  background:radial-gradient(circle,rgba(166,86,240,.1),transparent 65%);
+  box-shadow:none;
+}
+
+#screen-upgrader .upg-wheel-wrap[data-wheel-theme="classic"]::before {
+  display:none !important;
+  content:none !important;
+}
+
+#screen-upgrader .upg-wheel-wrap[data-wheel-theme="classic"] .upg-holo {
+  border:0;
+  background:transparent;
+  filter:drop-shadow(0 0 8px rgba(166,86,240,.65));
+}
+
+#screen-upgrader .upg-wheel-wrap[data-wheel-theme="classic"] #upg-wheel-fill {
+  fill:url(upgrader-style-switch-v1.css#upgFillGrad);
+  opacity:1;
+}
+
+#screen-upgrader .upg-wheel-wrap[data-wheel-theme="classic"].upg-low-chance #upg-wheel-fill {
+  filter:brightness(1.35) drop-shadow(0 -2px 4px rgba(122,255,190,.95));
+}
+
+html[data-ui-theme="modern"] #screen-upgrader .upg-style-control {
+  display:none;
+}
+
+html[data-ui-theme="modern"] #screen-upgrader .upg-speed-control { grid-row:3; }
+html[data-ui-theme="modern"] #screen-upgrader #upg-go-btn { grid-row:4; }
+html[data-ui-theme="modern"] #screen-upgrader .upg-quick { grid-row:5; }
+html[data-ui-theme="modern"] #screen-upgrader #upg-result { grid-row:6; }
+
+@media (max-width:430px) {
+  #screen-upgrader .upg-style-control { grid-template-columns:1fr 1fr; gap:4px; }
+  #screen-upgrader .upg-style-label {
+    grid-column:1 / -1;
+    min-height:15px;
+    justify-content:center;
+    padding:0;
+  }
+  #screen-upgrader .upg-style-option {
+    grid-template-columns:23px minmax(0,1fr);
+    gap:6px;
+    min-height:45px;
+    padding:5px 6px;
+  }
+  #screen-upgrader .upg-style-swatch { width:23px; height:23px; }
+  #screen-upgrader .upg-style-swatch--classic::after,
+  #screen-upgrader .upg-style-swatch--neon::after { left:9px; height:9px; transform-origin:50% 11px; }
+  #screen-upgrader .upg-style-option b { font-size:9px; }
+  #screen-upgrader .upg-style-option small { font-size:7px; }
+}
+
+@media (prefers-reduced-motion:reduce) {
+  #screen-upgrader .upg-style-option { transition:none; }
+}

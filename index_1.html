@@ -1,0 +1,445 @@
+<!DOCTYPE html><html lang="ru"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>BrainBet Exchange Demo</title>
+  <script>
+    (function () {
+      var saved = null;
+      try { saved = localStorage.getItem('bb_ui_theme'); } catch (error) {}
+      var legacy = saved === 'classic' || saved === 'classic-refresh';
+      var design = saved === 'ultra' || legacy ? 'ultra' : 'modern';
+      document.documentElement.dataset.uiDesign = design;
+      document.documentElement.dataset.parentTheme = design === 'ultra' ? 'classic' : 'modern';
+      if (legacy) {
+        try { localStorage.setItem('bb_ui_theme', 'ultra'); } catch (error) {}
+      }
+    })();
+  </script>
+  <link rel="preload" href="js/traits.json" as="fetch">
+  <link rel="stylesheet" href="css/style_1.css">
+  <link rel="stylesheet" href="css/reserve-v2.css">
+  <link rel="stylesheet" href="css/exchange-shell-v2.css">
+  <link rel="stylesheet" href="css/ux-responsive-v1_1.css">
+  <link rel="stylesheet" href="css/deal-mobile-v3.css">
+  <link rel="stylesheet" href="css/polish-v4.css">
+  <link rel="stylesheet" href="css/wide-layout-v1.css">
+  <link rel="stylesheet" href="css/ultra-exchange-v1.css">
+</head>
+<body>
+  <div class="grain"></div>
+  <header class="topbar">
+    <button class="exchange-exit-btn" id="exchangeExitBtn" type="button" aria-label="Вернуться в игры">
+      <span aria-hidden="true">←</span><b>В ИГРЫ</b>
+    </button>
+    <div class="brand"><span class="brain">◉</span><strong>BRAIN<span>BET</span></strong><small>EXCHANGE</small></div>
+    <button class="mobile-reserve-shortcut" id="reserveWalletBtn" type="button" title="Гарантийный резерв" aria-label="Открыть гарантийный резерв">
+      <span aria-hidden="true">◆</span><b id="reserveWalletBadge">0</b>
+    </button>
+    <div class="balance"><small data-i18n="my_balance">МОЙ БАЛАНС</small><b id="accountBalance">7 725 🧠</b></div>
+    <button class="exchange-tools-toggle" id="exchangeToolsToggle" type="button" title="Инструменты биржи" aria-label="Инструменты биржи" aria-expanded="false" aria-controls="exchangeHeadActions"><span>ИНСТРУМЕНТЫ</span><b>•••</b></button>
+    <div class="exchange-head-actions" id="exchangeHeadActions">
+      <button class="icon-btn admin-console-btn hidden" id="adminConsoleBtn" type="button" title="Администрирование">
+        <i class="action-glyph" aria-hidden="true">A</i><span class="action-label">Админ</span><b class="action-value">Панель</b><span class="admin-alert-badge hidden" id="adminAlertBadge">0</span>
+      </button>
+      <button class="icon-btn guarantor-hub-btn hidden" id="guarantorHubBtn" type="button" title="Сделки гаранта">
+        <i class="action-glyph" aria-hidden="true">✓</i><span class="action-label">Сделки</span><b class="action-value">Гарант</b><span class="guarantor-badge hidden" id="guarantorBadge">0</span>
+      </button>
+      <button class="icon-btn chat-hub-btn" id="chatHubBtn" type="button" title="Чаты">
+        <i class="action-glyph" aria-hidden="true">✉</i><span class="action-label">Чаты</span><b class="action-value">Сообщения</b><span class="chat-badge hidden" id="chatBadge">0</span>
+      </button>
+      <label class="display-currency" title="Валюта цен">
+        <i class="action-glyph" aria-hidden="true">¤</i><span class="currency-caption">Валюта</span>
+        <select id="displayCurrencySelect" aria-label="Валюта цен">
+          <option value="BYN">BYN</option>
+          <option value="RUB">RUB</option>
+          <option value="USD">USD</option>
+          <option value="EUR">EUR</option>
+          <option value="UAH">UAH</option>
+        </select>
+      </label>
+      <button class="language-btn" id="languageToggle" type="button" title="Language">RU</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-strip">
+      <div>
+        <div class="kicker">MARKET / TRADE FLOOR</div>
+        <h1 data-i18n="market_title">Биржа предметов</h1>
+        <p data-i18n="market_intro">Выставляй брейнротов, находи обмены и договаривайся в одной комнате.</p>
+      </div>
+      <button class="primary" id="createBtn" data-i18n="create_listing">＋ Создать предложение</button>
+    </section>
+
+    <nav class="tabs">
+      <button class="tab active" data-tab="market"><span data-i18n="all_offers">Все предложения</span> <b>128</b></button>
+      <button class="tab" data-tab="mine" data-i18n="my_listings">Мои объявления</button>
+    </nav>
+
+    <div class="mobile-feed-tools">
+      <button id="mobileFiltersBtn" type="button"><span>⌕</span><b>Фильтры</b><i id="mobileFilterCount" class="hidden">0</i></button>
+      <span id="mobileResultCount">0 предложений</span>
+    </div>
+
+    <section class="layout">
+      <aside class="filters">
+        <div class="mobile-panel-head">
+          <div><small>ПОИСК И СОРТИРОВКА</small><b>Фильтры</b></div>
+          <button id="mobileFiltersClose" type="button" aria-label="Закрыть">×</button>
+        </div>
+        <div class="section-label" data-i18n="filters">ФИЛЬТРЫ</div>
+        <div class="filter-summary">
+          <span><b id="filterMatchCount">0</b> <span data-i18n="found_short">найдено</span></span>
+          <button id="resetFilters" type="button" data-i18n="reset_all">Сбросить всё</button>
+        </div>
+        <div id="activeFilterChips" class="active-filter-chips hidden"></div>
+
+        <section class="filter-section always-open">
+          <div class="filter-section-title"><span data-i18n="filter_search">ПОИСК</span></div>
+          <label class="search"><span>⌕</span><input id="search" placeholder="Название предмета" data-i18n-placeholder="item_name"></label>
+          <label class="compact-field"><span data-i18n="seller_name">ПРОДАВЕЦ</span><input id="filterSeller" placeholder="@username" autocomplete="off"></label>
+          <label class="filter-toggle exact-toggle"><input id="filterExact" type="checkbox"><i></i><span data-i18n="exact_item_match">Точное совпадение названия</span></label>
+        </section>
+
+        <details class="filter-section" open="">
+          <summary><span data-i18n="offer_type">СПОСОБ СДЕЛКИ</span><i></i></summary>
+          <div class="listing-intent-filter" aria-label="Направление объявления">
+            <button class="active" type="button" data-filter-intent="all">Все</button>
+            <button type="button" data-filter-intent="sell">Продают</button>
+            <button type="button" data-filter-intent="buy">Покупают</button>
+          </div>
+          <div class="filter-options method-options">
+            <label class="filter-check"><input type="checkbox" data-filter-method="trade"><span class="check-box">✓</span><b>⇄ <span data-i18n="trade">Трейд</span></b><small id="tradeFilterCount">0</small></label>
+            <label class="filter-check"><input type="checkbox" data-filter-method="cash"><span class="check-box">✓</span><b>¤ <span data-i18n="sale">Продажа</span></b><small id="cashFilterCount">0</small></label>
+            <label class="filter-check"><input type="checkbox" data-filter-method="brains"><span class="check-box">✓</span><b>🧠 <span data-i18n="for_brains">За мозги</span></b><small id="brainsFilterCount">0</small></label>
+            <label class="filter-check"><input type="checkbox" data-filter-method="stars"><span class="check-box">✓</span><b>★ Telegram Stars</b><small id="starsFilterCount">0</small></label>
+          </div>
+          <label class="filter-toggle"><input id="filterAllMethods" type="checkbox"><i></i><span data-i18n="require_all_methods">Должны быть все выбранные способы</span></label>
+        </details>
+
+        <details class="filter-section" open="">
+          <summary><span data-i18n="price_and_income">ЦЕНА И ДОХОД</span><i></i></summary>
+          <div class="range-label"><span data-i18n="brains_price">Цена в мозгах</span><small>🧠</small></div>
+          <div class="range-inputs"><input id="filterBrainsMin" type="number" min="0" placeholder="от"><span>—</span><input id="filterBrainsMax" type="number" min="0" placeholder="до"></div>
+          <div class="range-label"><span data-i18n="stars_price">Цена в Telegram Stars</span><small>★</small></div>
+          <div class="range-inputs"><input id="filterStarsMin" type="number" min="0" placeholder="от"><span>—</span><input id="filterStarsMax" type="number" min="0" placeholder="до"></div>
+          <div class="range-label"><span data-i18n="cash_price_short">Цена в валюте</span><small>¤</small></div>
+          <select id="filterCashCurrency" class="currency-filter">
+            <option value="" data-i18n="any_currency">Любая, пересчёт в RUB</option>
+            <option value="BYN">BYN · Br</option>
+            <option value="RUB">RUB · ₽</option>
+            <option value="USD">USD · $</option>
+            <option value="EUR">EUR · €</option>
+            <option value="UAH">UAH · ₴</option>
+          </select>
+          <div class="range-inputs"><input id="filterCashMin" type="number" min="0" placeholder="от"><span>—</span><input id="filterCashMax" type="number" min="0" placeholder="до"></div>
+          <label class="filter-toggle filter-currency-lock"><input id="filterStrictCashCurrency" type="checkbox"><i></i><span data-i18n="strict_cash_currency">Только с оплатой строго в выбранной валюте</span></label>
+          <div class="range-label"><span data-i18n="income_second">Доход в секунду</span><small>250M, 1.5B</small></div>
+          <div class="range-inputs"><input id="filterIncomeMin" inputmode="decimal" placeholder="от"><span>—</span><input id="filterIncomeMax" inputmode="decimal" placeholder="до"></div>
+        </details>
+
+        <details class="filter-section">
+          <summary><span data-i18n="items_and_quantity">ПРЕДМЕТЫ И КОЛИЧЕСТВО</span><i></i></summary>
+          <div class="segmented filter-structure" id="filterStructure">
+            <button class="active" type="button" data-structure="all" data-i18n="any">Любые</button>
+            <button type="button" data-structure="single" data-i18n="single_item">Один</button>
+            <button type="button" data-structure="bundle" data-i18n="bundle">Набор</button>
+          </div>
+          <div class="range-label"><span data-i18n="different_items">Разных предметов</span></div>
+          <div class="range-inputs"><input id="filterItemsMin" type="number" min="1" placeholder="от"><span>—</span><input id="filterItemsMax" type="number" min="1" placeholder="до"></div>
+          <div class="range-label"><span data-i18n="total_quantity">Общее количество</span></div>
+          <div class="range-inputs"><input id="filterQuantityMin" type="number" min="1" placeholder="от"><span>—</span><input id="filterQuantityMax" type="number" min="1" placeholder="до"></div>
+        </details>
+
+        <details class="filter-section">
+          <summary><span data-i18n="attributes">МУТАЦИИ И БАФФЫ</span><i></i></summary>
+          <div class="filter-subhead required" data-i18n="required_attributes">ДОЛЖНО БЫТЬ</div>
+          <label class="compact-field"><span data-i18n="mutation">МУТАЦИЯ</span><select id="filterMutation"><option value="" data-i18n="any_mutation">Любая мутация</option></select></label>
+          <div class="filter-subhead excluded" data-i18n="excluded_attributes">НЕ ДОЛЖНО БЫТЬ</div>
+          <label class="compact-field"><span data-i18n="forbidden_mutation">ИСКЛЮЧИТЬ МУТАЦИЮ</span><select id="filterExcludedMutation"><option value="" data-i18n="any_forbidden_mutation">Не исключать мутации</option></select></label>
+          <div class="filter-rule-toggles">
+            <label class="filter-toggle danger-toggle"><input id="filterNoMutation" type="checkbox"><i></i><span data-i18n="without_mutations">Строго без мутаций</span></label>
+            <label class="filter-toggle danger-toggle"><input id="filterNoTraits" type="checkbox"><i></i><span data-i18n="without_traits">Строго без бафов</span></label>
+          </div>
+          <label class="compact-field trait-filter-search"><span data-i18n="traits_many">БАФФЫ</span><input id="filterTraitSearch" placeholder="Найти бафф..." data-i18n-placeholder="trait_search" autocomplete="off"></label>
+          <div class="segmented trait-selection-mode">
+            <button class="active" type="button" data-trait-selection-mode="include" data-i18n="include_traits">Требовать бафы</button>
+            <button type="button" data-trait-selection-mode="exclude" data-i18n="exclude_traits">Исключать бафы</button>
+          </div>
+          <small class="filter-rule-hint" data-i18n="attribute_rule_hint">Выбери режим, затем нажимай на бафы. Запрещённый баф исключит весь набор.</small>
+          <div id="filterTraitOptions" class="filter-trait-options"></div>
+          <div id="selectedFilterTraits" class="selected-filter-traits hidden"></div>
+          <div class="segmented trait-match-mode" id="traitMatchMode">
+            <button class="active" type="button" data-trait-mode="any" data-i18n="any_selected_trait">Любой выбранный</button>
+            <button type="button" data-trait-mode="all" data-i18n="all_selected_traits">Все выбранные</button>
+          </div>
+        </details>
+
+        <details class="filter-section">
+          <summary><span data-i18n="additional">ДОПОЛНИТЕЛЬНО</span><i></i></summary>
+          <div class="filter-toggle-list">
+            <label class="filter-toggle"><input id="filterScreenshots" type="checkbox"><i></i><span data-i18n="with_screenshots">Со скриншотами продавца</span></label>
+            <label class="filter-toggle"><input id="filterHasMutation" type="checkbox"><i></i><span data-i18n="with_mutation">Только с мутацией</span></label>
+            <label class="filter-toggle"><input id="filterHasTraits" type="checkbox"><i></i><span data-i18n="with_traits">Только с баффами</span></label>
+            <label class="filter-toggle"><input id="filterMultipleMethods" type="checkbox"><i></i><span data-i18n="multiple_methods">Несколько способов сделки</span></label>
+          </div>
+        </details>
+
+        <section class="filter-section always-open sort-section">
+          <div class="filter-section-title"><span data-i18n="sorting">СОРТИРОВКА</span></div>
+          <select id="sort">
+            <option value="new" data-i18n="new_first">Сначала новые</option>
+            <option value="income_desc" data-i18n="income_high">Доход: сначала высокий</option>
+            <option value="income_asc" data-i18n="income_low">Доход: сначала низкий</option>
+            <option value="brains_asc" data-i18n="brains_low">Мозги: сначала дешевле</option>
+            <option value="brains_desc" data-i18n="brains_high">Мозги: сначала дороже</option>
+            <option value="stars_asc" data-i18n="stars_low">Stars: сначала дешевле</option>
+            <option value="stars_desc" data-i18n="stars_high">Stars: сначала дороже</option>
+            <option value="cash_asc" data-i18n="cash_low">Рубли: сначала дешевле</option>
+            <option value="cash_desc" data-i18n="cash_high">Рубли: сначала дороже</option>
+            <option value="quantity_desc" data-i18n="quantity_high">Количество: сначала больше</option>
+            <option value="offers" data-i18n="most_offers">Больше откликов</option>
+          </select>
+        </section>
+        <button id="applyMobileFilters" class="filter-apply" type="button"><span data-i18n="show_results">Показать</span> <b id="applyFilterCount">0</b></button>
+      </aside>
+
+      <section class="feed">
+        <div class="feed-head"><div><b id="feedTitle">Свежие предложения</b><small data-i18n="updated_now">Обновлено только что</small></div><span id="resultCount">6 предложений</span></div>
+        <div class="cards" id="cards"></div>
+        <button class="exchange-load-more hidden" id="exchangeLoadMore" type="button">Показать ещё</button>
+      </section>
+
+      <aside class="deal-panel" id="dealPanel">
+        <button class="mobile-deal-close" id="mobileDealClose" type="button" aria-label="Назад">‹ <span>К предложениям</span></button>
+        <div class="empty-deal" id="emptyDeal">
+          <div class="radar">◎</div>
+          <b data-i18n="select_offer">Выбери предложение</b>
+          <small data-i18n="select_offer_hint">Здесь появятся детали предмета, чат и кнопка обмена.</small>
+        </div>
+        <div class="deal-content hidden" id="dealContent"></div>
+      </aside>
+    </section>
+  </main>
+
+  <nav class="mobile-nav" aria-label="Основная навигация">
+    <button class="active" type="button" data-mobile-action="market"><span>⌂</span><b>Биржа</b></button>
+    <button type="button" data-mobile-action="mine"><span>▣</span><b>Мои</b></button>
+    <button class="mobile-create" type="button" data-mobile-action="create"><span>＋</span><b>Создать</b></button>
+    <button type="button" data-mobile-action="chats"><span>✉</span><b>Чаты</b><i id="mobileChatBadge">0</i></button>
+  </nav>
+  <div class="mobile-scrim" id="mobileScrim"></div>
+
+  <div class="modal hidden" id="modal">
+    <div class="modal-box">
+      <button class="close" id="closeModal" type="button" onclick="window.closeExchangeModal(event)">×</button>
+      <div class="kicker">NEW LISTING / STEP 01</div>
+      <h2 data-i18n="create_offer">Создать предложение</h2>
+      <p class="muted" data-i18n="demo_note">В демо данные никуда не отправляются.</p>
+      <div class="listing-intent-switch" id="listingIntentSwitch" aria-label="Что ты хочешь сделать">
+        <button class="active" type="button" data-listing-intent="sell">
+          <i aria-hidden="true">↑</i><span><b>Продаю</b><small>Выставляю свои предметы</small></span>
+        </button>
+        <button type="button" data-listing-intent="buy">
+          <i aria-hidden="true">⌕</i><span><b>Хочу купить</b><small>Ищу нужные предметы</small></span>
+        </button>
+      </div>
+      <div class="listing-intent-note" id="listingIntentNote">Выбери предметы, которые предлагаешь другим игрокам.</div>
+      <label class="field"><span id="brainrotFieldLabel">ЧТО ПРОДАЁШЬ</span>
+        <div class="brainrot-picker">
+          <input id="brainrotSearch" autocomplete="off" placeholder="Начни вводить название..." data-i18n-placeholder="brainrot_search">
+          <div id="brainrotSuggestions" class="brainrot-suggestions hidden"></div>
+          <div id="selectedBrainrots" class="selected-brainrots"></div>
+          <div id="traitEditor" class="trait-editor hidden">
+            <div class="trait-editor-head">
+              <b id="traitTargetName">TRAITS</b>
+              <button id="closeTraitEditor" type="button">x</button>
+            </div>
+            <section class="mutation-editor">
+              <div class="editor-section-title">
+                <b data-i18n="mutation_one">МУТАЦИЯ</b>
+                <small data-i18n="mutation_hint">можно выбрать только одну</small>
+              </div>
+              <div id="mutationOptions" class="mutation-options"></div>
+            </section>
+            <div class="editor-section-title traits-title">
+              <b data-i18n="traits_many">БАФЫ</b>
+              <small data-i18n="traits_hint">можно выбрать несколько</small>
+            </div>
+            <input id="traitSearch" autocomplete="off" placeholder="Find a trait..." data-i18n-placeholder="trait_search">
+            <div id="traitSuggestions" class="trait-suggestions"></div>
+            <div id="selectedTraits" class="selected-traits"></div>
+            <div id="incomePreview" class="income-preview"></div>
+          </div>
+        </div>
+        <small class="picker-hint" data-i18n="picker_hint">Выбрать можно только предметы из каталога. Можно добавить несколько.</small>
+      </label>
+      <div class="deal-type-prompt" id="dealTypePrompt">КАК ГОТОВ ПОЛУЧИТЬ ОПЛАТУ</div>
+      <div class="deal-types">
+        <label><input type="checkbox" id="typeCash"> <span>¤</span><b data-i18n="sale">Продажа</b></label>
+        <label><input type="checkbox" id="typeBrains"> <span>🧠</span><b data-i18n="for_brains">За мозги</b></label>
+        <label><input type="checkbox" id="typeStars"> <span>★</span><b>Telegram Stars</b></label>
+        <label><input type="checkbox" id="typeTrade"> <span>⇄</span><b data-i18n="trade">Трейд</b></label>
+      </div>
+      <div id="cashFields" class="conditional hidden">
+        <div class="cash-price-editor">
+          <label class="field"><span id="cashPriceLabel">ЦЕНА ПРОДАЖИ</span><input id="newCash" type="number" min="0.01" max="100000000" step="0.01" inputmode="decimal" placeholder="Например, 25" data-i18n-placeholder="cash_placeholder"></label>
+          <label class="field currency-field"><span data-i18n="currency">ВАЛЮТА</span>
+            <select id="newCashCurrency">
+              <option value="BYN">BYN · Br</option>
+              <option value="RUB" selected="">RUB · ₽</option>
+              <option value="USD">USD · $</option>
+              <option value="EUR">EUR · €</option>
+              <option value="UAH">UAH · ₴</option>
+            </select>
+          </label>
+        </div>
+        <label class="cash-currency-only filter-toggle">
+          <input id="newCashCurrencyOnly" type="checkbox">
+          <i aria-hidden="true"></i>
+          <span><b data-i18n="currency_only">Только за выбранную валюту</b><small data-i18n="currency_only_hint">Покупатель должен рассчитаться именно в этой валюте. Пересчёт будет только справочным.</small></span>
+        </label>
+        <small class="currency-rate-note" data-i18n="currency_rate_note">Для защищённой сделки курс фиксируется в момент запуска.</small>
+      </div>
+      <div id="brainsFields" class="conditional hidden">
+        <label class="field"><span id="brainPriceLabel">ЦЕНА В МОЗГАХ BRAINBET</span><input id="newPrice" type="number" placeholder="Например, 500" data-i18n-placeholder="brain_placeholder"></label>
+      </div>
+      <div id="starsFields" class="conditional hidden">
+        <label class="field"><span id="starsPriceLabel">ЦЕНА В TELEGRAM STARS</span><input id="newStars" type="number" min="1" max="100000000" step="1" inputmode="numeric" placeholder="Например, 250"></label>
+        <small class="currency-rate-note">Количество фиксируется при запуске сделки. Оплата Stars проводится вне BrainBet.</small>
+      </div>
+      <div id="tradeFields" class="conditional hidden">
+        <label class="field"><span id="tradeFieldLabel">НА ЧТО ГОТОВ ОБМЕНЯТЬ</span><textarea id="newTrade" placeholder="Dragon Cannelloni, Cerberus или ваши предложения" data-i18n-placeholder="trade_placeholder"></textarea></label>
+      </div>
+      <div class="upload" id="screenshotDrop">
+        <input class="hidden" id="screenshotInput" type="file" accept="image/jpeg,image/png,image/webp,image/gif" multiple="">
+        <button class="screenshot-picker" id="chooseScreenshots" type="button">
+          <span data-i18n="upload">＋ Перетащи скриншоты сюда</span>
+          <small data-i18n="up_to_files">до 6 изображений · 6 МБ каждое · 10 МБ вместе</small>
+        </button>
+        <div class="screenshot-previews" id="screenshotPreviews"></div>
+      </div>
+      <button class="primary full" id="publishBtn" data-i18n="publish">Опубликовать демо-объявление</button>
+    </div>
+  </div>
+  <div class="reserve-wallet hidden" id="reserveWallet">
+    <section class="reserve-wallet-shell" role="dialog" aria-modal="true" aria-labelledby="reserveWalletTitle">
+      <header>
+        <div><small>BRAINBET TRUST VAULT</small><h2 id="reserveWalletTitle">Гарантийный резерв</h2></div>
+        <button id="closeReserveWallet" type="button" aria-label="Закрыть">×</button>
+      </header>
+      <div class="reserve-wallet-total">
+        <span>◆</span>
+        <div><small>АКТИВНЫЙ ГАРАНТИЙНЫЙ РЕЗЕРВ</small><strong id="reserveWalletTotal">0 🧠</strong><em>Эту сумму видят участники сделок</em></div>
+      </div>
+      <div class="reserve-wallet-breakdown">
+        <span class="available"><small>Доступно для сделок</small><b id="reserveWalletAvailable">0 🧠</b></span>
+        <span><small>Удерживается в сделках</small><b id="reserveWalletHeld">0 🧠</b></span>
+        <span class="pending"><small>Заявка на снятие</small><b id="reserveWalletPending">0 🧠</b></span>
+        <span><small>Свободный баланс</small><b id="reserveWalletBalance">0 🧠</b></span>
+      </div>
+      <div class="reserve-operation-grid">
+        <section>
+          <small>ПОПОЛНИТЬ РЕЗЕРВ</small>
+          <p>Мозги сразу станут видны другим игрокам и смогут использоваться как гарантия сделки.</p>
+          <label><span>СУММА</span><input id="reserveDepositInput" type="number" min="1" step="1" inputmode="numeric" placeholder="Например, 500"></label>
+          <button class="primary" id="reserveWalletDeposit" type="button">+ ДОБАВИТЬ В РЕЗЕРВ</button>
+        </section>
+        <section class="withdraw-request-section">
+          <small>СНЯТЬ ИЗ РЕЗЕРВА</small>
+          <p>Снятие выполняется только после проверки администратором. Пока заявка рассматривается, сумма заблокирована.</p>
+          <label><span>СУММА</span><input id="reserveWithdrawInput" type="number" min="1" step="1" inputmode="numeric" placeholder="Сколько снять"></label>
+          <button id="reserveWalletWithdraw" type="button">ОТПРАВИТЬ ЗАЯВКУ</button>
+        </section>
+      </div>
+      <div class="reserve-request-history" id="reserveRequestHistory"></div>
+      <small class="reserve-wallet-status" id="reserveWalletStatus"></small>
+    </section>
+  </div>
+  <div class="messenger hidden" id="messenger">
+    <div class="messenger-shell" id="messengerShell">
+      <aside class="thread-list-pane">
+        <header class="messenger-title">
+          <div><span data-i18n="all_chats">ВСЕ ПЕРЕПИСКИ</span><h2 data-i18n="chats">Чаты</h2></div>
+          <button id="closeMessenger" type="button" aria-label="Close">×</button>
+        </header>
+        <label class="messenger-search"><span>⌕</span><input id="chatSearch" data-i18n-placeholder="search_chats" placeholder="Поиск по чатам..."></label>
+        <div class="thread-list" id="threadList"></div>
+      </aside>
+      <section class="conversation-pane" id="conversationPane"></section>
+    </div>
+  </div>
+  <div class="admin-help-dialog hidden" id="adminHelpDialog" role="dialog" aria-modal="true" aria-labelledby="adminHelpTitle">
+    <form class="admin-help-card" id="adminHelpForm">
+      <header>
+        <div><small>ПОДДЕРЖКА СДЕЛКИ</small><h2 id="adminHelpTitle">Вызвать администратора</h2></div>
+        <button id="adminHelpClose" type="button" aria-label="Закрыть">×</button>
+      </header>
+      <p>После отправки администратор увидит переписку, а активная сделка автоматически перейдёт в спор.</p>
+      <label>
+        <span>ПРИЧИНА</span>
+        <select id="adminHelpReason" required="">
+          <option value="">Выбери причину</option>
+          <option value="Не получил оплату">Не получил оплату</option>
+          <option value="Не получил предмет">Не получил предмет</option>
+          <option value="Подозрение на обман">Подозрение на обман</option>
+          <option value="Нарушение условий сделки">Нарушение условий сделки</option>
+          <option value="Другое">Другое</option>
+        </select>
+      </label>
+      <label>
+        <span>ПОДРОБНОСТИ</span>
+        <textarea id="adminHelpDetails" maxlength="400" rows="4" placeholder="Коротко опиши, что произошло"></textarea>
+        <small><b id="adminHelpCounter">0</b>/400</small>
+      </label>
+      <div class="admin-help-error" id="adminHelpError"></div>
+      <footer><button id="adminHelpCancel" type="button">ОТМЕНА</button><button class="danger" id="adminHelpSubmit" type="submit">ВЫЗВАТЬ АДМИНИСТРАТОРА</button></footer>
+    </form>
+  </div>
+  <div class="screenshot-viewer hidden" id="screenshotViewer" role="dialog" aria-modal="true" aria-label="Screenshot viewer">
+    <div class="screenshot-viewer-bar">
+      <div><b id="screenshotViewerName"></b><small id="screenshotViewerCounter"></small></div>
+      <button id="screenshotViewerClose" type="button" aria-label="Закрыть">×</button>
+    </div>
+    <button class="screenshot-viewer-nav previous" id="screenshotViewerPrev" type="button" aria-label="Предыдущее фото">‹</button>
+    <figure><img id="screenshotViewerImage" alt=""></figure>
+    <button class="screenshot-viewer-nav next" id="screenshotViewerNext" type="button" aria-label="Следующее фото">›</button>
+  </div>
+  <div class="guarantee-console hidden" id="guaranteeConsole">
+    <div class="guarantee-shell">
+      <header class="guarantee-head">
+        <div><small>BRAINBET SAFE DEAL</small><h2>Центр сделок</h2></div>
+        <button id="closeGuaranteeConsole" type="button" aria-label="Закрыть">×</button>
+      </header>
+      <div class="guarantee-summary" id="guaranteeSummary"></div>
+      <div class="guarantee-list" id="guaranteeDealList"></div>
+    </div>
+  </div>
+  <div class="admin-console hidden" id="adminConsole">
+    <div class="admin-shell">
+      <header class="admin-head">
+        <div><small>BrainBet Exchange</small><h2>Администрирование</h2></div>
+        <button id="closeAdminConsole" type="button" aria-label="Закрыть">×</button>
+      </header>
+      <nav class="admin-tabs" aria-label="Разделы администрирования">
+        <button class="active" type="button" data-admin-tab="listings">Объявления</button>
+        <button type="button" data-admin-tab="calls">Вызовы <span id="adminCallsTabBadge">0</span></button>
+        <button type="button" data-admin-tab="chats">Переписки</button>
+        <button type="button" data-admin-tab="users">Игроки</button>
+        <button type="button" data-admin-tab="deals">Сделки</button>
+        <button type="button" data-admin-tab="reserve">Резерв <span id="adminReserveTabBadge">0</span></button>
+        <button type="button" data-admin-tab="guarantors">Гаранты</button>
+        <button type="button" data-admin-tab="audit">Журнал</button>
+      </nav>
+      <div class="admin-toolbar">
+        <label><span>⌕</span><input id="adminSearch" placeholder="Поиск..."></label>
+        <span id="adminResultCount"></span>
+      </div>
+      <div class="admin-content" id="adminContent"></div>
+    </div>
+  </div>
+  <script src="js/app_1.js"></script>
+
+
+
+</body></html>

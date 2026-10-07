@@ -1,0 +1,134 @@
+/* Real wide-screen exchange: keep the market fluid instead of centering a phone-sized strip. */
+@media (min-width: 901px) {
+  .topbar {
+    min-height: 74px;
+    padding-inline: clamp(28px, 3.2vw, 84px);
+  }
+
+  main {
+    width: calc(100% - clamp(56px, 7vw, 176px));
+    max-width: 2320px;
+    margin-inline: auto;
+    padding: 30px 0 64px;
+  }
+
+  .hero-strip {
+    min-height: 154px;
+    padding: 30px clamp(30px, 2.5vw, 54px);
+  }
+
+  .hero-strip h1 {
+    font-size: clamp(34px, 2vw, 48px);
+  }
+
+  .layout {
+    grid-template-columns:
+      clamp(250px, 13vw, 320px)
+      minmax(620px, 1fr)
+      clamp(390px, 21vw, 500px);
+    gap: clamp(18px, 1.35vw, 30px);
+    align-items: stretch;
+  }
+
+  .filters,
+  .deal-panel,
+  .feed {
+    min-width: 0;
+  }
+
+  .feed,
+  .deal-panel {
+    min-height: clamp(620px, 63vh, 940px);
+  }
+
+  .deal-panel {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .empty-deal {
+    flex: 1;
+    height: auto;
+    min-height: 620px;
+    padding: 42px;
+    background:
+      radial-gradient(circle at 50% 46%, rgba(232,183,60,.09), transparent 25%),
+      linear-gradient(180deg, rgba(255,255,255,.018), transparent 45%);
+  }
+
+  .cards {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+
+  .cards.is-empty {
+    display: block;
+    min-height: 620px;
+  }
+
+  .exchange-empty-market {
+    min-height: 620px;
+    display: grid;
+    place-items: center;
+    padding: clamp(34px, 5vw, 76px);
+    border: 1px solid var(--line);
+    background:
+      linear-gradient(90deg, rgba(255,255,255,.022) 1px, transparent 1px),
+      linear-gradient(rgba(255,255,255,.022) 1px, transparent 1px),
+      radial-gradient(circle at 50% 38%, rgba(232,183,60,.12), transparent 29%),
+      #0c1016;
+    background-size: 34px 34px, 34px 34px, auto, auto;
+  }
+
+  .exchange-empty-market-card {
+    width: min(620px, 100%);
+    padding: clamp(30px, 3vw, 54px);
+    border: 1px solid #5e4b28;
+    background: rgba(12,16,22,.9);
+    box-shadow: 0 24px 70px rgba(0,0,0,.36), inset 0 0 36px rgba(232,183,60,.035);
+    text-align: center;
+  }
+
+  .exchange-empty-market-mark {
+    width: 82px;
+    height: 82px;
+    margin: 0 auto 24px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    color: var(--gold);
+    font-size: 36px;
+    box-shadow: 0 0 28px rgba(232,183,60,.2), inset 0 0 24px rgba(232,183,60,.08);
+  }
+
+  .exchange-empty-market-card h3 {
+    margin: 0;
+    color: #fff5dd;
+    font-size: clamp(23px, 1.5vw, 32px);
+  }
+
+  .exchange-empty-market-card p {
+    max-width: 520px;
+    margin: 14px auto 24px;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  .exchange-empty-market-card .primary {
+    min-width: 240px;
+  }
+}
+
+@media (min-width: 2100px) {
+  .topbar {
+    gap: 30px;
+  }
+
+  .exchange-head-actions {
+    gap: 10px;
+  }
+
+  .exchange-head-actions .icon-btn {
+    min-width: 96px;
+  }
+}

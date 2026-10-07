@@ -1,0 +1,286 @@
+/* ULTRA exchange. Layout, scroll containers and transaction states stay in the base skin. */
+html[data-ui-design="ultra"] {
+  color-scheme: dark;
+  --bg: #080e1a;
+  --gold: #72f3cc;
+  --green: #72f3cc;
+  --orange: #ffc18c;
+  --line: #253449;
+  --muted: #96a8bf;
+  --ultra-panel: #0f1929;
+  --ultra-raised: #152238;
+  background: var(--bg);
+}
+
+html[data-ui-design="ultra"] body {
+  color: #ecf4ff;
+  font-family: "Manrope", "Inter", "Segoe UI", Arial, sans-serif;
+  background: radial-gradient(ellipse at 12% 0, #15384266, transparent 42%),
+    radial-gradient(ellipse at 96% 8%, #142b4b77, transparent 48%), #080e1a;
+}
+
+html[data-ui-design="ultra"] :is(button, input, textarea, select) {
+  font-family: inherit;
+}
+
+html[data-ui-design="ultra"] :is(button, [role="button"], input, textarea, select):focus-visible {
+  outline: 2px solid #82cfff;
+  outline-offset: 3px;
+}
+
+html[data-ui-design="ultra"] .grain { display: none; }
+html[data-ui-design="ultra"] main { background: transparent; box-shadow: none; }
+
+html[data-ui-design="ultra"] .topbar {
+  background: #0d1626f7;
+  border-color: #293b50;
+  box-shadow: 0 8px 36px #00000028;
+}
+html[data-ui-design="ultra"] .brand { letter-spacing: -.6px; font-weight: 850; }
+html[data-ui-design="ultra"] .brand small { color: #82cfff; letter-spacing: 2px; }
+html[data-ui-design="ultra"] .brain { color: #72f3cc; text-shadow: 0 0 18px #72f3cc28; }
+html[data-ui-design="ultra"] .balance b { color: #eaf8ff; font-variant-numeric: tabular-nums; }
+
+html[data-ui-design="ultra"] :is(.exchange-exit-btn, .exchange-tools-toggle,
+  .language-btn, .mobile-reserve-shortcut, .exchange-head-actions .icon-btn,
+  .exchange-head-actions .display-currency, .exchange-head-actions .reserve-wallet-btn) {
+  border-color: #30445d;
+  border-radius: 11px;
+  background: #162439;
+  box-shadow: inset 0 1px #ffffff05;
+  color: #d8eaff;
+}
+html[data-ui-design="ultra"] :is(.action-glyph, .exchange-head-actions .action-value) {
+  color: #82cfff;
+}
+html[data-ui-design="ultra"] :is(.action-label, .currency-caption) { color: #a0b3cb; }
+html[data-ui-design="ultra"] .exchange-head-actions .display-currency select {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #e9f6ff;
+}
+html[data-ui-design="ultra"] .exchange-head-actions .display-currency::after { color: #82cfff; }
+html[data-ui-design="ultra"] .display-currency option { background: #122038; color: #ecf4ff; }
+
+html[data-ui-design="ultra"] .hero-strip {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #2b4757;
+  border-radius: 22px;
+  background: radial-gradient(ellipse at 90% -30%, #64dece25, transparent 62%),
+    linear-gradient(115deg, #15263a, #101b2e 72%);
+  box-shadow: inset 0 1px #d8f5ff0a;
+}
+html[data-ui-design="ultra"] .hero-strip h1 {
+  color: #f3f8ff;
+  font-weight: 800;
+  letter-spacing: -1.25px;
+}
+html[data-ui-design="ultra"] .hero-strip p { color: #b0bfd2; line-height: 1.6; }
+html[data-ui-design="ultra"] .kicker { color: #72f3cc; letter-spacing: 1.8px; }
+
+html[data-ui-design="ultra"] :is(.primary, .offer-btn, .filter-apply) {
+  border: 1px solid #8df7d9;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #8bf9d9, #66dfcd);
+  box-shadow: 0 5px 22px #72f3cc12, inset 0 1px #eafff977;
+  color: #092722;
+  font-weight: 800;
+  letter-spacing: .1px;
+}
+html[data-ui-design="ultra"] :is(.primary, .offer-btn, .filter-apply):hover {
+  background: #9afbdd;
+  box-shadow: 0 6px 24px #72f3cc22;
+}
+
+html[data-ui-design="ultra"] .tabs { gap: 6px; border-color: #253b50; }
+html[data-ui-design="ultra"] .tab {
+  border-radius: 12px 12px 0 0;
+  background: transparent;
+  color: #a8bbd2;
+  font-weight: 700;
+}
+html[data-ui-design="ultra"] .tab.active {
+  background: #17332f;
+  border-color: #31514d;
+  border-bottom-color: #72f3cc;
+  color: #9df8db;
+}
+html[data-ui-design="ultra"] :is(.filters, .deal-panel, .card) {
+  border-color: #263a51;
+  border-radius: 18px;
+  background: #101c2d;
+  box-shadow: 0 8px 24px #00000018, inset 0 1px #ffffff04;
+}
+html[data-ui-design="ultra"] .card { padding: 13px; }
+html[data-ui-design="ultra"] .card h3 { font-size: 15px; line-height: 1.4; letter-spacing: -.2px; }
+html[data-ui-design="ultra"] .card.selected { border-color: #72f3cc; box-shadow: 0 0 0 1px #72f3cc44; }
+html[data-ui-design="ultra"] :is(.item-photo, .deal-hero) {
+  overflow: hidden;
+  border-radius: 13px;
+  background: radial-gradient(ellipse at 50% 25%, #274159, #142238 78%);
+}
+html[data-ui-design="ultra"] :is(.listing-media.card, .listing-media.detail, .listing-brainrot-visual) {
+  background-color: #15263b;
+  border-color: #2c425c;
+}
+html[data-ui-design="ultra"] .price { color: #8ff3d4; font-variant-numeric: tabular-nums; }
+html[data-ui-design="ultra"] :is(.tag, .term, .listing-income, .listing-cover-income) {
+  border-radius: 7px;
+}
+html[data-ui-design="ultra"] :is(.feed-head, .meta, .filter-section) { border-color: #26394f; }
+html[data-ui-design="ultra"] .section-label { color: #b4c8df; letter-spacing: 1.5px; }
+
+html[data-ui-design="ultra"] :is(.search, .filter-summary, .filter-check,
+  .filter-toggle, .active-filter-chips button, .selected-filter-traits button) {
+  border-color: #2c4059;
+  border-radius: 9px;
+  background: #111f32;
+}
+html[data-ui-design="ultra"] :is(.filters input:not([type="checkbox"]), .filters select,
+  .field input, .field select, .field textarea, .currency-filter) {
+  border: 1px solid #30465f;
+  border-radius: 9px;
+  background: #0b1727;
+  color: #e8f3ff;
+  min-height: 38px;
+}
+html[data-ui-design="ultra"] .search input { border: 0; background: transparent; min-height: 24px; }
+html[data-ui-design="ultra"] :is(input, textarea)::placeholder { color: #849ab5; opacity: 1; }
+html[data-ui-design="ultra"] :is(.listing-intent-filter, .segmented, .listing-intent-switch) {
+  gap: 4px;
+}
+html[data-ui-design="ultra"] :is(.listing-intent-filter, .segmented, .listing-intent-switch) button {
+  border-radius: 8px;
+  border-color: #2a425e;
+  background: #122238;
+  color: #b1c6df;
+}
+html[data-ui-design="ultra"] :is(.listing-intent-filter, .segmented, .listing-intent-switch) button.active {
+  border-color: #579b91;
+  background: #193f3b;
+  color: #b7ffe8;
+}
+html[data-ui-design="ultra"] .filter-check input:checked + .check-box {
+  border-color: #72f3cc;
+  background: #72f3cc;
+  color: #092722;
+}
+html[data-ui-design="ultra"] .empty-deal {
+  background: radial-gradient(ellipse at 50% 45%, #214a532d, transparent 60%);
+}
+html[data-ui-design="ultra"] .radar { color: #72f3cc; text-shadow: 0 0 26px #72f3cc22; }
+html[data-ui-design="ultra"] .exchange-empty-market {
+  border-color: #263a51;
+  border-radius: 18px;
+  background: radial-gradient(ellipse at 50% 30%, #264c6228, transparent 68%), #101a2b;
+}
+html[data-ui-design="ultra"] .exchange-empty-market-card {
+  border-color: #2d495a;
+  border-radius: 22px;
+  background: #132237;
+  box-shadow: 0 24px 52px #00000022;
+}
+html[data-ui-design="ultra"] .exchange-empty-market-card h3 { color: #eef8ff; letter-spacing: -.7px; }
+html[data-ui-design="ultra"] .exchange-empty-market-mark {
+  color: #72f3cc;
+  border-color: #4b8c87;
+  background: #153a39;
+  box-shadow: 0 0 32px #72f3cc0c;
+}
+
+html[data-ui-design="ultra"] :is(.modal-box, .reserve-wallet-shell,
+  .guarantee-console-shell, .admin-console-shell, .messenger-shell) {
+  border-color: #314c63;
+  border-radius: 22px;
+  background: #101d30;
+  color: #ecf4ff;
+  box-shadow: 0 26px 85px #00000060;
+}
+html[data-ui-design="ultra"] :is(.messenger-title, .conversation-head,
+  .messenger-composer, .mobile-panel-head, .reserve-wallet-head,
+  .guarantee-console-head, .admin-console-head) {
+  background: #16263c !important;
+  border-color: #2c425a !important;
+}
+html[data-ui-design="ultra"] :is(.thread-list-pane, .conversation-pane) {
+  background: #0f1a2b !important;
+  border-color: #2b415c;
+}
+html[data-ui-design="ultra"] .messenger-messages {
+  background: radial-gradient(ellipse at 80% 10%, #17354e44, transparent 65%), #0c1626;
+}
+html[data-ui-design="ultra"] .thread-row { border-color: #20364e; }
+html[data-ui-design="ultra"] .thread-row.active {
+  background: #183b3a;
+  box-shadow: inset 3px 0 #72f3cc;
+}
+html[data-ui-design="ultra"] .message-bubble {
+  border: 1px solid #2a425e;
+  border-radius: 15px 15px 15px 5px;
+  background: #192c44;
+  color: #e8f3ff;
+}
+html[data-ui-design="ultra"] .message-row.mine .message-bubble {
+  border-color: #31605c;
+  border-radius: 15px 15px 5px 15px;
+  background: #163c3b;
+  color: #dffff5;
+}
+html[data-ui-design="ultra"] .message-text { font-size: 13px; line-height: 1.6; }
+html[data-ui-design="ultra"] :is(.message-system, .message-meta, .message-author) { color: #a8c2d9; }
+html[data-ui-design="ultra"] .message-receipt.read { color: #72f3cc; }
+html[data-ui-design="ultra"] :is(.messenger-search, .messenger-composer textarea) {
+  border-color: #314a67;
+  border-radius: 10px;
+  background: #0e1b2e;
+  color: #eff7ff;
+}
+html[data-ui-design="ultra"] :is(.deal-methods, .deal-guard-fee, .deal-status,
+  .deal-steps, .reserve-card, .reserve-summary, .guarantee-row,
+  .admin-row, .admin-guarantor-row, .open-listing-chats, .upload) {
+  border-color: #314c63;
+  border-radius: 12px;
+  background-color: #14243a;
+}
+html[data-ui-design="ultra"] .deal-guard-fee b { color: #8ff3d4; }
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  html[data-ui-design="ultra"] .card { transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease; }
+  html[data-ui-design="ultra"] .card:hover { border-color: #558791; transform: translateY(-3px); box-shadow: 0 12px 24px #00000030; }
+}
+
+@media (max-width: 900px) {
+  html[data-ui-design="ultra"] .topbar { border-radius: 0; background: #0d1728; }
+  html[data-ui-design="ultra"] main { background: #0a1322; border-color: #23394f; }
+  html[data-ui-design="ultra"] .hero-strip { border-radius: 0 0 18px 18px; }
+  html[data-ui-design="ultra"] .hero-strip h1 { font-size: 26px; letter-spacing: -.8px; }
+  html[data-ui-design="ultra"] .tabs { background: #0c1829; }
+  html[data-ui-design="ultra"] .card { border-radius: 16px; padding: 12px; }
+  html[data-ui-design="ultra"] .filters { border-radius: 22px 22px 0 0; background: #111e31; }
+  html[data-ui-design="ultra"] .mobile-panel-head { border-radius: 22px 22px 0 0; }
+  html[data-ui-design="ultra"] .mobile-feed-tools button {
+    border-color: #314c64;
+    border-radius: 10px;
+    background: #15273e;
+    color: #d3eaff;
+  }
+  html[data-ui-design="ultra"] .mobile-nav {
+    border-color: #2c475f;
+    background: #0e1a2d;
+    box-shadow: 0 -8px 25px #00000022;
+  }
+  html[data-ui-design="ultra"] .mobile-nav button { color: #9bb1cc; }
+  html[data-ui-design="ultra"] .mobile-nav button.active { color: #72f3cc; }
+  html[data-ui-design="ultra"] .mobile-nav .mobile-create { color: #9effde; }
+  html[data-ui-design="ultra"] .mobile-nav .mobile-create span { border: 1px solid #72f3cc; border-radius: 9px; background: #72f3cc; color: #0b2028; box-shadow: none; }
+  html[data-ui-design="ultra"] .mobile-nav .mobile-create b { color: #9effde; }
+  html[data-ui-design="ultra"] :is(.messenger-shell, .reserve-wallet-shell,
+    .guarantee-console-shell, .admin-console-shell, .deal-panel) { border-radius: 0; }
+  html[data-ui-design="ultra"] .exchange-head-actions { border-color: #2c465e; background: #112036; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-ui-design="ultra"] :is(.card, .primary, .offer-btn) { transition: none; }
+}

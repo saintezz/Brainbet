@@ -1,0 +1,366 @@
+/* Admin support center, IP relations and touch-friendly copy surfaces. */
+
+:is(#screen-admin, #screen-players, #screen-tickets, #screen-analytics,
+    #admin-player-modal, #player-profile-overlay, #ticket-modal,
+    #ticket-create-modal, #player-chat-overlay, #screen-faq) {
+  -webkit-user-select: text !important;
+  user-select: text !important;
+  -webkit-touch-callout: default !important;
+}
+
+:is(#screen-admin, #screen-players, #screen-tickets, #screen-analytics,
+    #admin-player-modal, #player-profile-overlay, #ticket-modal,
+    #ticket-create-modal, #player-chat-overlay, #screen-faq)
+  :is(p, div, span, b, strong, small, code, time, li, td, th) {
+  -webkit-user-select: text !important;
+  user-select: text !important;
+  -webkit-touch-callout: default !important;
+}
+
+.admin-copy-btn {
+  min-height: 30px;
+  border: 1px solid rgba(111, 231, 255, .28);
+  border-radius: 8px;
+  background: rgba(111, 231, 255, .07);
+  color: #8deaff;
+  padding: 6px 9px;
+  font: 700 9px/1 'IBM Plex Mono', monospace;
+  letter-spacing: .07em;
+  cursor: pointer;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+  touch-action: manipulation;
+}
+
+.admin-copy-btn.copied {
+  border-color: rgba(70, 255, 162, .55);
+  background: rgba(70, 255, 162, .12);
+  color: #61ffa8;
+}
+
+/* IP relation explorer */
+.admin-ip-panel {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 18px;
+  border: 1px solid rgba(94, 217, 255, .2);
+  border-radius: 16px;
+  padding: 16px;
+  background:
+    linear-gradient(135deg, rgba(28, 181, 255, .07), transparent 42%),
+    rgba(5, 8, 14, .78);
+}
+
+.admin-ip-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 2px;
+  background: linear-gradient(#63e5ff, transparent 75%);
+}
+
+.admin-ip-title {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 11px;
+  color: #e7fbff;
+  font: 700 12px/1.2 'IBM Plex Mono', monospace;
+  letter-spacing: .12em;
+}
+
+.admin-ip-title span { color: #63e5ff; font-size: 9px; }
+.admin-ip-search-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; }
+.admin-ip-search-row input {
+  min-width: 0;
+  min-height: 44px;
+  border: 1px solid rgba(126, 151, 181, .28);
+  border-radius: 10px;
+  background: rgba(0, 0, 0, .34);
+  color: var(--text, #fff);
+  padding: 0 13px;
+  font: 500 13px 'IBM Plex Mono', monospace;
+}
+.admin-ip-search-row button {
+  min-width: 94px;
+  border: 1px solid rgba(99, 229, 255, .55);
+  border-radius: 10px;
+  background: rgba(99, 229, 255, .12);
+  color: #a9efff;
+  font: 800 10px 'IBM Plex Mono', monospace;
+  letter-spacing: .1em;
+}
+.admin-ip-hint { margin: 9px 0 0; color: var(--text-dim); font-size: 10px; line-height: 1.5; }
+.admin-ip-results { display: grid; gap: 12px; margin-top: 14px; }
+.admin-ip-empty {
+  padding: 16px;
+  border: 1px dashed rgba(130, 151, 175, .25);
+  border-radius: 12px;
+  color: var(--text-dim);
+  font-size: 11px;
+  text-align: center;
+}
+.admin-ip-empty.error { color: #ff788c; border-color: rgba(255, 83, 112, .3); }
+.admin-ip-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 7px;
+}
+.admin-ip-summary div {
+  border: 1px solid rgba(100, 143, 176, .2);
+  border-radius: 10px;
+  background: rgba(0, 0, 0, .25);
+  padding: 9px;
+}
+.admin-ip-summary small { display: block; color: var(--text-dim); font-size: 8px; letter-spacing: .08em; }
+.admin-ip-summary b { display: block; margin-top: 4px; color: #dff8ff; font-size: 17px; }
+.admin-ip-warning {
+  color: #b8c5d4;
+  font-size: 9px;
+  line-height: 1.5;
+  padding: 9px 11px;
+  border-left: 2px solid #ffc94b;
+  background: rgba(255, 201, 75, .06);
+}
+.admin-ip-account {
+  border: 1px solid rgba(108, 154, 188, .22);
+  border-radius: 14px;
+  background: rgba(8, 11, 18, .86);
+  overflow: hidden;
+}
+.admin-ip-account-head,
+.admin-ip-twin-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px;
+}
+.admin-ip-account-head { border-bottom: 1px solid rgba(108, 154, 188, .16); }
+.admin-ip-account-head > div:first-child,
+.admin-ip-twin-head > div:first-child { min-width: 0; }
+.admin-ip-account-head b,
+.admin-ip-twin-head b { display: block; overflow: hidden; color: #f5fbff; font-size: 12px; text-overflow: ellipsis; }
+.admin-ip-account-head small,
+.admin-ip-twin-head small { display: block; margin-top: 3px; color: #8294a8; font-size: 9px; }
+.admin-ip-head-actions { display: flex; flex: 0 0 auto; gap: 6px; }
+.admin-ip-profile-btn {
+  min-height: 30px;
+  border: 1px solid rgba(245, 197, 66, .3);
+  border-radius: 8px;
+  background: rgba(245, 197, 66, .08);
+  color: var(--gold, #f5c542);
+  padding: 6px 9px;
+  font: 700 9px 'IBM Plex Mono', monospace;
+}
+.admin-ip-list { display: grid; gap: 6px; padding: 10px 12px 12px; }
+.admin-ip-row {
+  display: grid;
+  grid-template-columns: minmax(120px, auto) auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  border: 1px solid rgba(97, 126, 153, .16);
+  border-radius: 9px;
+  padding: 7px 8px;
+  background: rgba(255, 255, 255, .018);
+}
+.admin-ip-address { color: #72e7ff; font-size: 10px; overflow-wrap: anywhere; }
+.admin-ip-count { color: #d0d8e1; font-size: 9px; white-space: nowrap; }
+.admin-ip-row time { color: #708094; font-size: 8px; line-height: 1.45; }
+.admin-ip-twins { padding: 0 12px 12px; }
+.admin-ip-twins-title { margin: 3px 0 8px; color: #ffcc5d; font-size: 9px; letter-spacing: .1em; }
+.admin-ip-no-twins { padding: 10px; border-radius: 9px; background: rgba(70, 255, 162, .05); color: #65dba0; font-size: 10px; }
+.admin-ip-twin {
+  margin-top: 7px;
+  border: 1px solid rgba(255, 183, 69, .24);
+  border-radius: 11px;
+  background: rgba(255, 174, 42, .035);
+}
+.admin-ip-confidence {
+  display: inline-flex;
+  margin-top: 4px;
+  border-radius: 999px;
+  padding: 3px 7px;
+  color: #ffcf70;
+  background: rgba(255, 191, 75, .09);
+  font-size: 8px;
+}
+.admin-ip-confidence.high { color: #ff7183; background: rgba(255, 78, 105, .1); }
+.admin-ip-confidence.medium { color: #ffb75a; }
+
+/* Ticket queue */
+.ticket-center-header { display: flex; align-items: center; justify-content: space-between; }
+.ticket-refresh {
+  width: 38px; height: 38px; border: 1px solid var(--border); border-radius: 10px;
+  background: var(--surface2); color: var(--gold); font-size: 20px; cursor: pointer;
+}
+.ticket-center { display: grid; gap: 12px; }
+.ticket-summary { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.ticket-summary button {
+  min-width: 0;
+  min-height: 68px;
+  border: 1px solid rgba(114, 137, 164, .22);
+  border-radius: 12px;
+  background: rgba(8, 11, 17, .72);
+  color: var(--text);
+  padding: 10px 12px;
+  text-align: left;
+  cursor: pointer;
+}
+.ticket-summary small { display: block; color: var(--text-dim); font: 700 8px 'IBM Plex Mono', monospace; letter-spacing: .09em; }
+.ticket-summary b { display: block; margin-top: 5px; color: #edf4ff; font: 700 22px 'IBM Plex Mono', monospace; }
+.ticket-summary .needs { border-color: rgba(65, 239, 163, .27); }
+.ticket-summary .needs b { color: #52f4a8; }
+.ticket-summary .urgent { border-color: rgba(255, 82, 105, .28); }
+.ticket-summary .urgent b { color: #ff6d82; }
+.ticket-toolbar {
+  display: grid;
+  grid-template-columns: minmax(240px, 1fr) auto;
+  gap: 9px;
+  border: 1px solid rgba(112, 138, 166, .2);
+  border-radius: 14px;
+  padding: 10px;
+  background: rgba(6, 9, 15, .76);
+}
+.ticket-search { display: flex; align-items: center; min-width: 0; border: 1px solid var(--border); border-radius: 9px; background: rgba(0,0,0,.28); }
+.ticket-search span { padding-left: 11px; color: #7f91a7; }
+.ticket-search input { width: 100%; min-width: 0; min-height: 40px; border: 0; outline: 0; background: none; color: var(--text); padding: 0 10px; font-size: 11px; }
+.ticket-filter-tabs { display: flex; gap: 5px; }
+.ticket-filter-tabs button {
+  min-height: 40px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface2);
+  color: var(--text-dim); padding: 0 11px; font: 700 8px 'IBM Plex Mono', monospace;
+}
+.ticket-filter-tabs button.active { border-color: rgba(245,197,66,.55); background: rgba(245,197,66,.1); color: var(--gold); }
+.ticket-filter-selects { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; }
+.ticket-filter-selects select,
+.ticket-admin-tools select,
+.ticket-new-category {
+  width: 100%; min-width: 0; min-height: 40px; border: 1px solid var(--border); border-radius: 8px;
+  background: var(--surface2); color: var(--text); padding: 0 10px; font: 600 10px 'IBM Plex Mono', monospace;
+}
+.ticket-new-category { margin-bottom: 12px; }
+.ticket-queue { display: grid; gap: 8px; }
+.ticket-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 9px 14px;
+  border: 1px solid rgba(116, 140, 167, .22);
+  border-radius: 13px;
+  padding: 13px 14px 12px 17px;
+  background: linear-gradient(110deg, rgba(14, 18, 27, .92), rgba(8, 10, 16, .86));
+  cursor: pointer;
+}
+.ticket-card::before { content: ''; position: absolute; inset: 8px auto 8px 0; width: 2px; border-radius: 2px; background: #65758a; }
+.ticket-card.priority-high::before { background: #ffb84d; }
+.ticket-card.priority-urgent::before { background: #ff4e68; box-shadow: 0 0 12px rgba(255,78,104,.45); }
+.ticket-card.needs-reply { border-color: rgba(69, 232, 158, .28); }
+.ticket-card-main { min-width: 0; }
+.ticket-card-kicker { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 5px; color: #718196; font-size: 8px; letter-spacing: .06em; }
+.ticket-card-kicker span { border: 1px solid rgba(120,145,172,.2); border-radius: 999px; padding: 3px 6px; }
+.ticket-card-kicker .needs { color: #50e9a1; border-color: rgba(69,232,158,.25); }
+.ticket-card-title { overflow: hidden; color: #f0f4fa; font-size: 13px; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
+.ticket-card-preview { overflow: hidden; margin-top: 5px; color: #8492a5; font-size: 10px; line-height: 1.35; text-overflow: ellipsis; white-space: nowrap; }
+.ticket-card-user { text-align: right; }
+.ticket-card-user b { display: block; color: #d7e2ed; font-size: 10px; }
+.ticket-card-user small { display: block; margin-top: 3px; color: #6f7d8d; font-size: 8px; }
+.ticket-card-foot { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 5px; padding-top: 7px; border-top: 1px solid rgba(112,137,164,.12); color: #6f7d8e; font-size: 8px; }
+.ticket-card-foot .unread { color: #51efa5; }
+
+/* Ticket conversation */
+.ticket-modal,
+.ticket-create-modal {
+  position: fixed; inset: 0; z-index: 3000; overflow-y: auto; padding: 16px;
+  background: rgba(0, 0, 0, .9); backdrop-filter: blur(10px);
+}
+.ticket-dialog {
+  width: min(1040px, 100%); min-height: min(720px, calc(100vh - 32px)); margin: 0 auto;
+  border: 1px solid rgba(116, 142, 170, .28); border-radius: 18px;
+  background: linear-gradient(145deg, rgba(12, 15, 23, .98), rgba(5, 7, 12, .98)); overflow: hidden;
+}
+.ticket-dialog-head {
+  display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 12px;
+  padding: 13px 15px; border-bottom: 1px solid rgba(112,137,164,.17); background: rgba(255,255,255,.015);
+}
+.ticket-dialog-head > button { min-height: 34px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface2); color: var(--text); padding: 0 11px; font-size: 9px; }
+.ticket-dialog-title { min-width: 0; }
+.ticket-dialog-title small { display: block; color: #718196; font-size: 8px; letter-spacing: .1em; }
+.ticket-dialog-title b { display: block; overflow: hidden; margin-top: 3px; color: #f5c94c; font-size: 13px; text-overflow: ellipsis; white-space: nowrap; }
+.ticket-status { border-radius: 999px; padding: 6px 9px; background: rgba(72,237,161,.09); color: #5ce9a5; font-size: 8px; white-space: nowrap; }
+.ticket-status.closed { background: rgba(126,142,161,.09); color: #8995a4; }
+.ticket-modal-meta { display: flex; flex-wrap: wrap; gap: 6px; padding: 9px 15px; border-bottom: 1px solid rgba(112,137,164,.12); }
+.ticket-meta-chip { display: inline-flex; align-items: center; gap: 5px; min-height: 25px; border: 1px solid rgba(115,140,168,.2); border-radius: 999px; padding: 0 8px; color: #91a0b2; font-size: 8px; }
+.ticket-modal-layout { display: grid; grid-template-columns: minmax(0, 1fr) 285px; min-height: 620px; }
+.ticket-conversation { display: flex; min-width: 0; flex-direction: column; padding: 14px; }
+.ticket-messages { display: flex; flex: 1; flex-direction: column; gap: 9px; max-height: 57vh; min-height: 280px; overflow: auto; padding: 3px 3px 14px; overscroll-behavior: contain; }
+.ticket-loading { color: var(--text-dim); font-size: 11px; }
+.ticket-message { display: flex; align-items: flex-end; gap: 6px; }
+.ticket-message.mod { justify-content: flex-end; }
+.ticket-message-bubble { width: min(78%, 620px); border: 1px solid rgba(112,137,164,.22); border-radius: 13px 13px 13px 4px; background: rgba(255,255,255,.035); padding: 9px 10px; }
+.ticket-message.mod .ticket-message-bubble { border-color: rgba(117,95,246,.35); border-radius: 13px 13px 4px 13px; background: rgba(102,75,224,.12); }
+.ticket-message-meta { display: flex; justify-content: space-between; gap: 8px; margin-bottom: 5px; color: #76869a; font-size: 8px; }
+.ticket-message-text { color: #e8edf4; font-size: 12px; line-height: 1.48; overflow-wrap: anywhere; white-space: pre-wrap; }
+.ticket-message .admin-copy-btn { min-height: 26px; padding: 5px 7px; }
+.ticket-reply-area { border-top: 1px solid rgba(112,137,164,.15); padding-top: 11px; }
+.ticket-quick-replies { display: flex; gap: 5px; overflow-x: auto; margin-bottom: 7px; padding-bottom: 2px; }
+.ticket-quick-replies button { flex: 0 0 auto; min-height: 29px; border: 1px solid rgba(103,130,160,.22); border-radius: 999px; background: rgba(255,255,255,.025); color: #8999ac; padding: 0 9px; font-size: 8px; }
+.ticket-reply-area textarea { width: 100%; min-height: 76px; max-height: 190px; resize: vertical; box-sizing: border-box; border: 1px solid rgba(112,137,164,.28); border-radius: 11px; background: rgba(0,0,0,.28); color: var(--text); padding: 10px 11px; font: 500 12px/1.45 'IBM Plex Mono', monospace; }
+.ticket-reply-actions { display: flex; gap: 7px; margin-top: 7px; }
+.ticket-reply-actions button { min-height: 39px; border-radius: 9px; font: 700 9px 'IBM Plex Mono', monospace; letter-spacing: .08em; }
+.ticket-send { flex: 1; border: 1px solid rgba(245,197,66,.5); background: linear-gradient(135deg, #e4ad26, #f8d76a); color: #15100a; }
+.ticket-close { border: 1px solid rgba(255,75,100,.42); background: rgba(255,75,100,.08); color: #ff7184; padding: 0 13px; }
+.ticket-close-confirm { margin-top: 8px; border: 1px solid rgba(255,75,100,.32); border-radius: 10px; background: rgba(255,75,100,.06); padding: 10px; }
+.ticket-close-confirm p { margin: 0 0 8px; color: #e9edf2; font-size: 10px; }
+.ticket-close-confirm > div { display: flex; gap: 6px; }
+.ticket-close-confirm button { flex: 1; min-height: 34px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface2); color: var(--text); font-size: 9px; }
+.ticket-close-confirm button:last-child { border-color: rgba(255,75,100,.38); color: #ff7184; }
+.ticket-admin-tools { border-left: 1px solid rgba(112,137,164,.17); padding: 14px; background: rgba(255,255,255,.012); }
+.ticket-tool-title { margin-bottom: 10px; color: #8391a3; font-size: 8px; letter-spacing: .12em; }
+.ticket-owner-card { border: 1px solid rgba(112,137,164,.18); border-radius: 10px; background: rgba(0,0,0,.22); padding: 10px; margin-bottom: 11px; }
+.ticket-owner-card b { display: block; color: #edf4fa; font-size: 11px; }
+.ticket-owner-card small { display: block; margin: 4px 0 8px; color: #758397; font-size: 8px; }
+.ticket-owner-actions { display: flex; gap: 5px; }
+.ticket-owner-actions button { flex: 1; }
+.ticket-admin-tools label { display: block; margin-top: 9px; color: #738296; font-size: 8px; letter-spacing: .08em; }
+.ticket-admin-tools label select,
+.ticket-admin-tools label textarea { margin-top: 5px; }
+.ticket-admin-tools textarea { width: 100%; min-height: 92px; resize: vertical; box-sizing: border-box; border: 1px solid var(--border); border-radius: 9px; background: var(--surface2); color: var(--text); padding: 9px; font-size: 10px; }
+.ticket-assign, .ticket-note-save, .ticket-reopen { width: 100%; min-height: 36px; margin-top: 8px; border-radius: 8px; font: 700 9px 'IBM Plex Mono', monospace; }
+.ticket-assign { border: 1px solid rgba(91,227,164,.35); background: rgba(91,227,164,.07); color: #5ee5a8; }
+.ticket-note-save { border: 1px solid rgba(113,143,174,.3); background: rgba(113,143,174,.07); color: #afbdcc; }
+.ticket-reopen { border: 1px solid rgba(245,197,66,.38); background: rgba(245,197,66,.08); color: var(--gold); }
+.ticket-create-dialog { max-width: 480px; margin: 0 auto; border: 1px solid var(--border); border-radius: 18px; background: var(--surface); padding: 20px; }
+.my-ticket-card { border: 1px solid var(--border); border-radius: 12px; background: var(--surface2); padding: 11px 12px; margin-bottom: 7px; cursor: pointer; }
+.my-ticket-card-head { display: flex; justify-content: space-between; gap: 8px; }
+.my-ticket-card-head b { min-width: 0; overflow: hidden; color: var(--text); font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
+.my-ticket-card-head span { flex: 0 0 auto; color: var(--text-dim); font-size: 9px; }
+.my-ticket-card p { overflow: hidden; margin: 6px 0 0; color: var(--text-dim); font-size: 9px; text-overflow: ellipsis; white-space: nowrap; }
+
+@media (max-width: 760px) {
+  .admin-ip-row { grid-template-columns: minmax(0, 1fr) auto; }
+  .admin-ip-row time { grid-column: 1 / -1; }
+  .ticket-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ticket-toolbar { grid-template-columns: 1fr; }
+  .ticket-filter-tabs { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .ticket-filter-selects { grid-column: auto; grid-template-columns: 1fr; }
+  .ticket-modal-layout { grid-template-columns: 1fr; }
+  .ticket-admin-tools { border-top: 1px solid rgba(112,137,164,.17); border-left: 0; }
+  .ticket-dialog { min-height: calc(100vh - 20px); }
+  .ticket-messages { max-height: 52vh; min-height: 240px; }
+}
+
+@media (max-width: 480px) {
+  .ticket-modal, .ticket-create-modal { padding: 0; }
+  .ticket-dialog, .ticket-create-dialog { min-height: 100vh; border: 0; border-radius: 0; }
+  .ticket-dialog-head { grid-template-columns: auto minmax(0, 1fr); }
+  .ticket-dialog-head .ticket-status { grid-column: 1 / -1; width: max-content; }
+  .ticket-message-bubble { width: 84%; }
+  .admin-ip-account-head, .admin-ip-twin-head { align-items: flex-start; flex-direction: column; }
+  .admin-ip-head-actions { width: 100%; }
+  .admin-ip-head-actions button { flex: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticket-refresh { transition: none; }
+}

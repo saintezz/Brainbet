@@ -1,0 +1,197 @@
+/* Wide-screen shell for the modern arcade theme.
+   It mirrors the useful proportions of Classic 2.0 without copying its skin. */
+@media (min-width: 1280px) {
+  html[data-ui-theme="modern"] .app {
+    grid-template-columns: 330px minmax(0, 1fr);
+    grid-template-rows: 64px auto;
+    width: min(calc(100% - 48px), 1760px);
+    max-width: 1760px;
+    min-height: 0;
+    gap: 14px 24px;
+    padding: 18px;
+    align-items: start;
+  }
+
+  html[data-ui-theme="modern"] .app > .header {
+    grid-column: 1;
+    grid-row: 1;
+    min-width: 0;
+    min-height: 64px;
+    height: 64px;
+    padding: 9px 12px;
+    overflow: hidden;
+  }
+
+  html[data-ui-theme="modern"] .app > .header .header-logo {
+    min-width: 0;
+    font-size: clamp(18px, 1.35vw, 23px);
+    letter-spacing: 1.2px;
+    white-space: nowrap;
+  }
+
+  html[data-ui-theme="modern"] .app > .header .header-logo .logo-mark {
+    width: 28px;
+    height: 28px;
+    margin-right: 6px;
+  }
+
+  html[data-ui-theme="modern"] .app > .header .header-stats {
+    min-width: 0;
+    gap: 6px;
+  }
+
+  html[data-ui-theme="modern"] .app > .header .stat {
+    min-width: 86px;
+    min-height: 44px;
+    padding: 6px 8px;
+  }
+
+  html[data-ui-theme="modern"] .app > .header .stat-value {
+    font-size: 16px;
+  }
+
+  html[data-ui-theme="modern"] .app > .header .snd-toggle {
+    width: 44px;
+    height: 44px;
+    flex: 0 0 44px;
+  }
+
+  html[data-ui-theme="modern"] .app > .live-wins {
+    grid-column: 2;
+    grid-row: 1;
+    min-width: 0;
+    min-height: 64px;
+    height: 64px;
+    margin: 0;
+  }
+
+  html[data-ui-theme="modern"] .app > .nav-wrapper {
+    grid-column: 1;
+    grid-row: 2;
+    width: 100%;
+    margin: 0;
+  }
+
+  html[data-ui-theme="modern"] .nav-wrapper .nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  html[data-ui-theme="modern"] .nav-wrapper .nav-btn {
+    min-height: 70px !important;
+    height: 70px !important;
+    max-height: 70px !important;
+    padding: 8px 6px;
+  }
+
+  html[data-ui-theme="modern"] .nav-wrapper .nav-btn .nav-icon {
+    width: 29px;
+    height: 29px;
+  }
+
+  html[data-ui-theme="modern"] .nav-wrapper .nav-btn > span {
+    font-size: 8px;
+  }
+
+  html[data-ui-theme="modern"] .app > .screen {
+    grid-column: 2;
+    grid-row: 2;
+    min-width: 0;
+    min-height: 0;
+    align-self: start;
+    padding: clamp(26px, 2.1vw, 40px);
+  }
+
+  html[data-ui-theme="modern"] .game-header {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: 22px;
+    min-height: 78px;
+    padding: 14px 22px;
+  }
+
+  html[data-ui-theme="modern"] .game-title {
+    font-size: clamp(34px, 2.35vw, 42px);
+    white-space: nowrap;
+  }
+
+  html[data-ui-theme="modern"] .game-desc {
+    min-width: 0;
+    margin-top: 0;
+    padding-left: 22px;
+    border-left: 1px solid color-mix(in srgb, var(--accent) 38%, var(--border));
+    font-size: 10px;
+  }
+}
+
+@media (min-width: 1800px) {
+  html[data-ui-theme="modern"] .app {
+    grid-template-columns: 390px minmax(0, 1fr);
+    grid-template-rows: 72px auto;
+    width: min(calc(100% - 72px), 2200px);
+    max-width: 2200px;
+    gap: 16px 30px;
+    padding: 22px;
+  }
+
+  html[data-ui-theme="modern"] .app > .header,
+  html[data-ui-theme="modern"] .app > .live-wins {
+    min-height: 72px;
+    height: 72px;
+  }
+
+  html[data-ui-theme="modern"] .app > .header {
+    padding: 10px 14px;
+  }
+
+  html[data-ui-theme="modern"] .app > .header .header-logo {
+    font-size: 24px;
+  }
+
+  html[data-ui-theme="modern"] .app > .header .stat-value {
+    font-size: 20px;
+  }
+
+  html[data-ui-theme="modern"] .nav-wrapper .nav {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  html[data-ui-theme="modern"] .nav-wrapper .nav-btn {
+    min-height: 92px !important;
+    height: 92px !important;
+    max-height: 92px !important;
+  }
+
+  html[data-ui-theme="modern"] .nav-wrapper .nav-btn .nav-icon {
+    width: 38px;
+    height: 38px;
+  }
+
+  html[data-ui-theme="modern"] .nav-wrapper .nav-btn > span {
+    font-size: 10px;
+  }
+
+  html[data-ui-theme="modern"] .app > .screen {
+    padding: clamp(30px, 1.9vw, 44px);
+  }
+
+  html[data-ui-theme="modern"] .game-header {
+    min-height: 84px;
+    padding: 15px 26px;
+  }
+
+  html[data-ui-theme="modern"] .game-title {
+    font-size: clamp(39px, 1.9vw, 47px);
+  }
+
+  html[data-ui-theme="modern"] :is(#screen-cases .cases-grid, #screen-shop .shop-grid, #screen-inventory .inv-grid) {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 2300px) {
+  html[data-ui-theme="modern"] #screen-cases .cases-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}

@@ -1,0 +1,196 @@
+/* Clear entry points for both modern and Classic 2.0 profile layouts. */
+#screen-profile :is(#profile-levels, #profile-achievements, #profile-workshop, #profile-activity) {
+  scroll-margin-top: 82px;
+}
+
+.profile-section-launcher {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0 0 12px;
+}
+
+.profile-section-launcher button {
+  position: relative;
+  min-width: 0;
+  min-height: 104px;
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  grid-template-rows: 1fr auto;
+  gap: 8px 10px;
+  padding: 13px;
+  border: 1px solid color-mix(in srgb, var(--accent) 28%, var(--border));
+  background: linear-gradient(145deg, color-mix(in srgb, var(--accent) 7%, var(--surface2)), var(--surface));
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, transform .18s ease, box-shadow .18s ease;
+}
+
+.profile-section-launcher button:hover,
+.profile-section-launcher button:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 72%, white 8%);
+  background: linear-gradient(145deg, color-mix(in srgb, var(--accent) 13%, var(--surface2)), var(--surface));
+  box-shadow: 0 10px 28px rgba(0,0,0,.25), inset 3px 0 var(--accent);
+  transform: translateY(-2px);
+  outline: none;
+}
+
+.profile-section-launcher button > i {
+  grid-row: 1 / 3;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--accent) 58%, var(--border));
+  background: color-mix(in srgb, var(--accent) 9%, var(--surface2));
+  color: var(--accent);
+  font: normal 700 10px/1 'Space Mono', monospace;
+}
+
+.profile-section-launcher button > span {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.profile-section-launcher button > span b {
+  color: var(--text);
+  font: 700 10px/1.25 'Space Mono', monospace;
+  letter-spacing: .45px;
+}
+
+.profile-section-launcher button > span small {
+  color: var(--text-dim);
+  font-size: 9px;
+  line-height: 1.35;
+}
+
+.profile-section-launcher button > strong {
+  grid-column: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--accent);
+  font: 700 8px/1 'Space Mono', monospace;
+  letter-spacing: .65px;
+}
+
+.profile-section-launcher button > strong em {
+  font-style: normal;
+  font-size: 15px;
+  transition: transform .18s ease;
+}
+
+.profile-section-launcher button:hover > strong em { transform: translateX(4px); }
+
+.profile-level-roadmap summary {
+  min-height: 72px !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 10px 14px !important;
+  border-top: 1px solid color-mix(in srgb, var(--accent) 32%, var(--border));
+  background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 9%, var(--surface2)), var(--surface2));
+  cursor: pointer;
+  transition: background .18s ease, box-shadow .18s ease;
+}
+
+.profile-level-roadmap summary:hover,
+.profile-level-roadmap summary:focus-visible {
+  background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 16%, var(--surface2)), var(--surface2));
+  box-shadow: inset 4px 0 var(--accent);
+  outline: none;
+}
+
+.profile-roadmap-label {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.profile-roadmap-label > i {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, var(--surface));
+  color: var(--accent);
+  font: normal 700 14px/1 'Space Mono', monospace;
+}
+
+.profile-roadmap-label > span { min-width: 0; }
+.profile-roadmap-label b,
+.profile-roadmap-label small { display: block; }
+.profile-roadmap-label b { color: var(--text); font: 700 11px/1.2 'Space Mono', monospace; }
+.profile-roadmap-label small { margin-top: 5px; color: var(--text-dim); font-size: 9px; line-height: 1.35; }
+
+.profile-level-roadmap summary > strong {
+  min-width: 124px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 11px 13px;
+  border: 1px solid var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, var(--surface));
+  color: var(--accent);
+  font: 700 9px/1 'Space Mono', monospace;
+  letter-spacing: 1px;
+}
+
+.profile-level-roadmap summary > strong i {
+  font: normal 18px/1 sans-serif;
+  transition: transform .2s ease;
+}
+
+.profile-level-roadmap[open] summary > strong span { font-size: 0; }
+.profile-level-roadmap[open] summary > strong span::after { content: "СВЕРНУТЬ"; font-size: 9px; }
+.profile-level-roadmap[open] summary > strong i { transform: rotate(180deg); }
+
+.profile-section-pulse { animation: profileSectionPulse 1s ease-out; }
+
+@keyframes profileSectionPulse {
+  0%, 100% { box-shadow: none; }
+  30% { box-shadow: 0 0 0 2px var(--accent), 0 0 28px color-mix(in srgb, var(--accent) 28%, transparent); }
+}
+
+html[data-ui-theme="classic"] .profile-section-launcher button,
+html[data-ui-theme="classic"] .profile-level-roadmap summary,
+html[data-ui-theme="classic"] .profile-level-roadmap summary > strong { border-radius: 0; }
+
+html[data-ui-theme="classic"][data-classic-variant="refresh"] .profile-section-launcher button {
+  border-color: color-mix(in srgb, var(--gold) 34%, #29313b);
+  background: linear-gradient(135deg, rgba(246,197,71,.075), rgba(7,10,14,.94) 58%);
+}
+
+@media (max-width: 1100px) {
+  .profile-section-launcher { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 520px) {
+  .profile-section-launcher { grid-template-columns: 1fr 1fr; gap: 6px; }
+  .profile-section-launcher button { min-height: 106px; grid-template-columns: 30px minmax(0,1fr); padding: 10px; }
+  .profile-section-launcher button > i { width: 30px; height: 30px; }
+  .profile-section-launcher button > span b { font-size: 9px; }
+  .profile-section-launcher button > span small { font-size: 8px; }
+  .profile-section-launcher button > strong { font-size: 7px; }
+  .profile-level-roadmap summary { min-height: 68px !important; padding: 9px 10px !important; }
+  .profile-roadmap-label > i { width: 36px; height: 36px; font-size: 12px; }
+  .profile-roadmap-label b { font-size: 9px; }
+  .profile-roadmap-label small { font-size: 7px; }
+  .profile-level-roadmap summary > strong { min-width: 42px; width: 42px; padding: 10px 0; }
+  .profile-level-roadmap summary > strong span { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .profile-section-launcher button,
+  .profile-section-launcher button > strong em,
+  .profile-level-roadmap summary > strong i { transition: none; }
+  .profile-section-pulse { animation: none; }
+}

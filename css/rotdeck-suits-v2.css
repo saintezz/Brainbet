@@ -1,0 +1,113 @@
+/* RotDeck suits v2 — one card palette, suit identity lives in a local pattern. */
+:root {
+  --rotdeck-card-accent: #6cf2df;
+  --rotdeck-card-accent-soft: rgba(108, 242, 223, .18);
+  --rotdeck-card-line: rgba(120, 232, 222, .56);
+}
+
+html[data-ui-theme] .resonance-card:is(
+  .faction-glitch, .faction-mutation, .faction-empire, .faction-void
+),
+html[data-ui-theme] .resonance-signal-card:is(
+  .faction-glitch, .faction-mutation, .faction-empire, .faction-void
+) {
+  --res-color: var(--rotdeck-card-accent);
+  isolation: isolate;
+  border-color: var(--rotdeck-card-line);
+  background:
+    radial-gradient(circle at 14% 4%, rgba(108, 242, 223, .15), transparent 36%),
+    linear-gradient(155deg, #10232a 0%, #0b131d 48%, #080b12 100%);
+  box-shadow:
+    inset 0 0 26px rgba(0, 0, 0, .46),
+    inset 0 1px rgba(190, 255, 248, .06),
+    0 8px 18px rgba(0, 0, 0, .3);
+}
+
+html[data-ui-theme] .resonance-signal-card:is(
+  .faction-glitch, .faction-mutation, .faction-empire, .faction-void
+) {
+  box-shadow:
+    0 0 28px rgba(73, 232, 216, .2),
+    inset 0 0 24px rgba(0, 0, 0, .42);
+}
+
+/* The same cyan ink is used for every suit. Only its geometry changes. */
+.resonance-card.faction-glitch,
+.resonance-signal-card.faction-glitch {
+  --rotdeck-suit-pattern:
+    repeating-linear-gradient(135deg, transparent 0 8px, rgba(108, 242, 223, .48) 9px 11px, transparent 12px 17px),
+    linear-gradient(90deg, transparent 0 24%, rgba(108, 242, 223, .2) 25% 32%, transparent 33% 57%, rgba(108, 242, 223, .14) 58% 68%, transparent 69%);
+}
+
+.resonance-card.faction-mutation,
+.resonance-signal-card.faction-mutation {
+  --rotdeck-suit-pattern:
+    radial-gradient(circle at 72% 24%, transparent 0 7px, rgba(108, 242, 223, .46) 8px 10px, transparent 11px),
+    radial-gradient(circle at 38% 54%, rgba(108, 242, 223, .28) 0 6px, transparent 7px),
+    radial-gradient(circle at 84% 73%, transparent 0 12px, rgba(108, 242, 223, .22) 13px 15px, transparent 16px);
+}
+
+.resonance-card.faction-empire,
+.resonance-signal-card.faction-empire {
+  --rotdeck-suit-pattern:
+    conic-gradient(from 12deg at 82% 16%, transparent 0 8deg, rgba(108, 242, 223, .38) 9deg 15deg, transparent 16deg 29deg, rgba(108, 242, 223, .2) 30deg 35deg, transparent 36deg 55deg),
+    linear-gradient(135deg, transparent 46%, rgba(108, 242, 223, .24) 47% 49%, transparent 50%);
+}
+
+.resonance-card.faction-void,
+.resonance-signal-card.faction-void {
+  --rotdeck-suit-pattern:
+    repeating-radial-gradient(circle at 78% 28%, transparent 0 11px, rgba(108, 242, 223, .28) 12px 14px, transparent 15px 22px),
+    radial-gradient(circle at 78% 28%, rgba(108, 242, 223, .26), transparent 42%);
+}
+
+html[data-ui-theme] .resonance-card:is(
+  .faction-glitch, .faction-mutation, .faction-empire, .faction-void
+)::before,
+html[data-ui-theme] .resonance-signal-card:is(
+  .faction-glitch, .faction-mutation, .faction-empire, .faction-void
+)::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  right: 0;
+  width: 63%;
+  height: 48%;
+  background: var(--rotdeck-suit-pattern);
+  opacity: .72;
+  -webkit-mask-image: linear-gradient(135deg, transparent 4%, #000 48%, #000 100%);
+  mask-image: linear-gradient(135deg, transparent 4%, #000 48%, #000 100%);
+  pointer-events: none;
+}
+
+html[data-ui-theme] .resonance-card-faction,
+html[data-ui-theme] .resonance-card-replace {
+  border-color: rgba(108, 242, 223, .3);
+  background: linear-gradient(90deg, rgba(40, 119, 119, .2), rgba(7, 15, 22, .96));
+}
+
+html[data-ui-theme] .resonance-card-faction,
+html[data-ui-theme] .resonance-card-faction i,
+html[data-ui-theme] .resonance-card-replace span,
+html[data-ui-theme] .resonance-suit-mark {
+  color: var(--rotdeck-card-accent);
+}
+
+html[data-ui-theme] .resonance-suit-legend span:is(
+  .faction-glitch, .faction-mutation, .faction-empire, .faction-void
+) {
+  --res-color: var(--rotdeck-card-accent);
+  border-top: 1px solid rgba(108, 242, 223, .16);
+  background: linear-gradient(180deg, rgba(25, 79, 82, .2), #080d12);
+}
+
+@media (max-width: 420px) {
+  html[data-ui-theme] .resonance-card:is(
+    .faction-glitch, .faction-mutation, .faction-empire, .faction-void
+  )::before {
+    width: 70%;
+    height: 43%;
+    opacity: .62;
+  }
+}

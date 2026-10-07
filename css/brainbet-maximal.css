@@ -1,0 +1,1973 @@
+/* BrainBet underground arcade skin. Decorative layers are out of flow so the
+   Telegram Mini App keeps the dimensions and behavior of the original UI. */
+
+:root {
+  --bg: #050201;
+  --surface: rgba(20, 10, 5, .88);
+  --surface2: rgba(38, 18, 8, .92);
+  --surface3: rgba(63, 29, 12, .94);
+  --border: #6b3117;
+  --border2: #a24d20;
+  --gold: #ffad3e;
+  --gold2: #ffd475;
+  --gold3: #d86822;
+  --red: #ff301c;
+  --red-glow: rgba(255, 48, 28, .48);
+  --accent: #83ff3f;
+  --accent2: #2fae31;
+  --green: #83ff3f;
+  --win: #83ff3f;
+  --lose: #ff301c;
+  --text: #ffe2aa;
+  --text-mid: #c99968;
+  --text-dim: #77533b;
+  --rust: #7c2f14;
+  --rust-dark: #32140b;
+  --crt: #83ff3f;
+  --ink: #070301;
+}
+
+html {
+  background: #020100;
+}
+
+body {
+  font-family: "IBM Plex Mono", monospace;
+  background:
+    linear-gradient(180deg, rgba(4, 1, 0, .05) 0 32%, rgba(4, 1, 0, .7) 76%, #030100 100%),
+    url("../images/brainbet-arcade-reference.png") center top / min(100vw, 720px) auto fixed no-repeat,
+    #030100;
+  color: var(--text);
+}
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+body::before {
+  z-index: 0;
+  background:
+    radial-gradient(circle at 10% 23%, rgba(255, 40, 12, .25), transparent 19%),
+    radial-gradient(circle at 88% 21%, rgba(131, 255, 63, .15), transparent 18%),
+    linear-gradient(90deg, rgba(0, 0, 0, .58), transparent 19%, transparent 81%, rgba(0, 0, 0, .58));
+}
+
+body::after {
+  z-index: 1000;
+  opacity: .3;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 3px, rgba(0, 0, 0, .38) 3px 4px),
+    linear-gradient(90deg, rgba(255, 0, 0, .025), rgba(0, 255, 60, .018), rgba(0, 80, 255, .025));
+  mix-blend-mode: multiply;
+}
+
+.noise {
+  z-index: 0;
+  opacity: .55;
+  background-size: 36px 36px, 36px 36px, 180px 180px;
+  mix-blend-mode: overlay;
+}
+
+.noise::before {
+  top: -80px;
+  width: min(620px, 120vw);
+  height: 350px;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255, 186, 72, .34), transparent 62%),
+    linear-gradient(90deg, transparent 9%, rgba(255, 63, 22, .18) 10%, transparent 24%, transparent 76%, rgba(117, 255, 61, .12) 90%, transparent 91%);
+}
+
+.app {
+  max-width: 480px;
+  padding-bottom: 60px;
+  isolation: isolate;
+  background:
+    linear-gradient(90deg, rgba(17, 7, 3, .82) 0 4px, transparent 4px calc(100% - 4px), rgba(17, 7, 3, .82) calc(100% - 4px)),
+    rgba(4, 2, 1, .22);
+  box-shadow:
+    0 0 0 2px rgba(83, 36, 14, .6),
+    0 0 55px rgba(0, 0, 0, .82);
+}
+
+.app > *:not(.casino-set) {
+  position: relative;
+  z-index: 2;
+}
+
+.casino-set {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 100vh;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.casino-set::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    url("../images/brainbet-arcade-reference.png") center top / 480px auto no-repeat;
+  opacity: .38;
+  filter: saturate(1.25) contrast(1.15);
+}
+
+.casino-set::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 116px;
+  height: 260px;
+  background:
+    linear-gradient(90deg, #41160a 0 4px, transparent 4px calc(100% - 4px), #41160a calc(100% - 4px)),
+    radial-gradient(circle at 7px 18px, #ee7a2b 0 2px, #351207 3px 5px, transparent 6px),
+    radial-gradient(circle at calc(100% - 7px) 18px, #ee7a2b 0 2px, #351207 3px 5px, transparent 6px);
+  background-size: auto, 100% 38px, 100% 38px;
+  opacity: .82;
+}
+
+.casino-chain {
+  position: absolute;
+  top: -6px;
+  width: 10px;
+  height: 64px;
+  z-index: 6;
+  background:
+    radial-gradient(ellipse, transparent 0 27%, #6e3a21 30% 46%, #1b0c07 49% 59%, transparent 62%) center top / 10px 14px repeat-y;
+  filter: drop-shadow(2px 2px 2px #000);
+}
+
+.chain-left { left: 68px; transform: rotate(2deg); }
+.chain-right { right: 68px; transform: rotate(-2deg); }
+
+.casino-lamp {
+  position: absolute;
+  top: 114px;
+  width: 58px;
+  height: 18px;
+  z-index: 1;
+  border: 3px solid #2b1007;
+  border-radius: 50% 50% 18% 18%;
+  background: linear-gradient(#522311, #1c0904);
+  box-shadow: 0 8px 16px 5px rgba(255, 160, 47, .32);
+}
+
+.casino-lamp::after {
+  content: "";
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: -5px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ffd075;
+  box-shadow: 0 0 16px 7px rgba(255, 160, 47, .58);
+}
+
+.lamp-left { left: 15px; transform: rotate(-5deg); }
+.lamp-right { right: 13px; transform: rotate(4deg); }
+
+.casino-character {
+  position: absolute;
+  z-index: 2;
+  object-fit: contain;
+  filter: saturate(1.18) contrast(1.12) drop-shadow(0 8px 7px #000);
+  opacity: .78;
+}
+
+.character-dragon {
+  left: -40px;
+  top: 165px;
+  width: 142px;
+  transform: rotate(-8deg);
+  filter: sepia(.25) hue-rotate(325deg) saturate(2.2) contrast(1.15) drop-shadow(0 0 10px rgba(255, 39, 13, .55));
+}
+
+.character-cup {
+  right: 42px;
+  top: 226px;
+  width: 72px;
+  transform: rotate(5deg);
+}
+
+.character-host {
+  right: -23px;
+  top: 150px;
+  width: 82px;
+  transform: rotate(4deg);
+}
+
+.character-wood {
+  left: 12px;
+  top: 344px;
+  width: 62px;
+  transform: rotate(-6deg);
+}
+
+.casino-cables {
+  position: absolute;
+  inset: 125px 0 auto;
+  height: 330px;
+  opacity: .7;
+  background:
+    radial-gradient(ellipse at 5% 52%, transparent 0 38px, #2e1108 40px 43px, transparent 45px),
+    radial-gradient(ellipse at 95% 76%, transparent 0 50px, #4a1b0a 52px 55px, transparent 57px);
+}
+
+.header {
+  min-height: 72px;
+  margin: 18px 14px 8px;
+  padding: 15px 14px 13px;
+  border: 4px solid #241008;
+  border-radius: 3px;
+  background:
+    radial-gradient(circle at 8px 8px, #c86a2e 0 2px, #2a1007 3px 5px, transparent 6px),
+    radial-gradient(circle at calc(100% - 8px) 8px, #c86a2e 0 2px, #2a1007 3px 5px, transparent 6px),
+    repeating-linear-gradient(98deg, transparent 0 19px, rgba(255, 147, 58, .05) 20px 22px),
+    linear-gradient(180deg, rgba(94, 40, 17, .98), rgba(28, 12, 7, .98));
+  box-shadow:
+    0 0 0 2px #743218,
+    inset 0 2px rgba(255, 178, 90, .22),
+    inset 0 -13px 18px rgba(0, 0, 0, .34),
+    0 11px 20px rgba(0, 0, 0, .55),
+    0 0 28px rgba(255, 83, 24, .17);
+}
+
+.header::before {
+  content: "";
+  position: absolute;
+  left: 50px;
+  right: 50px;
+  top: -22px;
+  height: 22px;
+  border-left: 4px solid #3f2114;
+  border-right: 4px solid #3f2114;
+  background:
+    radial-gradient(circle at 15% 100%, #ffd072 0 3px, rgba(255, 174, 61, .2) 4px 13px, transparent 14px),
+    radial-gradient(circle at 50% 100%, #ffd072 0 3px, rgba(255, 174, 61, .2) 4px 13px, transparent 14px),
+    radial-gradient(circle at 85% 100%, #ffd072 0 3px, rgba(255, 174, 61, .2) 4px 13px, transparent 14px);
+}
+
+.header::after {
+  left: 10px;
+  right: 10px;
+  bottom: 4px;
+  height: 3px;
+  background: linear-gradient(90deg, #ff2e18, #ff932f 32%, #83ff3f 68%, #167c2b);
+  box-shadow: 0 0 11px rgba(255, 128, 39, .72);
+}
+
+.header-logo,
+.game-title,
+.case-name,
+.shop-name,
+.inv-name,
+.result-title {
+  font-family: "Russo One", "Arial Black", sans-serif;
+  letter-spacing: 0;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  font-family: "Rubik Mono One", "Arial Black", sans-serif;
+  font-size: 21px;
+  font-weight: 400;
+  color: #ffd79a;
+  text-shadow:
+    1px 0 #7d3518,
+    0 1px #7d3518,
+    2px 2px #321108,
+    4px 4px rgba(0, 0, 0, .38),
+    0 0 13px rgba(255, 156, 55, .38);
+}
+
+.header-logo .logo-mark {
+  margin-right: 8px;
+  font-family: sans-serif;
+  font-size: 20px;
+  filter: drop-shadow(2px 3px #260a04) saturate(1.2);
+}
+
+.header-logo .logo-brain {
+  color: #ffe0ad;
+}
+
+.header-logo .logo-bet {
+  color: var(--crt);
+  text-shadow:
+    1px 0 #28691f,
+    0 1px #28691f,
+    2px 2px #123b16,
+    4px 4px rgba(0, 0, 0, .38),
+    0 0 11px rgba(131, 255, 63, .72);
+}
+
+.stat-label {
+  color: #b77f4f;
+  letter-spacing: .8px;
+}
+
+.stat-value {
+  color: var(--crt);
+  text-shadow: 0 0 10px rgba(131, 255, 63, .75);
+}
+
+.snd-toggle,
+.nav-arrow {
+  border: 2px solid #6e3519;
+  border-radius: 3px;
+  background: linear-gradient(#5b2812, #170a05);
+  color: #ffd278;
+  box-shadow: inset 0 1px #c67d42, 0 3px 0 #0a0301, 0 0 11px rgba(255, 106, 33, .18);
+}
+
+.live-wins {
+  height: 32px;
+  margin: 0 10px 8px;
+  border: 3px solid #32160b;
+  border-radius: 3px;
+  background:
+    repeating-linear-gradient(0deg, rgba(131, 255, 63, .09) 0 1px, transparent 1px 4px),
+    linear-gradient(90deg, rgba(3, 25, 6, .98), rgba(13, 8, 3, .98));
+  box-shadow: 0 0 0 1px #75401f, inset 0 0 14px rgba(131, 255, 63, .12), 0 5px 13px #000;
+}
+
+.live-wins::after {
+  content: "";
+  position: absolute;
+  right: 7px;
+  top: 7px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #ff401e;
+  box-shadow: 0 0 7px #ff321a;
+}
+
+.live-wins-label {
+  color: var(--crt);
+  border-right: 1px dashed rgba(131, 255, 63, .38);
+  background: rgba(131, 255, 63, .08);
+  text-shadow: 0 0 8px rgba(131, 255, 63, .8);
+}
+
+.nav-wrapper {
+  margin: 0 6px;
+  border: 3px solid #2b1208;
+  border-radius: 3px;
+  background:
+    repeating-linear-gradient(90deg, rgba(255, 155, 67, .055) 0 1px, transparent 1px 19px),
+    linear-gradient(#6f3218, #241007 32%, #0e0603);
+  box-shadow: 0 0 0 1px #78401e, inset 0 2px rgba(255, 181, 94, .16), 0 7px 18px #000;
+}
+
+.nav {
+  background: transparent;
+  box-shadow: inset 0 -3px rgba(131, 255, 63, .12);
+}
+
+.nav-btn {
+  min-width: 58px;
+  padding: 8px 7px 7px;
+  color: #b78054;
+  font-family: "Russo One", sans-serif;
+  font-size: 10px;
+  letter-spacing: 0;
+  border-left: 1px solid rgba(170, 76, 27, .16);
+  border-bottom-width: 3px;
+  text-shadow: 1px 1px #130703;
+}
+
+.nav-btn::after {
+  content: "";
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #5c2c17;
+  box-shadow: inset 0 1px #c37842;
+}
+
+.nav-btn .nav-icon {
+  font-size: 17px;
+  filter: drop-shadow(1px 2px #140603) saturate(1.25);
+}
+
+.nav-btn.active {
+  color: var(--crt);
+  border-bottom-color: var(--crt);
+  background:
+    repeating-linear-gradient(0deg, rgba(131, 255, 63, .08) 0 1px, transparent 1px 4px),
+    linear-gradient(rgba(38, 102, 24, .6), rgba(6, 23, 7, .72));
+  box-shadow: inset 0 0 18px rgba(131, 255, 63, .13);
+  text-shadow: 0 0 7px rgba(131, 255, 63, .6);
+}
+
+.nav-btn.active::after {
+  background: var(--crt);
+  box-shadow: 0 0 7px var(--crt);
+}
+
+.screen {
+  position: relative;
+  margin: 7px 6px 0;
+  padding: 20px 14px 24px;
+  border-left: 4px solid rgba(86, 36, 15, .88);
+  border-right: 4px solid rgba(86, 36, 15, .88);
+  background:
+    linear-gradient(90deg, rgba(63, 23, 9, .72) 0 3px, transparent 3px calc(100% - 3px), rgba(63, 23, 9, .72) calc(100% - 3px)),
+    linear-gradient(180deg, rgba(7, 3, 1, .42), rgba(7, 3, 1, .78));
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, .38);
+}
+
+.screen.active::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: .56;
+  background:
+    radial-gradient(circle at 8px 14px, #bd5c25 0 2px, #281006 3px 5px, transparent 6px) 0 0 / 100% 42px repeat-y,
+    radial-gradient(circle at calc(100% - 8px) 14px, #bd5c25 0 2px, #281006 3px 5px, transparent 6px) 0 0 / 100% 42px repeat-y,
+    url("../images/brainbet-arcade-reference.png") center 26% / cover no-repeat;
+}
+
+.screen.active::after {
+  content: "";
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  top: 7px;
+  height: 7px;
+  pointer-events: none;
+  background: repeating-linear-gradient(90deg, #cc5b21 0 9px, #361208 9px 14px, #8b3414 14px 22px);
+  box-shadow: 0 2px 7px #000;
+}
+
+/* The shared arcade photo was visible through the rocket's translucent
+   cabinet and produced wide light columns on mobile GPU compositors. */
+#screen-rocket.active::before {
+  opacity: 1;
+  background:
+    radial-gradient(circle at 50% 30%, rgba(143, 54, 22, .13), transparent 31%),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, .012) 0 1px, transparent 1px 5px),
+    linear-gradient(180deg, #090b0e 0%, #07090b 54%, #050607 100%);
+  mix-blend-mode: normal;
+}
+
+#screen-rocket .rocket-stage,
+#screen-rocket .rocket-machine-shell {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  mix-blend-mode: normal;
+}
+
+/* Rocket uses an opaque page surface. The shared full-page artwork otherwise
+   leaks through the translucent app as large bright columns in WebViews. */
+body.rocket-screen-active,
+body:has(#screen-rocket.active) {
+  background-color: #050608 !important;
+  background-image: none !important;
+}
+
+body.rocket-screen-active::before,
+body.rocket-screen-active::after,
+body:has(#screen-rocket.active)::before,
+body:has(#screen-rocket.active)::after {
+  display: none !important;
+}
+
+body.rocket-screen-active > .noise,
+body:has(#screen-rocket.active) > .noise {
+  display: none !important;
+}
+
+body.rocket-screen-active > .app,
+body:has(#screen-rocket.active) > .app {
+  background: #07090b !important;
+}
+
+.game-header,
+.bet-area,
+.result-box,
+.coin-visual,
+.case-card,
+.shop-card,
+.inv-item,
+.slots-rules,
+.slots-reels,
+.dice-mode-row,
+.mr-wheel-wrap,
+.mr-sectors,
+.mr-history,
+.mr-players-list,
+.upg-wheel-wrap,
+.upg-tabs,
+.csm-card,
+.snd-card,
+.case-result-card,
+.lb-row,
+.lb-podium-slot,
+.profile-card,
+.ticket-card,
+.admin-player-row {
+  border-color: #743619 !important;
+  border-radius: 4px !important;
+  background:
+    repeating-linear-gradient(102deg, transparent 0 18px, rgba(255, 175, 83, .035) 19px 21px),
+    linear-gradient(180deg, rgba(66, 29, 12, .94), rgba(16, 8, 4, .95)) !important;
+  box-shadow:
+    0 0 0 1px #2a1007,
+    inset 0 1px rgba(255, 190, 106, .16),
+    inset 0 -13px 24px rgba(0, 0, 0, .28),
+    0 8px 18px rgba(0, 0, 0, .38);
+}
+
+.game-header {
+  min-height: 64px;
+  margin-bottom: 14px;
+  padding: 11px 12px 10px 16px;
+  border: 2px solid #743619;
+  overflow: hidden;
+}
+
+.game-header::before,
+.game-header::after {
+  content: "";
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  top: 7px;
+  background: radial-gradient(circle at 35% 35%, #e78a49, #5c2713 55%, #170703 60%);
+  box-shadow: 0 44px 0 #4c1d0e;
+}
+
+.game-header::before { left: 6px; }
+.game-header::after { right: 6px; }
+
+.game-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #ffd59a;
+  text-shadow: 2px 2px #63220f, 0 0 12px rgba(255, 147, 48, .34);
+}
+
+.game-title::after {
+  width: 72px;
+  height: 3px;
+  background: repeating-linear-gradient(90deg, #ff3b1d 0 9px, #ffad3e 9px 18px, #83ff3f 18px 27px);
+}
+
+.game-desc {
+  color: #c09063;
+  letter-spacing: 0;
+  text-shadow: 1px 1px #140603;
+}
+
+.bet-area {
+  margin: 13px 0;
+  padding: 11px;
+  border: 2px solid #743619;
+  position: relative;
+}
+
+.bet-area::before {
+  content: "COIN INPUT";
+  position: absolute;
+  right: 9px;
+  top: 7px;
+  color: #c45b25;
+  font: 700 7px "Space Mono", monospace;
+  letter-spacing: .6px;
+}
+
+.bet-label {
+  color: #ffae57;
+  letter-spacing: 1.5px;
+  text-shadow: 0 0 7px rgba(255, 119, 31, .35);
+}
+
+.bet-input-wrap,
+.slots-reel,
+.case-spin-viewport,
+.ticket-message,
+.admin-search-input,
+.profile-input,
+input,
+textarea {
+  border: 3px solid #261007 !important;
+  border-radius: 2px !important;
+  clip-path: none !important;
+  background:
+    repeating-linear-gradient(0deg, rgba(131, 255, 63, .075) 0 1px, transparent 1px 4px),
+    linear-gradient(180deg, #071507, #020703) !important;
+  color: var(--crt) !important;
+  box-shadow: 0 0 0 1px #3f6d26, inset 0 0 17px rgba(131, 255, 63, .12);
+}
+
+.bet-input-wrap::before,
+.result-box::before {
+  display: none;
+}
+
+.bet-input-wrap input::placeholder,
+input::placeholder,
+textarea::placeholder {
+  color: rgba(131, 255, 63, .42) !important;
+}
+
+.qbet,
+.step,
+.play-btn,
+.case-result-btn,
+.case-card,
+.shop-card,
+.inv-item,
+.inv-btn,
+.slots-color-btn,
+.dice-mode-btn,
+.mr-mbtn,
+.upg-tab,
+.upg-quick-btn,
+.upg-buy-btn,
+.upg-sell-btn {
+  clip-path: none !important;
+}
+
+.qbet,
+.step,
+.inv-btn,
+.slots-color-btn,
+.dice-mode-btn,
+.mr-mbtn,
+.upg-tab,
+.upg-quick-btn {
+  border: 2px solid #37150a !important;
+  border-radius: 3px;
+  background: linear-gradient(#78401e, #2b1108 55%, #120603) !important;
+  color: #e4a463;
+  box-shadow: 0 0 0 1px #82421d, inset 0 1px #c8793e, 0 3px 0 #070201;
+  text-shadow: 1px 1px #1a0703;
+}
+
+.qbet:hover,
+.slots-color-btn:hover,
+.dice-mode-btn:hover,
+.upg-quick-btn:hover {
+  color: var(--crt);
+  box-shadow: 0 0 0 1px #5c9b34, 0 0 13px rgba(131, 255, 63, .18);
+}
+
+.play-btn,
+.case-result-btn,
+.upg-buy-btn {
+  min-height: 50px;
+  border: 4px solid #173f16;
+  border-radius: 4px;
+  background:
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, .12) 0 1px, transparent 1px 5px),
+    linear-gradient(#c8ff74 0%, #69d33e 43%, #257825 55%, #184d1c 100%) !important;
+  color: #071505;
+  font-family: "Russo One", sans-serif;
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-shadow: 0 1px rgba(255, 255, 255, .35);
+  box-shadow:
+    0 0 0 2px #081a09,
+    inset 0 2px rgba(255, 255, 255, .4),
+    inset 0 -7px rgba(0, 0, 0, .22),
+    0 6px 0 #0a250e,
+    0 0 21px rgba(131, 255, 63, .25);
+}
+
+.play-btn::before {
+  left: -70%;
+  width: 42%;
+}
+
+.play-btn::after {
+  background:
+    radial-gradient(circle at 13px 50%, #173d17 0 3px, #061207 4px 6px, transparent 7px),
+    radial-gradient(circle at calc(100% - 13px) 50%, #173d17 0 3px, #061207 4px 6px, transparent 7px);
+}
+
+.play-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 0 2px #081a09, inset 0 2px rgba(255,255,255,.4), inset 0 -7px rgba(0,0,0,.22), 0 7px 0 #0a250e, 0 0 28px rgba(131,255,63,.38);
+}
+
+.play-btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 2px #081a09, inset 0 2px rgba(255,255,255,.24), 0 2px 0 #0a250e;
+}
+
+.coin-visual {
+  height: 202px;
+  min-height: 0;
+  margin: 13px 0;
+  padding: 38px 12px 13px;
+  gap: 15px;
+  border: 5px solid #210d06;
+  border-radius: 5px !important;
+  overflow: hidden;
+  position: relative;
+  background:
+    radial-gradient(circle at 50% 48%, rgba(255, 72, 22, .14), transparent 33%),
+    repeating-linear-gradient(0deg, rgba(131, 255, 63, .075) 0 1px, transparent 1px 5px),
+    linear-gradient(180deg, #081a08, #030603) !important;
+  box-shadow: 0 0 0 2px #87431e, inset 0 0 28px rgba(0, 0, 0, .9), 0 9px 20px #000;
+}
+
+.coin-visual::before {
+  content: none;
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  top: 7px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #4b2010;
+  border-radius: 2px;
+  background:
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, .08) 0 1px, transparent 1px 4px),
+    linear-gradient(90deg, #661c0c, #231005 34%, #102d0e 66%, #295712);
+  color: var(--crt);
+  font: 400 10px "Russo One", sans-serif;
+  letter-spacing: .5px;
+  text-shadow: 0 0 7px rgba(131, 255, 63, .86);
+  box-shadow: 0 0 10px rgba(255, 73, 25, .24);
+}
+
+.coin-visual::after {
+  content: "";
+  position: absolute;
+  inset: 35px 8px 8px;
+  pointer-events: none;
+  border: 1px solid rgba(131, 255, 63, .12);
+  background:
+    radial-gradient(circle at 9px 9px, #f13f1e 0 2px, transparent 3px),
+    radial-gradient(circle at calc(100% - 9px) 9px, #82ff3f 0 2px, transparent 3px),
+    linear-gradient(108deg, transparent 42%, rgba(131, 255, 63, .055) 43% 45%, transparent 46%);
+}
+
+.coin {
+  width: 82px;
+  height: 82px;
+  filter: drop-shadow(3px 4px 0 #351006) drop-shadow(0 0 15px rgba(255, 174, 62, .52));
+}
+
+.coin-face {
+  border: 4px solid #4b200e;
+  box-shadow: inset 0 2px 8px rgba(255,255,255,.28), inset 0 -10px 14px rgba(0,0,0,.4), 0 0 0 2px #180803;
+}
+
+.coin-steps {
+  gap: 5px;
+  z-index: 2;
+}
+
+.step {
+  min-width: 43px;
+  padding: 5px 7px;
+  text-align: center;
+}
+
+.case-card,
+.shop-card,
+.inv-item {
+  position: relative;
+  overflow: hidden;
+  border: 3px solid #321308 !important;
+  border-radius: 4px !important;
+  box-shadow: 0 0 0 1px #7f3b1a, inset 0 1px #b76831, inset 0 -14px 20px rgba(0,0,0,.28), 0 7px 13px rgba(0,0,0,.45);
+}
+
+.case-card::before,
+.shop-card::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  pointer-events: none;
+  border: 1px dashed rgba(255, 160, 75, .18);
+  background:
+    radial-gradient(circle at 3px 3px, #d16b2e 0 2px, #351207 3px, transparent 4px),
+    radial-gradient(circle at calc(100% - 3px) 3px, #d16b2e 0 2px, #351207 3px, transparent 4px);
+}
+
+.case-card::after,
+.shop-card::after,
+.inv-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .72;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(255, 48, 28, .18), transparent 19%),
+    radial-gradient(circle at 88% 16%, rgba(131, 255, 63, .13), transparent 17%),
+    repeating-linear-gradient(0deg, rgba(255,255,255,.045) 0 1px, transparent 1px 5px);
+}
+
+.case-card:hover,
+.shop-card:hover {
+  transform: translateY(-3px) rotate(-.6deg);
+  border-color: #55962d !important;
+  box-shadow: 0 0 0 1px #83ff3f, 0 0 22px rgba(131,255,63,.2), 0 10px 20px #000;
+}
+
+.case-card:nth-child(even):hover,
+.shop-card:nth-child(even):hover {
+  transform: translateY(-3px) rotate(.6deg);
+}
+
+.case-icon,
+.shop-emoji,
+.inv-emoji,
+.nav-icon {
+  filter: drop-shadow(2px 3px #210903) saturate(1.25) contrast(1.05);
+}
+
+.case-name,
+.shop-name,
+.inv-name,
+.upg-item-name {
+  color: #ffd298;
+  text-shadow: 1px 2px #3b1409;
+}
+
+.case-price,
+.shop-price,
+.upg-item-value,
+.result-amount {
+  color: var(--crt);
+  text-shadow: 0 0 9px rgba(131,255,63,.48);
+}
+
+.case-badge,
+.shop-rarity,
+.frozen-badge {
+  border-radius: 2px;
+  border: 1px solid currentColor;
+  background: rgba(0,0,0,.38) !important;
+}
+
+.result-box {
+  border: 3px solid #35150a !important;
+}
+
+.result-win {
+  border-color: #3d7d25 !important;
+  background: repeating-linear-gradient(0deg, rgba(131,255,63,.07) 0 1px, transparent 1px 5px), linear-gradient(#163711, #060b04) !important;
+}
+
+.result-lose {
+  border-color: #8e2d18 !important;
+  background: repeating-linear-gradient(0deg, rgba(255,48,28,.07) 0 1px, transparent 1px 5px), linear-gradient(#47150c, #0d0503) !important;
+}
+
+.slots-reel.match {
+  color: var(--crt);
+  box-shadow: 0 0 18px rgba(131,255,63,.22), inset 0 0 15px rgba(131,255,63,.1);
+}
+
+.slots-reel.no-match {
+  color: var(--red);
+  box-shadow: 0 0 18px rgba(255,48,28,.18), inset 0 0 15px rgba(255,48,28,.1);
+}
+
+.toast {
+  border: 3px solid #301207;
+  border-radius: 4px;
+  clip-path: none;
+  background: linear-gradient(#6a2e15, #180904) !important;
+  box-shadow: 0 0 0 1px #a44f20, 0 12px 30px #000;
+}
+
+@media (max-width: 390px) {
+  .header {
+    margin-inline: 10px;
+    padding-inline: 10px;
+  }
+
+  .header-logo { font-size: 18px; }
+  .character-dragon { left: -52px; width: 132px; }
+  .character-host { right: -34px; }
+  .screen { padding-inline: 12px; }
+}
+
+@media (max-height: 700px) {
+  .header {
+    min-height: 56px;
+    margin-top: 10px;
+    padding-block: 8px;
+  }
+
+  .live-wins { height: 28px; margin-bottom: 4px; }
+  .nav-btn { padding-block: 5px; }
+  .screen { padding-top: 14px; padding-bottom: 14px; }
+  .game-header { min-height: 49px; margin-bottom: 7px; padding-block: 6px; }
+  .game-title { font-size: 20px; }
+  .game-desc { margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .coin-visual { height: 145px; margin-block: 7px; padding-top: 34px; padding-bottom: 8px; gap: 6px; }
+  .coin { width: 60px; height: 60px; }
+  .coin-face { font-size: 34px; }
+  .step { padding-block: 4px; }
+  .bet-area { margin-block: 7px; padding: 7px; }
+  .bet-label { margin-bottom: 5px; }
+  .bet-input-wrap input { padding-block: 7px; }
+  .quick-bets { margin-top: 5px; }
+  .qbet { padding-block: 4px; }
+  .play-btn { min-height: 41px; padding-block: 9px; }
+}
+
+/* The upgrader chamber itself is angular; the previous circular shell is retired. */
+#screen-upgrader .upg-reactor-console .upg-wheel-wrap {
+  border: 0;
+  border-radius: 0;
+  outline: 0;
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
+}
+
+#screen-upgrader .upg-reactor-console .upg-wheel-wrap::before {
+  content: "SYNTH-07";
+  top: -10px;
+  z-index: 4;
+  border-color: #7f351c;
+  background: #1a0d08;
+  color: #e9ff76;
+  text-shadow: 0 0 7px rgba(215, 255, 99, .62);
+}
+
+/* Final reactor sizing must stay after the legacy compact rules above. */
+#screen-upgrader .upg-reactor-console {
+  grid-template-columns: minmax(218px, 1fr) 88px;
+  gap: 8px;
+  padding: 18px 8px 13px;
+}
+
+#screen-upgrader .upg-reactor-console .upg-wheel-wrap {
+  width: 218px;
+  height: 218px;
+  margin: 4px auto;
+}
+
+#screen-upgrader .upg-chance-readout,
+#screen-upgrader #upg-summary {
+  min-height: 92px;
+}
+
+@media (max-width: 370px), (max-height: 700px) {
+  #screen-upgrader .upg-reactor-console {
+    grid-template-columns: minmax(202px, 1fr) 78px;
+  }
+
+  #screen-upgrader .upg-reactor-console .upg-wheel-wrap {
+    width: 202px;
+    height: 202px;
+  }
+}
+
+/* Coin v3: a chunky two-sided arcade token, no platform emoji artwork. */
+#screen-coin .coin-visual {
+  height: 242px;
+  padding: 15px 12px 13px;
+  gap: 10px;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(229, 255, 118, .14), transparent 28%),
+    repeating-linear-gradient(0deg, rgba(111, 235, 73, .06) 0 1px, transparent 1px 5px),
+    linear-gradient(180deg, #0b1a0d, #030603) !important;
+}
+
+#screen-coin .coin {
+  width: 122px;
+  height: 122px;
+  filter: drop-shadow(5px 7px 0 #1b0904) drop-shadow(0 0 19px rgba(229, 255, 118, .28));
+}
+
+#screen-coin .coin-face {
+  border: 0;
+  border-radius: 0;
+  background: transparent !important;
+  box-shadow: none;
+  font-size: 0;
+}
+
+#screen-coin .coin-art {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+#screen-coin .coin-gear {
+  fill: #35160b;
+  stroke: #d9813a;
+  stroke-width: 3;
+}
+
+#screen-coin .coin-plate {
+  fill: url("brainbet-maximal.css#none");
+  stroke: #ffe178;
+  stroke-width: 2;
+}
+
+#screen-coin .coin-face.front .coin-plate {
+  fill: #9c7723;
+}
+
+#screen-coin .coin-plate-danger {
+  fill: #651c13;
+  stroke: #ff7040;
+}
+
+#screen-coin .coin-circuit {
+  fill: none;
+  stroke: #e7ff79;
+  stroke-width: 2;
+  opacity: .72;
+}
+
+#screen-coin .coin-brain {
+  fill: #17210f;
+  stroke: #ffdf70;
+  stroke-width: 2;
+}
+
+#screen-coin .coin-bolts {
+  fill: #ff492b;
+  stroke: #41130a;
+  stroke-width: 1.5;
+}
+
+#screen-coin .coin-skull {
+  fill: #160b08;
+  stroke: #ff9a53;
+  stroke-width: 2;
+}
+
+#screen-coin .coin-crack {
+  fill: none;
+  stroke: #ffe178;
+  stroke-width: 2.5;
+}
+
+#screen-coin .coin.spinning .coin-art {
+  animation: coinCorePulse .18s steps(2) infinite;
+}
+
+@keyframes coinCorePulse {
+  50% { filter: brightness(1.38) saturate(1.25); }
+}
+
+/* Dice v3: faceted energy capsules replace Unicode color circles. */
+.dice-orb {
+  --orb: #8ea29a;
+  --orb-hi: #e4fff3;
+  position: relative;
+  display: inline-block;
+  width: 32px;
+  height: 36px;
+  flex: 0 0 auto;
+  clip-path: polygon(28% 0, 72% 0, 100% 22%, 100% 78%, 72% 100%, 28% 100%, 0 78%, 0 22%);
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.72) 0 8%, transparent 9% 34%, rgba(0,0,0,.32) 35% 63%, transparent 64%),
+    radial-gradient(circle at 38% 28%, var(--orb-hi) 0 8%, var(--orb) 28%, #120906 76%);
+  box-shadow: inset 0 0 0 3px rgba(255, 230, 154, .3), inset 0 -9px 10px rgba(0,0,0,.48);
+  filter: drop-shadow(2px 3px 0 #110704) drop-shadow(0 0 7px var(--orb));
+}
+
+.dice-orb::before,
+.dice-orb::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.dice-orb::before {
+  inset: 5px;
+  border: 1px solid rgba(255, 244, 190, .6);
+  clip-path: inherit;
+}
+
+.dice-orb::after {
+  left: 50%;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  translate: -50% -50%;
+  rotate: 45deg;
+  background: #f5ffb0;
+  box-shadow: 0 0 7px var(--orb);
+}
+
+.dice-orb > i {
+  position: absolute;
+  left: 5px;
+  right: 5px;
+  top: 50%;
+  height: 2px;
+  translate: 0 -50%;
+  background: rgba(28, 9, 4, .62);
+}
+
+.dice-orb--red { --orb:#ff3f2b; --orb-hi:#ffd0a2; }
+.dice-orb--orange { --orb:#ff8a27; --orb-hi:#ffe39a; }
+.dice-orb--yellow { --orb:#e6c72f; --orb-hi:#ffffb0; }
+.dice-orb--green { --orb:#57d73c; --orb-hi:#dfff9a; }
+.dice-orb--blue { --orb:#28b8cf; --orb-hi:#bdf7ff; }
+.dice-orb--purple { --orb:#bd4ed4; --orb-hi:#ffc5ff; }
+
+.dice-orb--compact {
+  width: 24px;
+  height: 27px;
+  filter: drop-shadow(1px 2px 0 #110704) drop-shadow(0 0 4px var(--orb));
+}
+
+#screen-dice .dice-mode-icon {
+  width: 24px;
+  height: 24px;
+}
+
+#screen-dice .slots-color-btn {
+  min-height: 64px;
+}
+
+#screen-dice .slots-reel {
+  min-width: 0;
+  height: 82px;
+  font-size: 0;
+  border: 2px solid #6d341c;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.035), transparent 20% 80%, rgba(255,255,255,.035)),
+    repeating-linear-gradient(0deg, rgba(57, 211, 226, .055) 0 1px, transparent 1px 5px),
+    #071216;
+  box-shadow: inset 0 0 18px #000, 0 5px 0 #160904;
+}
+
+#screen-dice .slots-reel .dice-orb {
+  width: 39px;
+  height: 45px;
+}
+
+#screen-dice .slots-reel.spinning .dice-orb {
+  animation: diceCapsuleFlicker .1s steps(2) infinite;
+}
+
+@keyframes diceCapsuleFlicker {
+  50% { transform: translateY(-3px) scale(.88); filter: brightness(1.45) drop-shadow(0 0 9px var(--orb)); }
+}
+
+#screen-dice .neo-cell,
+#screen-dice .fs-cell {
+  display: grid;
+  place-items: center;
+  font-size: 0;
+}
+
+/* Upgrader v4: large central machine with its instruments below the core. */
+#screen-upgrader .game-title {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+#screen-upgrader .game-title-icon {
+  width: 26px;
+  height: 26px;
+  flex: 0 0 26px;
+  filter: drop-shadow(0 0 6px rgba(123, 230, 70, .42));
+}
+
+#screen-upgrader .upg-warning {
+  margin: -4px 0 12px;
+  padding: 7px 10px;
+  border: 2px solid #5c2b17;
+  background: repeating-linear-gradient(135deg, #251008 0 9px, #32170b 9px 18px);
+  color: #dba46e;
+  font-size: 9px;
+  text-align: center;
+}
+
+#screen-upgrader .upg-reactor-console {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: auto auto auto auto;
+  gap: 9px;
+  padding: 20px 10px 13px;
+  border-color: #2a1008;
+  background:
+    linear-gradient(90deg, transparent 49%, rgba(113, 226, 68, .07) 50%, transparent 51%),
+    repeating-linear-gradient(0deg, rgba(255, 181, 78, .045) 0 1px, transparent 1px 6px),
+    linear-gradient(#3a1a0d, #0d0704);
+  box-shadow: 0 0 0 2px #82431f, inset 0 0 34px #000, 0 12px 24px #000;
+}
+
+#screen-upgrader .upg-reactor-console::before {
+  border-color: #86451f;
+  background: #1d0e07;
+  color: #e8ff77;
+  text-shadow: 0 0 7px rgba(123, 230, 70, .55);
+}
+
+#screen-upgrader .upg-reactor-console .upg-wheel-wrap {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  width: 276px;
+  height: 276px;
+  margin: 2px auto 4px;
+  background:
+    radial-gradient(circle, rgba(116, 224, 65, .1), transparent 58%),
+    repeating-conic-gradient(from 0deg, rgba(210, 125, 53, .2) 0 3deg, transparent 3deg 30deg);
+  box-shadow: inset 0 0 32px #000, 0 0 0 2px #552611, 0 8px 0 #120704;
+}
+
+#screen-upgrader .upg-chance-readout {
+  grid-column: 1;
+  grid-row: 2;
+  min-height: 72px;
+}
+
+#screen-upgrader #upg-summary {
+  grid-column: 2;
+  grid-row: 2;
+  min-height: 72px;
+}
+
+#screen-upgrader #upg-go-btn {
+  grid-column: 1 / -1;
+  grid-row: 3;
+}
+
+#screen-upgrader #upg-result {
+  grid-column: 1 / -1;
+  grid-row: 4;
+}
+
+@media (max-width: 370px) {
+  #screen-upgrader .upg-reactor-console .upg-wheel-wrap {
+    width: 258px;
+    height: 258px;
+  }
+
+  #screen-coin .coin {
+    width: 108px;
+    height: 108px;
+  }
+}
+
+#screen-roulette1v1 {
+  overflow-x: clip;
+}
+
+#screen-roulette1v1 .wheel-wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+  gap: 10px;
+}
+
+#screen-roulette1v1 .wheel-wrap canvas {
+  grid-column: 1;
+}
+
+#screen-roulette1v1 #r1-legend {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: min(100%, 300px);
+  min-width: 0;
+  max-width: 300px;
+  padding: 7px;
+  border: 2px solid #31150e;
+  background: rgba(7, 15, 8, .78);
+}
+
+#screen-roulette1v1 #r1-legend .legend-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+}
+
+/* Project-local mode pictograms replace platform emoji glyphs. */
+.bb-icon-sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.nav-btn .nav-icon {
+  display: block;
+  width: 29px;
+  height: 29px;
+  flex: 0 0 29px;
+  overflow: visible;
+  filter: drop-shadow(0 2px 0 #080301) drop-shadow(0 0 4px rgba(255, 143, 58, .24));
+  transition: transform .16s ease, filter .16s ease;
+}
+
+.nav-btn.active .nav-icon {
+  transform: translateY(-1px) scale(1.08);
+  filter: drop-shadow(0 2px 0 #080301) drop-shadow(0 0 7px rgba(130, 255, 67, .58));
+}
+
+.coin-visual::before {
+  content: none;
+  display: none;
+}
+
+.coin-visual {
+  padding: 18px 12px 13px;
+}
+
+.coin-visual::after {
+  inset: 8px;
+}
+
+/* Larger upgrade reactor: the mechanism is the focus, not a thumbnail. */
+#screen-upgrader .upg-reactor-console {
+  grid-template-columns: minmax(218px, 1fr) 88px;
+  gap: 8px;
+  padding: 18px 8px 13px;
+}
+
+#screen-upgrader .upg-reactor-console .upg-wheel-wrap {
+  width: 218px;
+  height: 218px;
+  margin: 4px auto;
+}
+
+#screen-upgrader .upg-chance-readout {
+  min-height: 92px;
+  padding-inline: 3px;
+}
+
+#screen-upgrader #upg-chance-text {
+  font-size: 16px !important;
+}
+
+#screen-upgrader #upg-summary {
+  min-height: 92px;
+  display: grid;
+  place-items: center;
+  padding-inline: 4px;
+  font-size: 8px !important;
+}
+
+@media (max-width: 370px), (max-height: 700px) {
+  #screen-upgrader .upg-reactor-console {
+    grid-template-columns: minmax(202px, 1fr) 78px;
+  }
+
+  #screen-upgrader .upg-reactor-console .upg-wheel-wrap {
+    width: 202px;
+    height: 202px;
+  }
+
+  #screen-upgrader #upg-chance-text {
+    font-size: 14px !important;
+  }
+}
+
+#screen-upgrader .upg-wheel-svg {
+  filter: drop-shadow(0 6px 3px rgba(0, 0, 0, .72)) drop-shadow(0 0 8px rgba(255, 77, 39, .16));
+}
+
+#screen-upgrader .upg-holo {
+  top: 51%;
+  filter: drop-shadow(0 0 7px rgba(222, 255, 118, .55));
+}
+
+#screen-roulette1v1 canvas,
+#screen-rouletteFFA canvas,
+#screen-multiRoulette canvas {
+  filter: drop-shadow(0 8px 3px rgba(0, 0, 0, .8)) drop-shadow(0 0 9px rgba(255, 73, 37, .18));
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .header { animation: signFlicker 8s steps(1) infinite; }
+  .casino-lamp { animation: lampSway 5s ease-in-out infinite alternate; }
+  .lamp-right { animation-delay: -2.2s; }
+}
+
+@keyframes signFlicker {
+  0%, 18%, 20%, 64%, 66%, 100% { filter: brightness(1); }
+  19%, 65% { filter: brightness(.78); }
+}
+
+@keyframes lampSway {
+  from { translate: -1px 0; }
+  to { translate: 2px 1px; }
+}
+
+/* Mode-specific arcade cabinets. */
+.screen {
+  --mode-accent: #ffad3e;
+  --mode-glow: rgba(255, 173, 62, .24);
+  --mode-dark: #32140a;
+}
+
+.screen.active {
+  z-index: 3 !important;
+  isolation: isolate;
+}
+
+#screen-coin { --mode-accent: #83ff3f; --mode-glow: rgba(131, 255, 63, .22); }
+#screen-cases { --mode-accent: #ffb02f; --mode-glow: rgba(255, 176, 47, .23); }
+#screen-upgrader { --mode-accent: #d75cff; --mode-glow: rgba(215, 92, 255, .28); --mode-dark: #2d0b31; }
+#screen-roulette1v1 { --mode-accent: #ff4b2f; --mode-glow: rgba(255, 75, 47, .27); }
+#screen-rouletteFFA { --mode-accent: #ffd53f; --mode-glow: rgba(255, 213, 63, .28); }
+#screen-mr { --mode-accent: #ff321f; --mode-glow: rgba(255, 50, 31, .27); }
+#screen-dice { --mode-accent: #44dfff; --mode-glow: rgba(68, 223, 255, .25); }
+#screen-shop { --mode-accent: #ff973d; --mode-glow: rgba(255, 151, 61, .24); }
+#screen-inventory { --mode-accent: #52cfff; --mode-glow: rgba(82, 207, 255, .2); }
+
+.screen.active .game-header {
+  border-color: color-mix(in srgb, var(--mode-accent) 54%, #4d1b0a) !important;
+  box-shadow:
+    0 0 0 1px #210b04,
+    inset 0 1px rgba(255, 216, 157, .14),
+    inset 0 -13px 24px rgba(0, 0, 0, .3),
+    0 0 18px var(--mode-glow);
+}
+
+.screen.active .game-title::after {
+  background: repeating-linear-gradient(90deg, var(--mode-accent) 0 11px, #351108 11px 15px, #ff7b28 15px 25px);
+  box-shadow: 0 0 8px var(--mode-glow);
+}
+
+/* Upgrader: unstable synthesis reactor. */
+#screen-upgrader .upg-wheel-wrap {
+  border: 7px solid #1c071e;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, rgba(215, 92, 255, .2), transparent 56%),
+    repeating-conic-gradient(from 0deg, #6b2370 0 6deg, #210923 6deg 12deg);
+  outline: 2px dashed #9f3db0;
+  outline-offset: 5px;
+  box-shadow:
+    0 0 0 3px #4b173f,
+    inset 0 0 26px #000,
+    0 0 28px rgba(215, 92, 255, .3),
+    0 10px 22px #000;
+}
+
+#screen-upgrader .upg-wheel-wrap::before {
+  content: "SYNTH CORE";
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  translate: -50% 0;
+  padding: 3px 10px;
+  border: 2px solid #501952;
+  background: #160618;
+  color: #f28bff;
+  font: 400 9px "Russo One", sans-serif;
+  white-space: nowrap;
+  text-shadow: 0 0 7px #d75cff;
+  box-shadow: 0 3px 0 #090209;
+}
+
+#screen-upgrader .upg-quick-btn,
+#screen-upgrader .upg-tab.active {
+  border-color: #a840b4 !important;
+  color: #f28bff;
+  box-shadow: 0 0 10px rgba(215, 92, 255, .18);
+}
+
+/* 1v1: a split duel cabinet. */
+#screen-roulette1v1 .wheel-wrap {
+  padding: 14px 10px;
+  border: 4px solid #210a05;
+  border-radius: 4px;
+  background:
+    linear-gradient(90deg, rgba(130, 24, 15, .76) 0 48%, #170704 48% 52%, rgba(20, 94, 35, .72) 52%),
+    repeating-linear-gradient(0deg, rgba(255,255,255,.05) 0 1px, transparent 1px 5px);
+  box-shadow: 0 0 0 2px #773018, inset 0 0 28px #000, 0 10px 20px #000;
+}
+
+#screen-roulette1v1 .wheel-wrap::before {
+  content: "VS";
+  position: absolute;
+  left: 50%;
+  top: 10px;
+  translate: -50% 0;
+  z-index: 3;
+  color: #ffe0a3;
+  font: 400 15px "Rubik Mono One", sans-serif;
+  text-shadow: 2px 2px #4b120a, 0 0 10px #ff5b2e;
+}
+
+#screen-roulette1v1 .wheel-wrap canvas {
+  border: 5px solid #260b05;
+  box-shadow: 0 0 0 2px #b54825, 0 0 24px rgba(255, 69, 38, .3);
+}
+
+/* Jackpot: a heavy communal vault core. */
+#screen-rouletteFFA .wheel-wrap--ffa {
+  padding: 15px 8px;
+  border: 5px solid #231006;
+  border-radius: 5px;
+  background:
+    radial-gradient(circle at 50% 46%, rgba(255, 213, 63, .22), transparent 48%),
+    repeating-conic-gradient(from 0deg at 50% 50%, rgba(255, 185, 47, .1) 0 5deg, transparent 5deg 12deg),
+    linear-gradient(#4a250d, #100703);
+  box-shadow: 0 0 0 2px #9f5421, inset 0 0 34px #000, 0 0 25px rgba(255, 213, 63, .2);
+}
+
+#screen-rouletteFFA .wheel-wrap--ffa::before {
+  content: "JACKPOT CORE";
+  position: absolute;
+  top: 9px;
+  left: 50%;
+  translate: -50% 0;
+  z-index: 3;
+  padding: 3px 12px;
+  border: 1px solid #8d5b1e;
+  background: #181004;
+  color: #ffdc5c;
+  font: 400 9px "Russo One", sans-serif;
+  text-shadow: 0 0 8px rgba(255, 213, 63, .8);
+}
+
+#screen-rouletteFFA .wheel-wrap--ffa canvas {
+  max-width: min(300px, 82vw);
+  height: auto !important;
+  border: 6px solid #251006;
+  outline: 2px dashed #b97720;
+  outline-offset: 4px;
+  box-shadow: 0 0 0 2px #9b541e, 0 0 35px rgba(255, 213, 63, .28), inset 0 0 25px #000;
+}
+
+/* Shared queue panels become CRT status terminals. */
+#screen-roulette1v1 .rooms-section,
+#screen-rouletteFFA .rooms-section {
+  padding: 10px;
+  border: 3px solid #251006;
+  border-radius: 3px;
+  background:
+    repeating-linear-gradient(0deg, rgba(131,255,63,.065) 0 1px, transparent 1px 4px),
+    linear-gradient(#09200b, #030703);
+  box-shadow: 0 0 0 1px #5a4823, inset 0 0 18px #000;
+}
+
+#screen-roulette1v1 .rooms-title,
+#screen-rouletteFFA .rooms-title {
+  color: #83ff3f;
+  text-shadow: 0 0 8px rgba(131, 255, 63, .6);
+}
+
+#screen-roulette1v1 .rooms-empty,
+#screen-rouletteFFA .rooms-empty,
+#screen-roulette1v1 .room-item,
+#screen-rouletteFFA .room-item {
+  border-color: rgba(131, 255, 63, .26);
+  background: rgba(6, 22, 7, .72);
+  clip-path: none;
+}
+
+/* Multi roulette: casino table and bolted multiplier bank. */
+#screen-mr .mr-wheel-wrap {
+  width: min(330px, 88vw);
+  padding: 12px;
+  border: 7px solid #250b05;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, #0d3a1b 0 56%, #5a170d 57% 65%, #170704 66%);
+  outline: 2px dashed #9f3a1d;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 3px #6f2412, inset 0 0 28px #000, 0 12px 26px #000, 0 0 25px rgba(255, 50, 31, .2);
+}
+
+#screen-mr .mr-wheel-wrap canvas {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+#screen-mr .mr-timer-wrap {
+  width: 126px;
+  margin: 9px auto 13px;
+  padding: 5px 10px;
+  border: 3px solid #2c1007;
+  border-radius: 3px;
+  background: repeating-linear-gradient(0deg, rgba(255, 60, 31, .08) 0 1px, transparent 1px 4px), #150704;
+  box-shadow: 0 0 0 1px #7e2e16, inset 0 0 11px #000;
+}
+
+#screen-mr .mr-timer {
+  color: #ff5b32;
+  font-family: "Rubik Mono One", sans-serif;
+  text-shadow: 0 0 10px rgba(255, 50, 31, .75);
+}
+
+#screen-mr .mr-sectors,
+#screen-mr .mr-mult-btns {
+  padding: 8px;
+  border: 3px solid #251006;
+  border-radius: 3px;
+  background: linear-gradient(#44200e, #130704);
+  box-shadow: 0 0 0 1px #713218, inset 0 0 15px #000;
+}
+
+#screen-mr .mr-sector,
+#screen-mr .mr-mbtn,
+#screen-mr .mr-player-row {
+  border-radius: 3px;
+  box-shadow: inset 0 1px rgba(255,255,255,.08), 0 2px 0 #050201;
+}
+
+/* Dice: a noisy six-color slot machine. */
+#screen-dice .slots-rules {
+  position: relative;
+  border-width: 4px !important;
+  padding: 12px;
+  background:
+    repeating-linear-gradient(0deg, rgba(68, 223, 255, .06) 0 1px, transparent 1px 4px),
+    linear-gradient(#102733, #06090b) !important;
+  box-shadow: 0 0 0 2px #164657, inset 0 0 22px #000, 0 8px 18px #000;
+}
+
+#screen-dice .dice-mode-row {
+  padding: 5px;
+  border: 3px solid #281006;
+  border-radius: 3px;
+  background: linear-gradient(#5e2c15, #170804);
+  box-shadow: 0 0 0 1px #7b3a1b, inset 0 0 12px #000;
+}
+
+#screen-dice .dice-mode-btn {
+  border-radius: 3px;
+  font-family: "Russo One", sans-serif;
+}
+
+#screen-dice .dice-mode-btn.active {
+  color: #7cecff;
+  border-color: #39bfd8 !important;
+  background: #09242d !important;
+  box-shadow: inset 0 0 13px rgba(68,223,255,.18), 0 0 10px rgba(68,223,255,.2);
+}
+
+#screen-dice .slots-pick-row {
+  padding: 7px;
+  border: 3px solid #281006;
+  border-radius: 3px;
+  background: linear-gradient(#4b210f, #110603);
+  box-shadow: 0 0 0 1px #733319, inset 0 0 13px #000;
+}
+
+#screen-dice #dice-reels-container,
+#screen-dice .slots-reels {
+  margin-block: 12px;
+  padding: 11px 7px;
+  border: 5px solid #210c05;
+  border-radius: 4px;
+  background:
+    repeating-linear-gradient(0deg, rgba(68, 223, 255, .05) 0 1px, transparent 1px 5px),
+    linear-gradient(#0a1d24, #030607);
+  box-shadow: 0 0 0 2px #3c7f8c, inset 0 0 22px #000, 0 9px 20px #000;
+}
+
+/* Shop and inventory are a pawn counter and a storage cage. */
+#screen-shop .shop-grid,
+#screen-inventory .inv-grid {
+  padding: 9px;
+  border: 4px solid #250e06;
+  border-radius: 4px;
+  background:
+    repeating-linear-gradient(90deg, rgba(255, 166, 73, .055) 0 2px, transparent 2px 24px),
+    linear-gradient(#3b1b0d, #0e0603);
+  box-shadow: 0 0 0 2px #713418, inset 0 0 24px #000, 0 9px 20px #000;
+}
+
+#screen-inventory .inv-grid {
+  background:
+    linear-gradient(90deg, transparent 47%, rgba(82, 207, 255, .06) 48% 52%, transparent 53%),
+    repeating-linear-gradient(0deg, rgba(82, 207, 255, .045) 0 1px, transparent 1px 22px),
+    linear-gradient(#10202a, #06090b);
+  box-shadow: 0 0 0 2px #285267, inset 0 0 24px #000, 0 9px 20px #000;
+}
+
+/* Case dialogs must escape the screen layout and sit above the cabinet. */
+#screen-cases .case-select-modal {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 5000 !important;
+}
+
+#screen-cases .case-open-overlay {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 5100 !important;
+}
+
+#screen-cases .csm-card {
+  position: relative;
+  z-index: 2;
+}
+
+/* Upgrader v2: asymmetric reactor desk instead of a centered old wheel. */
+#screen-upgrader .upg-reactor-console {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(166px, 1.45fr) minmax(98px, .8fr);
+  grid-template-rows: auto auto auto;
+  gap: 9px;
+  align-items: center;
+  margin: 12px 0 16px;
+  padding: 16px 12px 12px;
+  border: 6px solid #1a061b;
+  border-radius: 4px;
+  background:
+    linear-gradient(90deg, rgba(99, 24, 108, .28), transparent 45%),
+    repeating-linear-gradient(0deg, rgba(218, 84, 255, .055) 0 1px, transparent 1px 5px),
+    linear-gradient(#321034, #0e050f);
+  box-shadow: 0 0 0 2px #6c236d, inset 0 0 26px #000, 0 12px 24px #000;
+}
+
+#screen-upgrader .upg-reactor-console::before {
+  content: "REACTOR 07";
+  position: absolute;
+  top: -11px;
+  left: 14px;
+  padding: 3px 10px;
+  border: 2px solid #6e2374;
+  background: #160617;
+  color: #f18bff;
+  font: 400 8px "Russo One", sans-serif;
+  text-shadow: 0 0 7px #d75cff;
+}
+
+#screen-upgrader .upg-reactor-console::after {
+  content: "";
+  position: absolute;
+  right: 12px;
+  top: 10px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ff3b24;
+  box-shadow: 0 0 8px #ff3b24, -13px 0 0 #83ff3f, -13px 0 8px #83ff3f;
+}
+
+#screen-upgrader .upg-reactor-console .upg-wheel-wrap {
+  grid-column: 1;
+  grid-row: 1 / 3;
+  width: 164px;
+  height: 164px;
+  margin: 6px auto;
+}
+
+#screen-upgrader .upg-chance-readout {
+  position: relative;
+  grid-column: 2;
+  grid-row: 1;
+  min-height: 72px;
+  margin: 0 !important;
+  padding: 26px 6px 8px;
+  border: 3px solid #1b071d;
+  border-radius: 3px;
+  background:
+    repeating-linear-gradient(0deg, rgba(131,255,63,.08) 0 1px, transparent 1px 4px),
+    #071408;
+  box-shadow: 0 0 0 1px #477029, inset 0 0 13px #000;
+}
+
+#screen-upgrader .upg-chance-readout::before {
+  content: "SUCCESS";
+  position: absolute;
+  top: 8px;
+  left: 0;
+  right: 0;
+  color: #83ff3f;
+  font: 400 8px "Russo One", sans-serif;
+  letter-spacing: .8px;
+  text-shadow: 0 0 6px #83ff3f;
+}
+
+#screen-upgrader #upg-chance-text {
+  color: #83ff3f;
+  font-family: "Rubik Mono One", sans-serif !important;
+  font-size: 19px !important;
+  text-shadow: 0 0 9px rgba(131,255,63,.68);
+}
+
+#screen-upgrader #upg-mult-text { grid-column: 2; }
+
+#screen-upgrader #upg-summary {
+  grid-column: 2;
+  grid-row: 2;
+  margin: 0 !important;
+  padding: 8px 6px;
+  border: 2px dashed #6e276f;
+  color: #d8a1dd !important;
+  font-size: 9px !important;
+  line-height: 1.45;
+}
+
+#screen-upgrader #upg-go-btn,
+#screen-upgrader #upg-result {
+  grid-column: 1 / -1;
+}
+
+#screen-upgrader #upg-go-btn {
+  grid-row: 3;
+  margin-top: 2px;
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.1) 0 1px, transparent 1px 5px),
+    linear-gradient(#f195ff, #9c38aa 48%, #55205d 52%, #321239) !important;
+  border-color: #571d5e;
+  color: #19051b;
+  box-shadow: 0 0 0 2px #1d071f, inset 0 2px rgba(255,255,255,.3), inset 0 -7px rgba(0,0,0,.24), 0 6px 0 #230928, 0 0 20px rgba(215,92,255,.25);
+}
+
+/* Dice v2: reorder the whole game into a real cabinet workflow. */
+#screen-dice.active {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    "dice-head"
+    "dice-reels"
+    "dice-mode"
+    "dice-pick-label"
+    "dice-pick"
+    "dice-bet"
+    "dice-play"
+    "dice-result"
+    "dice-paytable";
+  row-gap: 10px;
+  min-width: 0;
+}
+
+#screen-dice > * { min-width: 0; max-width: 100%; }
+
+#screen-dice > .game-header { grid-area: dice-head; margin: 0; }
+#screen-dice > #dice-reels-container { grid-area: dice-reels; }
+#screen-dice > .dice-mode-row { grid-area: dice-mode; margin: 0; }
+#screen-dice > .slots-pick-label { grid-area: dice-pick-label; margin: 2px 0 -4px; }
+#screen-dice > .slots-pick-row { grid-area: dice-pick; margin: 0; }
+#screen-dice > .bet-area { grid-area: dice-bet; margin: 0; }
+#screen-dice > #slots-btn { grid-area: dice-play; margin: 0; }
+#screen-dice > #slots-result { grid-area: dice-result; }
+#screen-dice > .slots-rules { grid-area: dice-paytable; margin: 8px 0 0; }
+
+#screen-dice #dice-reels-container {
+  min-height: 164px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 28px 8px 10px;
+  position: relative;
+}
+
+#screen-dice #dice-reels-container::before {
+  content: "COLOR REACTOR";
+  position: absolute;
+  top: 7px;
+  left: 50%;
+  translate: -50% 0;
+  color: #6feaff;
+  font: 400 9px "Russo One", sans-serif;
+  letter-spacing: .7px;
+  text-shadow: 0 0 7px #44dfff;
+}
+
+#screen-dice #dice-reels-container .slots-reels {
+  width: 100%;
+  margin: 0;
+  padding: 6px;
+  border-width: 2px;
+  box-shadow: none;
+}
+
+#screen-dice .slots-rules {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 4px;
+  padding: 7px;
+}
+
+#screen-dice .slots-rule {
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+  padding: 6px 2px;
+  border: 1px solid rgba(68,223,255,.15);
+  background: rgba(0,0,0,.24);
+  text-align: center;
+}
+
+#screen-dice .slots-rule-arrow { display: none; }
+#screen-dice .slots-rule-count { font-size: 7px; white-space: normal; }
+#screen-dice .slots-rule-result { max-width: 100%; padding: 3px 2px; font-size: 7px; white-space: normal; }
+
+@media (max-height: 700px) {
+  #screen-upgrader .upg-reactor-console { padding-block: 12px 9px; }
+  #screen-upgrader .upg-reactor-console .upg-wheel-wrap { width: 148px; height: 148px; }
+  #screen-dice.active { row-gap: 7px; }
+  #screen-dice #dice-reels-container { min-height: 136px; padding-top: 25px; }
+}
+
+#screen-upgrader .upg-reactor-console .upg-wheel-wrap {
+  border: 0;
+  border-radius: 0;
+  outline: 0;
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
+}
+
+#screen-upgrader .upg-reactor-console .upg-wheel-wrap::before {
+  content: "SYNTH-07";
+  top: -10px;
+  z-index: 4;
+  border-color: #7f351c;
+  background: #1a0d08;
+  color: #e9ff76;
+  text-shadow: 0 0 7px rgba(215, 255, 99, .62);
+}
+
+#screen-upgrader .upg-reactor-console {
+  grid-template-columns: minmax(218px, 1fr) 88px;
+  gap: 8px;
+  padding: 18px 8px 13px;
+}
+
+#screen-upgrader .upg-reactor-console .upg-wheel-wrap {
+  width: 218px;
+  height: 218px;
+  margin: 4px auto;
+}
+
+#screen-upgrader .upg-chance-readout,
+#screen-upgrader #upg-summary {
+  min-height: 92px;
+}
+
+@media (max-width: 370px), (max-height: 700px) {
+  #screen-upgrader .upg-reactor-console {
+    grid-template-columns: minmax(202px, 1fr) 78px;
+  }
+
+  #screen-upgrader .upg-reactor-console .upg-wheel-wrap {
+    width: 202px;
+    height: 202px;
+  }
+}

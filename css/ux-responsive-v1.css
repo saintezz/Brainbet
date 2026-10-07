@@ -1,0 +1,566 @@
+/* Final responsive interaction layer shared by both BrainBet skins. */
+:root {
+  --bb-touch: 44px;
+  --bb-view-height: var(--tg-viewport-height, 100dvh);
+  --bb-stable-height: var(--tg-viewport-stable-height, 100dvh);
+  --bb-safe-top: max(env(safe-area-inset-top, 0px), var(--tg-safe-area-inset-top, 0px), var(--tg-content-safe-area-inset-top, 0px));
+  --bb-safe-bottom: max(env(safe-area-inset-bottom, 0px), var(--tg-safe-area-inset-bottom, 0px), var(--tg-content-safe-area-inset-bottom, 0px));
+}
+
+html,
+body {
+  width: 100%;
+  min-height: var(--bb-stable-height);
+  -webkit-text-size-adjust: 100%;
+}
+
+button,
+input,
+textarea,
+select,
+[role="button"] {
+  touch-action: manipulation;
+}
+
+button,
+[role="button"] {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid var(--gold, #f5c542);
+  outline-offset: 2px;
+}
+
+.app,
+.screen,
+.header,
+.live-wins,
+.nav-wrapper {
+  min-width: 0;
+}
+
+.header::after,
+.nav::after,
+.nav-wrapper::after,
+.screen::before,
+.screen::after {
+  pointer-events: none;
+}
+
+html.exchange-active body .app > #screen-exchange {
+  height: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+html.exchange-active body .exchange-frame {
+  height: 100% !important;
+  background: #080b10;
+}
+
+#player-chat-overlay.player-chat-overlay {
+  top: 0;
+  bottom: auto;
+  height: var(--bb-view-height);
+  max-height: var(--bb-view-height);
+  padding-top: var(--bb-safe-top);
+  padding-bottom: 0;
+}
+
+.player-chat-console {
+  height: 100%;
+  max-height: 100%;
+}
+
+.player-chat-compose {
+  position: relative;
+  z-index: 10;
+  padding-bottom: calc(10px + var(--bb-safe-bottom));
+  background: var(--surface, #10141b);
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, .35);
+}
+
+.player-chat-compose textarea {
+  min-height: 46px;
+  font-size: 16px;
+}
+
+.player-chat-compose button,
+.player-chat-back {
+  min-width: var(--bb-touch);
+  min-height: var(--bb-touch);
+}
+
+#ticket-modal,
+.public-profile-overlay {
+  max-height: var(--bb-view-height);
+  padding-top: calc(10px + var(--bb-safe-top)) !important;
+  padding-bottom: calc(10px + var(--bb-safe-bottom)) !important;
+  overscroll-behavior: contain;
+}
+
+@media (max-width: 600px) {
+  body {
+    overscroll-behavior-y: contain;
+  }
+
+  .app {
+    width: 100%;
+    max-width: 480px;
+    padding-top: var(--bb-safe-top);
+    padding-bottom: calc(64px + var(--bb-safe-bottom));
+  }
+
+  .header {
+    min-height: 64px;
+    gap: 8px;
+    padding: 10px 12px;
+  }
+
+  .header-logo {
+    min-width: 0;
+    font-size: clamp(19px, 6vw, 25px);
+    letter-spacing: 2px;
+    white-space: nowrap;
+  }
+
+  .header-stats {
+    min-width: 0;
+    gap: 7px;
+  }
+
+  .stat {
+    min-width: 0;
+  }
+
+  .stat-label {
+    overflow: hidden;
+    font-size: 6px;
+    letter-spacing: 1px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .stat-value {
+    max-width: 124px;
+    overflow: hidden;
+    font-size: 13px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .nav-wrapper {
+    top: 0;
+    isolation: isolate;
+  }
+
+  .nav-btn {
+    min-height: 58px;
+    padding: 7px 9px;
+  }
+
+  .nav-arrow {
+    width: 34px;
+    min-height: 58px;
+  }
+
+  .screen {
+    padding: 18px 12px calc(18px + var(--bb-safe-bottom));
+  }
+
+  .screen .play-btn,
+  .screen .case-open-btn,
+  .screen .craft-run-btn,
+  .screen .upg-start-btn,
+  .screen button[type="submit"] {
+    min-height: 48px;
+  }
+
+  .modal-content,
+  .modal-box,
+  .profile-editor,
+  .public-profile-modal {
+    max-width: 100%;
+  }
+
+  .modal-actions,
+  .case-result-actions,
+  .craft-actions {
+    position: relative;
+    z-index: 12;
+    padding-bottom: var(--bb-safe-bottom);
+  }
+
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+  textarea,
+  select {
+    font-size: 16px;
+  }
+
+  #ticket-modal {
+    padding-inline: 8px !important;
+  }
+
+  .public-profile-modal {
+    width: 100%;
+    max-height: calc(var(--bb-view-height) - var(--bb-safe-top) - var(--bb-safe-bottom) - 20px);
+    overflow-y: auto;
+  }
+
+  .player-chat-head {
+    min-height: 64px;
+  }
+
+  .player-chat-messages {
+    padding: 12px 10px 18px;
+  }
+
+  .player-chat-empty {
+    margin-top: min(18vh, 100px);
+  }
+
+  html.exchange-active,
+  html.exchange-active body,
+  html.exchange-active body .app {
+    width: 100%;
+    height: var(--bb-stable-height);
+    max-height: var(--bb-stable-height);
+  }
+
+  html.exchange-active body .app {
+    padding-bottom: 0;
+  }
+
+  html.exchange-active body .app > #screen-exchange,
+  html.exchange-active body .exchange-frame {
+    min-height: 0 !important;
+    max-height: 100% !important;
+  }
+}
+
+@media (max-width: 350px) {
+  .header {
+    padding-inline: 8px;
+  }
+
+  .header-logo {
+    font-size: 18px;
+  }
+
+  .screen {
+    padding-inline: 9px;
+  }
+
+  .player-chat-row.user {
+    padding-right: 12px;
+  }
+
+  .player-chat-row.admin {
+    padding-left: 12px;
+  }
+}
+
+/* Compact case shelf for Telegram's narrow viewport. */
+@media (max-width: 620px) {
+  #screen-cases .cases-grid,
+  #screen-cases .deposit-reward-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  #screen-cases .case-card {
+    min-width: 0;
+    padding: 8px 4px 7px;
+  }
+
+  #screen-cases .case-icon-wrap,
+  #screen-cases .case-icon-wrap--object {
+    min-height: 74px;
+    margin-bottom: 2px;
+  }
+
+  #screen-cases .case-art {
+    width: 74px;
+    height: 74px;
+  }
+
+  #screen-cases .case-object,
+  #screen-cases .case-object--showcase {
+    transform: perspective(240px) rotateX(-3deg) rotateY(-7deg) scale(.78);
+  }
+
+  #screen-cases .case-card:hover .case-object,
+  #screen-cases .case-card:hover .case-object--showcase {
+    transform: perspective(240px) rotateX(-1deg) rotateY(0) translateY(-2px) scale(.82);
+  }
+
+  #screen-cases .case-card .case-name {
+    min-height: 25px;
+    margin-bottom: 2px;
+    font-size: 11px;
+    line-height: 1.1;
+    letter-spacing: .6px;
+  }
+
+  #screen-cases .case-card .case-price {
+    margin: 0;
+    font-size: 10px;
+  }
+
+  #screen-cases .case-card .case-badge {
+    margin-top: 4px;
+    padding: 2px 5px;
+    font-size: 6px;
+    letter-spacing: .7px;
+  }
+
+  #screen-cases .deposit-reward-hub {
+    margin-bottom: 12px;
+    padding: 8px;
+  }
+
+  #screen-cases .deposit-reward-heading {
+    margin-bottom: 8px;
+    padding-bottom: 7px;
+  }
+
+  #screen-cases .deposit-reward-heading small {
+    font-size: 7px;
+  }
+
+  #screen-cases .deposit-reward-heading h2 {
+    margin-top: 3px;
+    font-size: 20px;
+  }
+
+  #screen-cases .deposit-reward-heading p {
+    margin-top: 4px;
+    font-size: 7px;
+    line-height: 1.3;
+  }
+
+  #screen-cases .deposit-reward-card {
+    display: flex;
+    padding: 8px 4px 6px;
+    text-align: center;
+  }
+
+  #screen-cases .deposit-reward-tag {
+    width: 100%;
+    min-height: 16px;
+    font-size: 6px;
+    line-height: 1.15;
+    letter-spacing: .3px;
+  }
+
+  #screen-cases .deposit-reward-art {
+    min-height: 68px;
+    margin: 0;
+  }
+
+  #screen-cases .deposit-reward-art .case-art {
+    width: 68px;
+    height: 68px;
+  }
+
+  #screen-cases .deposit-reward-card .case-name {
+    min-height: 27px;
+    margin: 1px 0;
+    font-size: 11px;
+    line-height: 1.1;
+    text-align: center;
+  }
+
+  #screen-cases .deposit-reward-card .case-price {
+    margin: 0 0 3px;
+    font-size: 10px;
+    text-align: center;
+  }
+
+  #screen-cases .deposit-reward-badge {
+    margin: 0;
+    padding: 2px 4px;
+    font-size: 6px;
+  }
+
+  #screen-cases .deposit-reward-progress-copy {
+    width: 100%;
+    margin-top: 5px;
+  }
+
+  #screen-cases .deposit-reward-progress-copy span,
+  #screen-cases .deposit-reward-progress-copy b {
+    font-size: 6px;
+  }
+
+  #screen-cases .deposit-reward-progress {
+    width: 100%;
+    height: 5px;
+    margin: 4px 0 5px;
+  }
+
+  #screen-cases .deposit-reward-state,
+  #screen-cases .deposit-reward-period {
+    display: none;
+  }
+
+  #screen-cases .deposit-reward-action {
+    width: 100%;
+    min-height: 32px;
+    margin-top: auto;
+    padding: 4px 2px;
+    font-size: 7px;
+    line-height: 1.15;
+    letter-spacing: 0;
+  }
+}
+
+@media (max-width: 350px) {
+  #screen-cases .cases-grid,
+  #screen-cases .deposit-reward-grid {
+    gap: 4px;
+  }
+
+  #screen-cases .case-card {
+    padding-inline: 3px;
+  }
+
+  #screen-cases .case-icon-wrap,
+  #screen-cases .case-icon-wrap--object {
+    min-height: 66px;
+  }
+
+  #screen-cases .case-art,
+  #screen-cases .deposit-reward-art .case-art {
+    width: 64px;
+    height: 64px;
+  }
+
+  #screen-cases .deposit-reward-art {
+    min-height: 64px;
+  }
+
+  #screen-cases .case-card .case-name,
+  #screen-cases .deposit-reward-card .case-name {
+    font-size: 10px;
+  }
+}
+
+/* The level-10 daily case should read as one compact reward row, not a hero. */
+@media (max-width: 620px) {
+  #screen-cases .daily-level-case {
+    margin-bottom: 10px;
+  }
+
+  #screen-cases .daily-case-kicker {
+    min-height: 24px;
+    padding: 0 8px;
+  }
+
+  #screen-cases .daily-case-kicker span {
+    font-size: 6px;
+  }
+
+  #screen-cases .daily-case-kicker b {
+    font-size: 5px;
+    letter-spacing: .6px;
+  }
+
+  #screen-cases .daily-case-main {
+    min-height: 68px;
+    grid-template-columns: minmax(0, 1fr) 92px;
+    gap: 5px;
+    padding: 7px 8px 5px;
+  }
+
+  #screen-cases .daily-case-copy small {
+    font-size: 6px;
+    letter-spacing: .8px;
+  }
+
+  #screen-cases .daily-case-copy h3 {
+    margin: 2px 0 0;
+    font-size: 17px;
+    letter-spacing: .8px;
+  }
+
+  #screen-cases .daily-case-copy p {
+    display: none;
+  }
+
+  #screen-cases .daily-case-preview {
+    width: 92px;
+    height: 54px;
+  }
+
+  #screen-cases .daily-case-preview > span {
+    top: 6px;
+    width: 43px;
+    height: 43px;
+  }
+
+  #screen-cases .daily-case-preview > span img {
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  #screen-cases .daily-case-preview > span:nth-child(2) {
+    left: 24px;
+    top: 1px;
+  }
+
+  #screen-cases .daily-case-preview i {
+    right: 0;
+    bottom: 0;
+    padding: 1px 2px;
+    font-size: 5px;
+  }
+
+  #screen-cases .daily-case-level,
+  #screen-cases .daily-case-status {
+    min-height: 25px;
+    margin: 0 8px 6px;
+    padding: 5px 7px;
+  }
+
+  #screen-cases .daily-case-status {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  #screen-cases .daily-case-level span,
+  #screen-cases .daily-case-status span,
+  #screen-cases .daily-case-status b {
+    font-size: 6px;
+    line-height: 1.15;
+  }
+
+  #screen-cases .daily-case-status b {
+    text-align: right;
+  }
+
+  #screen-cases .daily-case-level > i {
+    height: 4px;
+    margin-top: 4px;
+  }
+
+  #screen-cases .daily-case-action {
+    width: calc(100% - 16px);
+    min-height: 32px;
+    margin: 0 8px 8px;
+    padding: 4px 6px;
+    font-size: 7px;
+    letter-spacing: .5px;
+  }
+
+  #screen-cases .daily-case-loading {
+    min-height: 64px;
+    padding: 8px;
+  }
+}

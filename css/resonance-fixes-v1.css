@@ -1,0 +1,29 @@
+/* Small mode-specific readability fixes shared by all three UI themes. */
+#tab-resonance .resonance-nav-label {
+  position: relative;
+  z-index: 2;
+  display: block;
+  color: #bff8ff;
+  font-size: 10px !important;
+  font-weight: 900 !important;
+  line-height: 1.1 !important;
+  letter-spacing: .075em !important;
+  opacity: 1 !important;
+  text-shadow: 0 0 8px rgba(71, 231, 255, .58), 0 1px 1px #000;
+}
+
+#tab-resonance.active .resonance-nav-label {
+  color: #fff2a8;
+  text-shadow: 0 0 8px rgba(245, 197, 66, .7), 0 1px 1px #000;
+}
+
+html[data-ui-theme="classic"] #tab-resonance .resonance-nav-label {
+  color: #f6d862;
+  text-shadow: 0 0 7px rgba(240, 201, 79, .52), 0 1px 1px #000;
+}
+
+@media (min-width: 1400px) {
+  #tab-resonance .resonance-nav-label {
+    font-size: 11px !important;
+  }
+}

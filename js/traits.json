@@ -1,0 +1,779 @@
+[
+  {
+    "category": "OG",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/6/6d/Strawberry.png",
+    "multiplier": "9×",
+    "name": "Strawberry",
+    "image": "static/traits/001_Strawberry.png"
+  },
+  {
+    "category": "OG",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/f/f9/ICON_Meowl.png",
+    "multiplier": "8×",
+    "name": "Meowl",
+    "image": "static/traits/002_Meowl.png"
+  },
+  {
+    "category": "OG",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/4/4a/John_Pork_Trait_HD.webp",
+    "multiplier": "7.5×",
+    "name": "John Pork",
+    "image": "static/traits/003_John_Pork.webp"
+  },
+  {
+    "category": "OG",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/7/7b/SkibidiIcon.png",
+    "multiplier": "7×",
+    "name": "Skibidi",
+    "image": "static/traits/004_Skibidi.png"
+  },
+  {
+    "category": "AA Exclusive",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/d/d9/Granny.png",
+    "multiplier": "6.5×",
+    "name": "Granny",
+    "image": "static/traits/005_Granny.png"
+  },
+  {
+    "category": "AA Exclusive",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/3/30/Fire.png",
+    "multiplier": "6×",
+    "name": "Fire",
+    "image": "static/traits/006_Fire.png"
+  },
+  {
+    "category": "AA Exclusive",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/4/4f/Rose.png",
+    "multiplier": "6×",
+    "name": "Rose",
+    "image": "static/traits/007_Rose.png"
+  },
+  {
+    "category": "AA Exclusive",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/6/62/Fireworks.png",
+    "multiplier": "6×",
+    "name": "Fireworks",
+    "image": "static/traits/008_Fireworks.png"
+  },
+  {
+    "category": "AA Exclusive",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/9/92/Nyan.png",
+    "multiplier": "6×",
+    "name": "Nyan",
+    "image": "static/traits/009_Nyan.png"
+  },
+  {
+    "category": "AA Exclusive",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/f/f3/Dragon.webp",
+    "multiplier": "6×",
+    "name": "Lightning",
+    "image": "static/traits/010_Lightning.webp"
+  },
+  {
+    "category": "AA Exclusive",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/2/2d/Burger_Trait.png",
+    "multiplier": "5.5×",
+    "name": "Burger",
+    "image": "static/traits/011_Burger.png"
+  },
+  {
+    "category": "AA Exclusive",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/4/44/Aura_Shades.png",
+    "multiplier": "5.5×",
+    "name": "Aura Shades",
+    "image": "static/traits/012_Aura_Shades.png"
+  },
+  {
+    "category": "AA Exclusive",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/8/85/Disco.webp",
+    "multiplier": "5×",
+    "name": "Disco",
+    "image": "static/traits/013_Disco.webp"
+  },
+  {
+    "category": "AA Exclusive",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/0/01/Glitch.png",
+    "multiplier": "5×",
+    "name": "Glitched",
+    "image": "static/traits/014_Glitched.png"
+  },
+  {
+    "category": "AA Exclusive",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/f/f6/CrabClaw.png",
+    "multiplier": "5×",
+    "name": "Claws",
+    "image": "static/traits/015_Claws.png"
+  },
+  {
+    "category": "AA Exclusive",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/8/83/EvilTungTungSahur.png",
+    "multiplier": "5×",
+    "name": "Zombie",
+    "image": "static/traits/016_Zombie.png"
+  },
+  {
+    "category": "AA Exclusive",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/0/02/Bubblegum.png",
+    "multiplier": "4×",
+    "name": "Bubblegum",
+    "image": "static/traits/017_Bubblegum.png"
+  },
+  {
+    "category": "AA Exclusive",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/3/38/Alienevent.webp",
+    "multiplier": "3×",
+    "name": "UFO",
+    "image": "static/traits/018_UFO.webp"
+  },
+  {
+    "category": "AA Exclusive",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/4/4d/Taco.png",
+    "multiplier": "3.5×",
+    "name": "Taco",
+    "image": "static/traits/019_Taco.png"
+  },
+  {
+    "category": "AA Exclusive",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/a/ab/Sleepy.webp",
+    "multiplier": "0.5×",
+    "name": "Sleepy",
+    "image": "static/traits/020_Sleepy.webp"
+  },
+  {
+    "category": "Rituals",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/2/28/Chicleteirabicicleteira.png",
+    "multiplier": "6×",
+    "name": "Paint",
+    "image": "static/traits/021_Paint.png"
+  },
+  {
+    "category": "Rituals",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/1/10/3.png",
+    "multiplier": "5.5×",
+    "name": ":3",
+    "image": "static/traits/022_3.png"
+  },
+  {
+    "category": "Rituals",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/8/8d/Tie.png",
+    "multiplier": "4.75×",
+    "name": "Tie",
+    "image": "static/traits/023_Tie.png"
+  },
+  {
+    "category": "Rituals",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/a/ad/Spider.webp",
+    "multiplier": "4.5×",
+    "name": "Spider",
+    "image": "static/traits/024_Spider.webp"
+  },
+  {
+    "category": "Rituals",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/d/d3/MatteoHat.png",
+    "multiplier": "4.5×",
+    "name": "Matteo Hat",
+    "image": "static/traits/025_Matteo_Hat.png"
+  },
+  {
+    "category": "Rituals",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/c/cb/Comet2.png",
+    "multiplier": "4×",
+    "name": "Galactic",
+    "image": "static/traits/026_Galactic.png"
+  },
+  {
+    "category": "Rituals",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/4/4c/Bombardiro.png",
+    "multiplier": "4×",
+    "name": "Explosive",
+    "image": "static/traits/027_Explosive.png"
+  },
+  {
+    "category": "Rituals",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/4/4d/Shark_Fin.webp",
+    "multiplier": "4×",
+    "name": "Shark Fin",
+    "image": "static/traits/028_Shark_Fin.webp"
+  },
+  {
+    "category": "Christmas",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/2/24/Reindeer.png",
+    "multiplier": "6×",
+    "name": "Reindeer Pet",
+    "image": "static/traits/029_Reindeer_Pet.png"
+  },
+  {
+    "category": "Christmas",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/5/5d/SantaHatIcon.png",
+    "multiplier": "5×",
+    "name": "Santa Hat",
+    "image": "static/traits/030_Santa_Hat.png"
+  },
+  {
+    "category": "Halloween",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/7/77/Jack-o-Lantern_Pet_Trait.png",
+    "multiplier": "5.5×",
+    "name": "Jack O' Lantern Pet",
+    "image": "static/traits/031_Jack_O__Lantern_Pet.png"
+  },
+  {
+    "category": "Halloween",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/7/75/GraveYard-RIP-Tombstone.png",
+    "multiplier": "4.5×",
+    "name": "RIP Gravestone",
+    "image": "static/traits/032_RIP_Gravestone.png"
+  },
+  {
+    "category": "Halloween",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/3/39/Witchhat.webp",
+    "multiplier": "4×",
+    "name": "Witch Hat",
+    "image": "static/traits/033_Witch_Hat.webp"
+  },
+  {
+    "category": "Easter",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/5/5c/BunnyEars.png",
+    "multiplier": "5.5×",
+    "name": "Bunny Ears",
+    "image": "static/traits/034_Bunny_Ears.png"
+  },
+  {
+    "category": "Easter",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/d/d0/PinkEgg.png",
+    "multiplier": "7.7×",
+    "name": "Pink Egg",
+    "image": "static/traits/035_Pink_Egg.png"
+  },
+  {
+    "category": "Easter",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/f/f5/BlueEgg.png",
+    "multiplier": "5.5×",
+    "name": "Blue Egg",
+    "image": "static/traits/036_Blue_Egg.png"
+  },
+  {
+    "category": "Easter",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/8/84/GreenEgg.png",
+    "multiplier": "5×",
+    "name": "Green Egg",
+    "image": "static/traits/037_Green_Egg.png"
+  },
+  {
+    "category": "Easter",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/f/f9/OrangeEgg.png",
+    "multiplier": "4×",
+    "name": "Orange Egg",
+    "image": "static/traits/038_Orange_Egg.png"
+  },
+  {
+    "category": "Milestones",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/5/55/1YR_Icon_Fixed.png",
+    "multiplier": "7×",
+    "name": "1 Year",
+    "image": "static/traits/039_1_Year.png"
+  },
+  {
+    "category": "Milestones",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/a/a7/2026Trait.png",
+    "multiplier": "6×",
+    "name": "26",
+    "image": "static/traits/040_26.png"
+  },
+  {
+    "category": "Milestones",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/4/4c/10b.png",
+    "multiplier": "4×",
+    "name": "10B",
+    "image": "static/traits/041_10B.png"
+  },
+  {
+    "category": "Eid",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/a/a6/RainbowBalloon.png",
+    "multiplier": "7.5×",
+    "name": "Rainbow Balloon",
+    "image": "static/traits/042_Rainbow_Balloon.png"
+  },
+  {
+    "category": "Eid",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/2/2c/PinkBalloon.png",
+    "multiplier": "6.5×",
+    "name": "Pink Balloon",
+    "image": "static/traits/043_Pink_Balloon.png"
+  },
+  {
+    "category": "Eid",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/2/2e/RedBalloon.png",
+    "multiplier": "6×",
+    "name": "Red Balloon",
+    "image": "static/traits/044_Red_Balloon.png"
+  },
+  {
+    "category": "Eid",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/f/f4/BlueBalloon.png",
+    "multiplier": "5×",
+    "name": "Blue Balloon",
+    "image": "static/traits/045_Blue_Balloon.png"
+  },
+  {
+    "category": "Eid",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/2/2f/GreenBalloon.png",
+    "multiplier": "4.5×",
+    "name": "Green Balloon",
+    "image": "static/traits/046_Green_Balloon.png"
+  },
+  {
+    "category": "Eid",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/4/47/OrangeBalloon.png",
+    "multiplier": "4×",
+    "name": "Orange Balloon",
+    "image": "static/traits/047_Orange_Balloon.png"
+  },
+  {
+    "category": "Mutation",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/e/eb/HaloTraitIcon.png",
+    "multiplier": "6×",
+    "name": "Halo",
+    "image": "static/traits/048_Halo.png"
+  },
+  {
+    "category": "Seasonal",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/a/a6/Lucky.png",
+    "multiplier": "6×",
+    "name": "Lucky",
+    "image": "static/traits/049_Lucky.png"
+  },
+  {
+    "category": "Seasonal",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/0/09/Summer_Hour.png",
+    "multiplier": "6×",
+    "name": "Sun",
+    "image": "static/traits/050_Sun.png"
+  },
+  {
+    "category": "Seasonal",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/7/7b/Ball.png",
+    "multiplier": "6×",
+    "name": "Ball",
+    "image": "static/traits/051_Ball.png"
+  },
+  {
+    "category": "Seasonal",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/e/ec/ChocolateTrait.png",
+    "multiplier": "5.5×",
+    "name": "Chocolate",
+    "image": "static/traits/052_Chocolate.png"
+  },
+  {
+    "category": "Seasonal",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/4/49/Extincty.png",
+    "multiplier": "4×",
+    "name": "Skeleton",
+    "image": "static/traits/053_Skeleton.png"
+  },
+  {
+    "category": "Country Events",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/8/8c/Brazil.png",
+    "multiplier": "6×",
+    "name": "Brazil",
+    "image": "static/traits/054_Brazil.png"
+  },
+  {
+    "category": "Country Events",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/6/61/Indonesian.png",
+    "multiplier": "5×",
+    "name": "Indonesian",
+    "image": "static/traits/055_Indonesian.png"
+  },
+  {
+    "category": "Country Events",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/f/f5/Mexico_Hat.png",
+    "multiplier": "5×",
+    "name": "Sombrero",
+    "image": "static/traits/056_Sombrero.png"
+  },
+  {
+    "category": "FIFA 2026",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/4/40/Algeria.png",
+    "multiplier": "6×",
+    "name": "Algeria",
+    "image": "static/traits/057_Algeria.png"
+  },
+  {
+    "category": "FIFA 2026",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/a/a2/Argentina.png",
+    "multiplier": "6×",
+    "name": "Argentina",
+    "image": "static/traits/058_Argentina.png"
+  },
+  {
+    "category": "FIFA 2026",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/4/43/Australia.png",
+    "multiplier": "6×",
+    "name": "Australia",
+    "image": "static/traits/059_Australia.png"
+  },
+  {
+    "category": "FIFA 2026",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/7/7f/Austria.png",
+    "multiplier": "6×",
+    "name": "Austria",
+    "image": "static/traits/060_Austria.png"
+  },
+  {
+    "category": "FIFA 2026",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/3/32/Belgium.png",
+    "multiplier": "6×",
+    "name": "Belgium",
+    "image": "static/traits/061_Belgium.png"
+  },
+  {
+    "category": "FIFA 2026",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/a/a9/Bosnia_and_Herzegovina.png",
+    "multiplier": "6×",
+    "name": "Bosnia and Herzegovina",
+    "image": "static/traits/062_Bosnia_and_Herzegovina.png"
+  },
+  {
+    "category": "FIFA 2026",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/a/a3/Canada.png",
+    "multiplier": "6×",
+    "name": "Canada",
+    "image": "static/traits/063_Canada.png"
+  },
+  {
+    "category": "FIFA 2026",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/c/cd/Cape_Verde.png",
+    "multiplier": "6×",
+    "name": "Cape Verde",
+    "image": "static/traits/064_Cape_Verde.png"
+  },
+  {
+    "category": "FIFA 2026",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/9/94/Croatia.png",
+    "multiplier": "6×",
+    "name": "Croatia",
+    "image": "static/traits/065_Croatia.png"
+  },
+  {
+    "category": "FIFA 2026",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/9/95/Curacao.png",
+    "multiplier": "6×",
+    "name": "Curacao",
+    "image": "static/traits/066_Curacao.png"
+  },
+  {
+    "category": "FIFA 2026",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/e/e2/Czechia.png",
+    "multiplier": "6×",
+    "name": "Czechia",
+    "image": "static/traits/067_Czechia.png"
+  },
+  {
+    "category": "FIFA 2026",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/4/4f/DR_Congo.png",
+    "multiplier": "6×",
+    "name": "DR Congo",
+    "image": "static/traits/068_DR_Congo.png"
+  },
+  {
+    "category": "FIFA 2026",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/b/b2/Ecuador.png",
+    "multiplier": "6×",
+    "name": "Ecuador",
+    "image": "static/traits/069_Ecuador.png"
+  },
+  {
+    "category": "FIFA 2026",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/3/37/Egypt.png",
+    "multiplier": "6×",
+    "name": "Egypt",
+    "image": "static/traits/070_Egypt.png"
+  },
+  {
+    "category": "FIFA 2026",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/2/21/England.png",
+    "multiplier": "6×",
+    "name": "England",
+    "image": "static/traits/071_England.png"
+  },
+  {
+    "category": "FIFA 2026",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/d/de/France.png",
+    "multiplier": "6×",
+    "name": "France",
+    "image": "static/traits/072_France.png"
+  },
+  {
+    "category": "FIFA 2026",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/9/9b/Germany.png",
+    "multiplier": "6×",
+    "name": "Germany",
+    "image": "static/traits/073_Germany.png"
+  },
+  {
+    "category": "FIFA 2026",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/8/88/Ghana.png",
+    "multiplier": "6×",
+    "name": "Ghana",
+    "image": "static/traits/074_Ghana.png"
+  },
+  {
+    "category": "FIFA 2026",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/2/28/Haiti.png",
+    "multiplier": "6×",
+    "name": "Haiti",
+    "image": "static/traits/075_Haiti.png"
+  },
+  {
+    "category": "FIFA 2026",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/d/d1/Iran.png",
+    "multiplier": "6×",
+    "name": "Iran",
+    "image": "static/traits/076_Iran.png"
+  },
+  {
+    "category": "FIFA 2026",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/c/c4/Iraq.png",
+    "multiplier": "6×",
+    "name": "Iraq",
+    "image": "static/traits/077_Iraq.png"
+  },
+  {
+    "category": "FIFA 2026",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/8/81/Ivory_Coast.png",
+    "multiplier": "6×",
+    "name": "Ivory Coast",
+    "image": "static/traits/078_Ivory_Coast.png"
+  },
+  {
+    "category": "FIFA 2026",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/f/fc/Japan.png",
+    "multiplier": "6×",
+    "name": "Japan",
+    "image": "static/traits/079_Japan.png"
+  },
+  {
+    "category": "FIFA 2026",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/e/e4/Jordan.png",
+    "multiplier": "6×",
+    "name": "Jordan",
+    "image": "static/traits/080_Jordan.png"
+  },
+  {
+    "category": "FIFA 2026",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/0/0a/Mexico.png",
+    "multiplier": "4.5×",
+    "name": "Mexico",
+    "image": "static/traits/081_Mexico.png"
+  },
+  {
+    "category": "FIFA 2026",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/e/e4/Morocco.png",
+    "multiplier": "6×",
+    "name": "Morocco",
+    "image": "static/traits/082_Morocco.png"
+  },
+  {
+    "category": "FIFA 2026",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/3/32/Netherlands.png",
+    "multiplier": "6×",
+    "name": "Netherlands",
+    "image": "static/traits/083_Netherlands.png"
+  },
+  {
+    "category": "FIFA 2026",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/d/d9/New_Zealand.png",
+    "multiplier": "6×",
+    "name": "New Zealand",
+    "image": "static/traits/084_New_Zealand.png"
+  },
+  {
+    "category": "FIFA 2026",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/0/0f/Norway.png",
+    "multiplier": "6×",
+    "name": "Norway",
+    "image": "static/traits/085_Norway.png"
+  },
+  {
+    "category": "FIFA 2026",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/3/3f/Panama.png",
+    "multiplier": "6×",
+    "name": "Panama",
+    "image": "static/traits/086_Panama.png"
+  },
+  {
+    "category": "FIFA 2026",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/5/57/Paraguay.png",
+    "multiplier": "6×",
+    "name": "Paraguay",
+    "image": "static/traits/087_Paraguay.png"
+  },
+  {
+    "category": "FIFA 2026",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/1/12/Portugal.png",
+    "multiplier": "6×",
+    "name": "Portugal",
+    "image": "static/traits/088_Portugal.png"
+  },
+  {
+    "category": "FIFA 2026",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/8/81/Qatar.png",
+    "multiplier": "6×",
+    "name": "Qatar",
+    "image": "static/traits/089_Qatar.png"
+  },
+  {
+    "category": "FIFA 2026",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/1/1f/Saudi_Arabia.png",
+    "multiplier": "6×",
+    "name": "Saudi Arabia",
+    "image": "static/traits/090_Saudi_Arabia.png"
+  },
+  {
+    "category": "FIFA 2026",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/2/27/Scotland.png",
+    "multiplier": "6×",
+    "name": "Scotland",
+    "image": "static/traits/091_Scotland.png"
+  },
+  {
+    "category": "FIFA 2026",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/2/22/Senegal.png",
+    "multiplier": "6×",
+    "name": "Senegal",
+    "image": "static/traits/092_Senegal.png"
+  },
+  {
+    "category": "FIFA 2026",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/e/ef/South_Africa.png",
+    "multiplier": "6×",
+    "name": "South Africa",
+    "image": "static/traits/093_South_Africa.png"
+  },
+  {
+    "category": "FIFA 2026",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/9/9c/South_Korea.png",
+    "multiplier": "6×",
+    "name": "South Korea",
+    "image": "static/traits/094_South_Korea.png"
+  },
+  {
+    "category": "FIFA 2026",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/5/58/Spain.png",
+    "multiplier": "6×",
+    "name": "Spain",
+    "image": "static/traits/095_Spain.png"
+  },
+  {
+    "category": "FIFA 2026",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/9/98/Sweden.png",
+    "multiplier": "6×",
+    "name": "Sweden",
+    "image": "static/traits/096_Sweden.png"
+  },
+  {
+    "category": "FIFA 2026",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/0/01/Switzerland.png",
+    "multiplier": "6×",
+    "name": "Switzerland",
+    "image": "static/traits/097_Switzerland.png"
+  },
+  {
+    "category": "FIFA 2026",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/0/08/Tunisia.png",
+    "multiplier": "6×",
+    "name": "Tunisia",
+    "image": "static/traits/098_Tunisia.png"
+  },
+  {
+    "category": "FIFA 2026",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/b/b3/Turkey.png",
+    "multiplier": "6×",
+    "name": "Turkey",
+    "image": "static/traits/099_Turkey.png"
+  },
+  {
+    "category": "FIFA 2026",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/3/32/United_States.png",
+    "multiplier": "6×",
+    "name": "United States",
+    "image": "static/traits/100_United_States.png"
+  },
+  {
+    "category": "FIFA 2026",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/2/29/Uruguay.png",
+    "multiplier": "6×",
+    "name": "Uruguay",
+    "image": "static/traits/101_Uruguay.png"
+  },
+  {
+    "category": "FIFA 2026",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/1/14/Uzbekistan.png",
+    "multiplier": "6×",
+    "name": "Uzbekistan",
+    "image": "static/traits/102_Uzbekistan.png"
+  },
+  {
+    "category": "Natural Events",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/1/15/Cometstruck.webp",
+    "multiplier": "3.5×",
+    "name": "Comet-struck",
+    "image": "static/traits/103_Comet-struck.webp"
+  },
+  {
+    "category": "Natural Events",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/a/a7/Snowy.png",
+    "multiplier": "3×",
+    "name": "Snowy",
+    "image": "static/traits/104_Snowy.png"
+  },
+  {
+    "category": "Natural Events",
+    "imageUrl": "https://static.wikia.nocookie.net/stealabr/images/b/be/Wet.png",
+    "multiplier": "2.5×",
+    "name": "Wet",
+    "image": "static/traits/105_Wet.png"
+  },
+  {
+    "category": "AA Exclusive",
+    "imageUrl": "https://www.eldorado.gg/blog/wp-content/uploads/2026/07/Bull-trait-e1785079201561-300x235.webp",
+    "multiplier": "6×",
+    "name": "Bull",
+    "image": "static/traits/106_Bull.webp"
+  },
+  {
+    "category": "AA Exclusive",
+    "imageUrl": "https://www.eldorado.gg/blog/wp-content/uploads/2026/08/Ice-Bee.webp",
+    "multiplier": "6×",
+    "name": "Ice Bee",
+    "image": "static/traits/107_Ice_Bee.webp"
+  },
+  {
+    "category": "AA Exclusive",
+    "imageUrl": "https://www.eldorado.gg/blog/wp-content/uploads/2026/08/Fire-Bee.webp",
+    "multiplier": "6×",
+    "name": "Fire Bee",
+    "image": "static/traits/108_Fire_Bee.webp"
+  },
+  {
+    "category": "Country Events",
+    "imageUrl": "https://www.eldorado.gg/blog/wp-content/uploads/2026/06/Colombia-300x200.webp",
+    "multiplier": "6×",
+    "name": "Colombia",
+    "image": "static/traits/109_Colombia.webp"
+  },
+  {
+    "category": "AA Exclusive",
+    "imageUrl": "https://www.eldorado.gg/blog/wp-content/uploads/2026/04/Job-Application-trait-e1785703734329-228x300.webp",
+    "multiplier": "5×",
+    "name": "Job Application",
+    "image": "static/traits/110_Job_Application.webp"
+  },
+  {
+    "category": "AA Exclusive",
+    "imageUrl": "https://www.eldorado.gg/blog/wp-content/uploads/2026/08/Bee.webp",
+    "multiplier": "5×",
+    "name": "Bee",
+    "image": "static/traits/111_Bee.webp"
+  }
+]

@@ -1,0 +1,1590 @@
+/* Compatibility for the original BrainBet skin with the current markup. */
+html[data-ui-theme="classic"],
+html[data-ui-theme="classic"] body {
+  min-height:100%;
+  min-height:var(--tg-viewport-stable-height,100dvh);
+}
+
+html[data-ui-theme="classic"] .bb-icon-sprite,
+html[data-ui-theme="classic"] .casino-set {
+  display:none !important;
+}
+
+html[data-ui-theme="classic"] .app {
+  display:flex;
+  flex-direction:column;
+  min-height:var(--tg-viewport-stable-height,100dvh);
+  padding-top:max(0px,env(safe-area-inset-top,0px),var(--tg-safe-area-inset-top,0px),var(--tg-content-safe-area-inset-top,0px));
+  padding-bottom:max(60px,env(safe-area-inset-bottom,0px),var(--tg-content-safe-area-inset-bottom,0px));
+}
+
+html[data-ui-theme="classic"] .app > .header { order:1; }
+html[data-ui-theme="classic"] .app > .live-wins { order:2; }
+html[data-ui-theme="classic"] .app > .nav-wrapper { order:3; }
+html[data-ui-theme="classic"] .app > .screen { order:4; }
+html[data-ui-theme="classic"] .app > #snd-settings-modal,
+html[data-ui-theme="classic"] .app > #player-chat-overlay { order:10; }
+
+html[data-ui-theme="classic"] .header-logo .logo-mark {
+  display:inline;
+  margin-right:5px;
+  color:var(--gold);
+}
+
+html[data-ui-theme="classic"] .header-logo .logo-brain,
+html[data-ui-theme="classic"] .header-logo .logo-bet {
+  color:#fff;
+}
+
+html[data-ui-theme="classic"] .nav-btn .nav-icon {
+  display:block;
+  width:19px;
+  height:19px;
+  overflow:visible;
+  transition:transform .2s;
+}
+
+html[data-ui-theme="classic"] .game-title-icon {
+  width:23px;
+  height:23px;
+  margin-right:8px;
+  vertical-align:-3px;
+}
+
+html[data-ui-theme="classic"] .dice-mode-icon {
+  width:24px;
+  height:24px;
+}
+
+.theme-icon-classic {
+  display:none !important;
+}
+
+/* Current settings remain usable inside the compact original modal. */
+html[data-ui-theme="classic"] .app > #snd-settings-modal {
+  position:fixed !important;
+  z-index:6000 !important;
+  inset:0 !important;
+}
+
+html[data-ui-theme="classic"] .app > #snd-settings-modal .snd-card {
+  width:min(92%,440px);
+  max-height:min(88dvh,720px);
+  overflow-x:hidden;
+  overflow-y:auto;
+  padding-bottom:max(22px,env(safe-area-inset-bottom,0px));
+}
+
+html[data-ui-theme="classic"] .snd-section-label {
+  margin:14px 0 7px;
+  color:var(--gold-dim);
+  font:700 9px/1 'Space Mono',monospace;
+  letter-spacing:1.5px;
+}
+
+html[data-ui-theme="classic"] .snd-channel {
+  margin-bottom:8px;
+  padding:0 10px 9px;
+  border:1px solid var(--border);
+  background:rgba(10,10,15,.66);
+}
+
+html[data-ui-theme="classic"] .snd-channel .snd-row {
+  padding-inline:0;
+  border-bottom:0;
+}
+
+html[data-ui-theme="classic"] .snd-haptic-row {
+  margin-top:8px;
+  border:1px solid var(--border2);
+}
+
+html[data-ui-theme="classic"] .display-mode-control {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:7px;
+}
+
+html[data-ui-theme="classic"] .display-mode-control button {
+  min-width:0;
+  min-height:52px;
+  padding:7px 5px;
+  border:1px solid var(--border2);
+  color:var(--text-dim);
+  background:var(--surface2);
+  font-family:'Exo 2',sans-serif;
+  cursor:pointer;
+}
+
+html[data-ui-theme="classic"] .display-mode-control button b,
+html[data-ui-theme="classic"] .display-mode-control button span { display:block; }
+html[data-ui-theme="classic"] .display-mode-control button b { font-size:11px; }
+html[data-ui-theme="classic"] .display-mode-control button span { margin-top:4px; font-size:8px; }
+
+html[data-ui-theme="classic"] .display-mode-control button.active {
+  border-color:var(--gold);
+  color:var(--gold);
+  background:rgba(245,197,66,.08);
+  box-shadow:inset 0 0 14px rgba(245,197,66,.06),0 0 8px rgba(245,197,66,.12);
+}
+
+html[data-ui-theme="classic"] .display-mode-status {
+  min-height:25px;
+  padding:7px 3px 0;
+  color:var(--text-dim);
+  text-align:center;
+  font:8px/1.35 'Space Mono',monospace;
+}
+
+/* The original coin presentation, driven by the current game code. */
+html[data-ui-theme="classic"] #screen-coin .coin-art { display:none; }
+
+html[data-ui-theme="classic"] #screen-coin .coin-face::before {
+  display:block;
+  font-size:58px;
+  line-height:1;
+}
+
+html[data-ui-theme="classic"] #screen-coin .coin-face.front::before { content:"🪙"; }
+html[data-ui-theme="classic"] #screen-coin .coin-face.back::before { content:"💀"; }
+
+/* New dice symbols in the geometry of the original screen. */
+html[data-ui-theme="classic"] .dice-orb {
+  --orb:#aaa;
+  position:relative;
+  width:31px;
+  height:31px;
+  display:inline-grid;
+  place-items:center;
+  border:2px solid rgba(255,255,255,.28);
+  border-radius:50%;
+  color:#08080c;
+  background:radial-gradient(circle at 34% 28%,#fff 0 4%,var(--orb) 28%,#111 115%);
+  box-shadow:0 0 8px color-mix(in srgb,var(--orb) 45%,transparent);
+}
+
+html[data-ui-theme="classic"] .dice-orb > i { display:none; }
+html[data-ui-theme="classic"] .dice-orb > b { font:900 10px/1 'Space Mono',monospace; }
+html[data-ui-theme="classic"] .dice-orb--red { --orb:#ff4055; }
+html[data-ui-theme="classic"] .dice-orb--orange { --orb:#ff9a35; }
+html[data-ui-theme="classic"] .dice-orb--yellow { --orb:#ffe04d; }
+html[data-ui-theme="classic"] .dice-orb--green { --orb:#42df7a; }
+html[data-ui-theme="classic"] .dice-orb--blue { --orb:#32bfff; }
+html[data-ui-theme="classic"] .dice-orb--purple { --orb:#bd63ef; }
+html[data-ui-theme="classic"] .dice-orb--compact { width:25px; height:25px; }
+
+html[data-ui-theme="classic"] .slots-reel .dice-orb {
+  width:43px;
+  height:43px;
+}
+
+/* The new upgrader mechanics inside the original clean layout. */
+html[data-ui-theme="classic"] #screen-upgrader .upg-reactor-console {
+  display:block;
+  margin:0;
+  padding:0;
+  border:0;
+  background:none;
+  box-shadow:none;
+}
+
+html[data-ui-theme="classic"] #screen-upgrader .upg-reactor-console::before,
+html[data-ui-theme="classic"] #screen-upgrader .upg-reactor-console::after,
+html[data-ui-theme="classic"] #screen-upgrader .upg-wheel-wrap::before {
+  display:none !important;
+  content:none !important;
+}
+
+html[data-ui-theme="classic"] #screen-upgrader .upg-wheel-wrap {
+  width:min(270px,calc(100vw - 74px));
+  height:auto;
+  aspect-ratio:1;
+  margin:10px auto 6px;
+}
+
+html[data-ui-theme="classic"] #screen-upgrader .upg-pointer-html {
+  position:absolute;
+  z-index:3;
+  inset:0;
+  width:100%;
+  height:100%;
+  transform:translate3d(0,0,0) rotate(0deg);
+  transform-origin:50% 50%;
+  pointer-events:none;
+  will-change:transform;
+}
+
+html[data-ui-theme="classic"] #screen-upgrader .upg-pointer-shaft,
+html[data-ui-theme="classic"] #screen-upgrader .upg-pointer-tip {
+  position:absolute;
+  display:block;
+}
+
+html[data-ui-theme="classic"] #screen-upgrader .upg-pointer-shaft {
+  top:18%;
+  left:calc(50% - 4px);
+  width:8px;
+  height:30%;
+  clip-path:polygon(38% 0,62% 0,100% 100%,0 100%);
+  background:linear-gradient(90deg,#8d6a0c,#fff5b2 50%,#9b720b);
+  filter:drop-shadow(0 0 3px rgba(245,197,66,.65));
+}
+
+html[data-ui-theme="classic"] #screen-upgrader .upg-pointer-tip {
+  top:11.5%;
+  left:calc(50% - 10px);
+  width:20px;
+  height:21px;
+  clip-path:polygon(50% 0,100% 100%,50% 78%,0 100%);
+  background:linear-gradient(90deg,#9b750d,#fff7bd 50%,#9b750d);
+  filter:drop-shadow(0 0 3px rgba(245,197,66,.65));
+}
+
+html[data-ui-theme="classic"] #screen-upgrader .upg-pointer-pin { display:none; }
+
+html[data-ui-theme="classic"] #screen-upgrader .upg-chance-readout {
+  text-align:center;
+  color:var(--green);
+}
+
+html[data-ui-theme="classic"] #screen-upgrader .upg-warning-sign {
+  display:inline-grid;
+  width:20px;
+  height:20px;
+  margin-right:7px;
+  place-items:center;
+  border:1px solid var(--gold-dim);
+  border-radius:50%;
+  color:var(--gold);
+}
+
+html[data-ui-theme="classic"] #screen-upgrader .upg-shop-notice {
+  margin:9px 0;
+  padding:9px;
+  border:1px solid var(--border2);
+  color:var(--text-mid);
+  font-size:11px;
+  line-height:1.4;
+  background:var(--surface);
+}
+
+/* Case drops added after the original skin was made. */
+html[data-ui-theme="classic"] .case-pending-drops {
+  margin:14px 0;
+  padding:9px;
+  border:1px solid var(--border2);
+  background:var(--surface);
+}
+
+html[data-ui-theme="classic"] .case-pending-head {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  margin-bottom:8px;
+  padding:7px;
+  border-bottom:1px solid var(--border2);
+  color:var(--gold);
+  font:700 10px/1.2 'Space Mono',monospace;
+}
+
+html[data-ui-theme="classic"] .case-pending-list { display:grid; gap:7px; }
+
+html[data-ui-theme="classic"] .case-pending-item {
+  display:grid;
+  grid-template-columns:44px minmax(0,1fr);
+  align-items:center;
+  gap:8px;
+  padding:8px;
+  border:1px solid var(--border);
+  background:var(--surface2);
+}
+
+html[data-ui-theme="classic"] .case-pending-item > .case-drop-actions { grid-column:1 / -1; }
+html[data-ui-theme="classic"] .case-pending-copy b,
+html[data-ui-theme="classic"] .case-pending-copy span { display:block; }
+html[data-ui-theme="classic"] .case-pending-copy b { color:var(--text); font-size:10px; }
+html[data-ui-theme="classic"] .case-pending-copy span { margin-top:3px; color:var(--green); font-size:10px; }
+
+/* Admin bank switch and player chat keep their functionality in classic mode. */
+html[data-ui-theme="classic"] .player-bank-control,
+html[data-ui-theme="classic"] .player-chat-launch {
+  position:relative;
+  width:100%;
+  min-height:64px;
+  display:flex;
+  align-items:center;
+  margin:0 0 11px;
+  border:1px solid var(--border2);
+  color:var(--text);
+  background:var(--surface2);
+  cursor:pointer;
+}
+
+html[data-ui-theme="classic"] .player-bank-control { padding:10px 52px 10px 66px; }
+html[data-ui-theme="classic"] .player-chat-launch { padding:10px 38px 10px 48px; text-align:left; }
+
+html[data-ui-theme="classic"] .player-bank-switch {
+  position:absolute;
+  left:12px;
+  top:50%;
+  width:40px;
+  height:22px;
+  transform:translateY(-50%);
+  padding:3px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:3px;
+  border:1px solid var(--border2);
+  background:var(--surface);
+}
+
+html[data-ui-theme="classic"] .player-bank-switch button {
+  position:static;
+  width:auto;
+  height:14px;
+  padding:0;
+  border:0;
+  background:#232833;
+  cursor:pointer;
+  transition:background .16s ease,box-shadow .16s ease;
+}
+
+html[data-ui-theme="classic"] .player-bank-control.mode-0 .player-bank-switch button:nth-child(1) { background:var(--red); }
+html[data-ui-theme="classic"] .player-bank-control.mode-1 { border-color:rgba(0,255,136,.45); }
+html[data-ui-theme="classic"] .player-bank-control.mode-1 .player-bank-switch button:nth-child(2),
+html[data-ui-theme="classic"] .player-bank-control.mode-3 .player-bank-switch button:nth-child(2) { background:var(--green); box-shadow:0 0 7px var(--green); }
+html[data-ui-theme="classic"] .player-bank-control.mode-2 { border-color:rgba(255,209,76,.55); }
+html[data-ui-theme="classic"] .player-bank-control.mode-2 .player-bank-switch button:nth-child(3),
+html[data-ui-theme="classic"] .player-bank-control.mode-3 .player-bank-switch button:nth-child(3) { background:var(--gold); box-shadow:0 0 7px var(--gold); }
+html[data-ui-theme="classic"] .player-bank-control.mode-3 { border-color:rgba(190,255,92,.58); }
+html[data-ui-theme="classic"] .player-bank-copy b,
+html[data-ui-theme="classic"] .player-chat-launch b { display:block; color:var(--gold); font-size:11px; }
+html[data-ui-theme="classic"] .player-bank-copy small,
+html[data-ui-theme="classic"] .player-chat-launch small { display:block; margin-top:4px; color:var(--text-mid); font-size:9px; }
+html[data-ui-theme="classic"] .player-bank-control > strong,
+html[data-ui-theme="classic"] .player-chat-launch > i { position:absolute; right:12px; color:var(--green); }
+
+html[data-ui-theme="classic"] .player-chat-launch-light {
+  position:absolute;
+  left:20px;
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 8px var(--green);
+}
+
+html[data-ui-theme="classic"] body.player-chat-open { overflow:hidden; }
+
+html[data-ui-theme="classic"] #player-chat-overlay.player-chat-overlay {
+  position:fixed;
+  z-index:6500 !important;
+  inset:0;
+  align-items:stretch;
+  justify-content:center;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  background:rgba(5,5,7,.96);
+}
+
+html[data-ui-theme="classic"] .player-chat-console {
+  width:min(100%,480px);
+  height:100%;
+  min-height:0;
+  display:grid;
+  grid-template-rows:auto minmax(0,1fr) auto;
+  overflow:hidden;
+  border-inline:1px solid var(--border2);
+  background:var(--bg);
+}
+
+html[data-ui-theme="classic"] .player-chat-head {
+  min-height:72px;
+  display:grid;
+  grid-template-columns:44px minmax(0,1fr) auto;
+  align-items:center;
+  gap:9px;
+  padding:9px 10px;
+  border-bottom:1px solid rgba(245,197,66,.3);
+  background:var(--surface);
+}
+
+html[data-ui-theme="classic"] .player-chat-back,
+html[data-ui-theme="classic"] .player-chat-compose button {
+  border:1px solid var(--border2);
+  color:var(--gold);
+  background:var(--surface2);
+}
+
+html[data-ui-theme="classic"] .player-chat-back { width:40px; height:40px; font-size:27px; }
+html[data-ui-theme="classic"] .player-chat-person { min-width:0; }
+html[data-ui-theme="classic"] .player-chat-kicker { color:var(--green); font:700 7px/1.2 'Space Mono',monospace; }
+html[data-ui-theme="classic"] .player-chat-kicker span { display:inline-block; width:5px; height:5px; margin-right:5px; border-radius:50%; background:var(--green); }
+html[data-ui-theme="classic"] .player-chat-name { overflow:hidden; color:var(--text); font-weight:800; text-overflow:ellipsis; white-space:nowrap; }
+html[data-ui-theme="classic"] .player-chat-id { margin-top:3px; color:var(--text-dim); font:8px/1.2 'Space Mono',monospace; }
+html[data-ui-theme="classic"] .player-chat-link { padding:7px; color:var(--green); text-align:center; font-size:8px; }
+html[data-ui-theme="classic"] .player-chat-link i { display:block; width:6px; height:6px; margin:0 auto 3px; border-radius:50%; background:var(--green); }
+
+html[data-ui-theme="classic"] .player-chat-messages {
+  min-height:0;
+  overflow-y:auto;
+  padding:16px 12px 24px;
+  background:linear-gradient(rgba(0,200,255,.025),transparent),var(--bg);
+}
+
+html[data-ui-theme="classic"] .player-chat-empty {
+  width:min(280px,90%);
+  margin:18vh auto 0;
+  padding:18px;
+  border:1px dashed var(--border2);
+  color:var(--text-mid);
+  text-align:center;
+}
+
+html[data-ui-theme="classic"] .player-chat-event { width:max-content; max-width:92%; margin:13px auto; padding:7px 11px; border:1px solid var(--gold-dim); color:var(--gold); font-size:9px; }
+html[data-ui-theme="classic"] .player-chat-event time { display:block; margin-top:3px; color:var(--text-dim); font-size:7px; }
+html[data-ui-theme="classic"] .player-chat-row { display:flex; width:100%; margin:10px 0; }
+html[data-ui-theme="classic"] .player-chat-row.user { justify-content:flex-start; padding-right:36px; }
+html[data-ui-theme="classic"] .player-chat-row.admin { justify-content:flex-end; padding-left:36px; }
+
+html[data-ui-theme="classic"] .player-chat-bubble {
+  min-width:110px;
+  max-width:100%;
+  padding:9px 11px;
+  border:1px solid var(--border2);
+  background:var(--surface2);
+}
+
+html[data-ui-theme="classic"] .player-chat-row.user .player-chat-bubble { border-left:3px solid var(--gold); }
+html[data-ui-theme="classic"] .player-chat-row.admin .player-chat-bubble { border-right:3px solid var(--green); }
+html[data-ui-theme="classic"] .player-chat-meta { display:flex; justify-content:space-between; gap:16px; margin-bottom:6px; font-size:8px; }
+html[data-ui-theme="classic"] .player-chat-meta b { color:var(--gold); }
+html[data-ui-theme="classic"] .player-chat-row.admin .player-chat-meta b { color:var(--green); }
+html[data-ui-theme="classic"] .player-chat-meta time { color:var(--text-dim); }
+html[data-ui-theme="classic"] .player-chat-body { overflow-wrap:anywhere; font:12px/1.45 'Space Mono',monospace; }
+html[data-ui-theme="classic"] .player-chat-status { margin-top:6px; color:var(--text-dim); text-align:right; font-size:7px; }
+html[data-ui-theme="classic"] .player-chat-status.sent { color:var(--green); }
+html[data-ui-theme="classic"] .player-chat-status.failed { color:var(--red); }
+
+html[data-ui-theme="classic"] .player-chat-compose {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 48px;
+  gap:8px;
+  padding:10px 10px calc(10px + env(safe-area-inset-bottom,0px));
+  border-top:1px solid var(--border2);
+  background:var(--surface);
+}
+
+html[data-ui-theme="classic"] .player-chat-compose textarea {
+  width:100%;
+  min-height:48px;
+  max-height:112px;
+  resize:none;
+  padding:10px;
+  border:1px solid var(--border2);
+  outline:none;
+  color:var(--text);
+  background:var(--bg);
+  font:12px/1.35 'Space Mono',monospace;
+}
+
+html[data-ui-theme="classic"] .player-chat-compose textarea:focus { border-color:var(--gold-dim); }
+html[data-ui-theme="classic"] .player-chat-compose button { width:48px; height:48px; font-size:22px; }
+
+@media (max-width:360px) {
+  html[data-ui-theme="classic"] .screen { padding-inline:14px; }
+  html[data-ui-theme="classic"] .display-mode-control button b { font-size:10px; }
+  html[data-ui-theme="classic"] #screen-upgrader .upg-wheel-wrap { width:min(246px,calc(100vw - 60px)); }
+  html[data-ui-theme="classic"] .player-chat-head { grid-template-columns:40px minmax(0,1fr) 40px; padding-inline:7px; }
+  html[data-ui-theme="classic"] .player-chat-link { padding-inline:3px; }
+}
+
+/* Restore the original icon language inside every game. */
+html[data-ui-theme="classic"] .nav-btn .nav-icon,
+html[data-ui-theme="classic"] .game-title-icon,
+html[data-ui-theme="classic"] .dice-mode-icon {
+  display:none !important;
+}
+
+html[data-ui-theme="classic"] .nav-btn::after {
+  position:static;
+  order:-1;
+  font-size:16px;
+  line-height:1;
+  filter:none;
+}
+
+html[data-ui-theme="classic"] #tab-dice::after { content:"🎲"; }
+html[data-ui-theme="classic"] #tab-coin::after { content:"🪙"; }
+html[data-ui-theme="classic"] #tab-cases::after { content:"📦"; }
+html[data-ui-theme="classic"] #tab-upgrader::after { content:"⬆️"; }
+html[data-ui-theme="classic"] #tab-craft::after { content:"⚒️"; }
+html[data-ui-theme="classic"] #tab-roulette1v1::after { content:"🎡"; }
+html[data-ui-theme="classic"] #tab-rouletteFFA::after { content:"🌀"; }
+html[data-ui-theme="classic"] #tab-mr::after { content:"🎰"; }
+html[data-ui-theme="classic"] #tab-analytics::after { content:"📊"; }
+html[data-ui-theme="classic"] #tab-shop::after { content:"🛒"; }
+html[data-ui-theme="classic"] #tab-inventory::after { content:"🎒"; }
+html[data-ui-theme="classic"] #tab-profile::after { content:"👤"; }
+html[data-ui-theme="classic"] #tab-leaders::after { content:"🏆"; }
+html[data-ui-theme="classic"] #tab-faq::after { content:"❓"; }
+
+/* New modes use a separate compact pictogram set in the original skin. */
+html[data-ui-theme="classic"] .bb-icon-sprite {
+  position:absolute !important;
+  width:0 !important;
+  height:0 !important;
+  overflow:hidden !important;
+  display:block !important;
+}
+
+html[data-ui-theme="classic"] #tab-brain-slots .nav-icon,
+html[data-ui-theme="classic"] #tab-mines .theme-icon-classic,
+html[data-ui-theme="classic"] #tab-rocket .theme-icon-classic,
+html[data-ui-theme="classic"] #tab-craft .theme-icon-classic,
+html[data-ui-theme="classic"] #tab-exchange .theme-icon-classic {
+  display:block !important;
+  width:19px;
+  height:19px;
+  flex:0 0 19px;
+  overflow:visible;
+  filter:drop-shadow(0 0 5px rgba(230,189,52,.25));
+}
+
+html[data-ui-theme="classic"] #tab-mines .theme-icon-modern,
+html[data-ui-theme="classic"] #tab-rocket .theme-icon-modern,
+html[data-ui-theme="classic"] #tab-craft .theme-icon-modern,
+html[data-ui-theme="classic"] #tab-exchange .theme-icon-modern {
+  display:none !important;
+}
+
+html[data-ui-theme="classic"] #tab-mines::after,
+html[data-ui-theme="classic"] #tab-rocket::after,
+html[data-ui-theme="classic"] #tab-craft::after,
+html[data-ui-theme="classic"] #tab-exchange::after {
+  content:none;
+}
+
+html[data-ui-theme="classic"] #screen-mines .theme-icon-classic,
+html[data-ui-theme="classic"] #screen-rocket .theme-icon-classic,
+html[data-ui-theme="classic"] #screen-craft .theme-icon-classic {
+  display:inline-block !important;
+  width:23px;
+  height:23px;
+  margin-right:8px;
+  overflow:visible;
+  vertical-align:-4px;
+  filter:drop-shadow(0 0 6px rgba(230,189,52,.28));
+}
+
+html[data-ui-theme="classic"] #screen-mines .theme-icon-modern,
+html[data-ui-theme="classic"] #screen-rocket .theme-icon-modern,
+html[data-ui-theme="classic"] #screen-craft .theme-icon-modern {
+  display:none !important;
+}
+
+/* Case reward actions in the classic skin. The modern stylesheet is disabled there,
+   so keep these controls as real game buttons instead of browser defaults. */
+html[data-ui-theme="classic"] .case-drop-result,
+html[data-ui-theme="classic"] .case-pending-item {
+  border:1px solid rgba(166,86,240,.42);
+  border-left:3px solid #a656f0;
+  border-radius:3px;
+  background:linear-gradient(180deg,#171421,#0d0d14);
+  box-shadow:inset 0 0 16px rgba(0,0,0,.55);
+}
+
+html[data-ui-theme="classic"] .case-drop-actions {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:6px;
+  margin-top:8px;
+}
+
+html[data-ui-theme="classic"] .case-drop-btn,
+html[data-ui-theme="classic"] .case-drop-bulk button {
+  min-width:0;
+  min-height:38px;
+  padding:6px 5px;
+  border-radius:2px;
+  font:700 8px/1.2 'Space Mono',monospace;
+  letter-spacing:0;
+  white-space:normal;
+  overflow-wrap:anywhere;
+  box-shadow:inset 0 0 10px rgba(0,0,0,.55),0 2px 0 #050507;
+}
+
+html[data-ui-theme="classic"] .case-drop-btn b,
+html[data-ui-theme="classic"] .case-drop-btn span {
+  display:block;
+}
+
+html[data-ui-theme="classic"] .case-drop-btn b { font-size:8px; }
+html[data-ui-theme="classic"] .case-drop-btn span {
+  margin-top:3px;
+  font-size:7px;
+}
+
+html[data-ui-theme="classic"] .case-drop-sell {
+  border:1px solid #b64d70;
+  color:#ffd0de;
+  background:linear-gradient(#4b1b34,#210d1c);
+}
+
+html[data-ui-theme="classic"] .case-drop-keep {
+  border:1px solid #6c53c8;
+  color:#e1d6ff;
+  background:linear-gradient(#2c2255,#121024);
+}
+
+html[data-ui-theme="classic"] .case-drop-bulk {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:6px;
+  margin:0 0 10px;
+  padding:6px;
+  border:1px solid rgba(166,86,240,.38);
+  border-radius:3px;
+  background:#0d0c15;
+}
+
+html[data-ui-theme="classic"] .case-drop-bulk button:first-child {
+  border-color:#b64d70;
+  color:#ffd0de;
+  background:#321326;
+}
+
+html[data-ui-theme="classic"] .case-drop-bulk button:last-child {
+  border-color:#6c53c8;
+  color:#e1d6ff;
+  background:#17132f;
+}
+
+html[data-ui-theme="classic"] .case-drop-resolved-mark {
+  grid-column:1/-1;
+  min-height:38px;
+  padding:7px;
+  border:1px solid #6c53c8;
+  color:#d8c9ff;
+  text-align:center;
+  background:#121024;
+}
+
+html[data-ui-theme="classic"] .case-drop-actions.sold .case-drop-resolved-mark {
+  border-color:#b64d70;
+  color:#ffd0de;
+  background:#210d1c;
+}
+
+html[data-ui-theme="classic"] #screen-craft .game-title::before {
+  content:"⚒";
+  margin-right:6px;
+  color:#ffd83d;
+}
+html[data-ui-theme="classic"] #tab-admin::after { content:"🔐"; }
+html[data-ui-theme="classic"] #tab-tickets::after { content:"🎫"; }
+
+html[data-ui-theme="classic"] .game-title::before {
+  display:inline-block;
+  margin-right:8px;
+  font-family:sans-serif;
+  font-size:22px;
+  line-height:1;
+  letter-spacing:0;
+  vertical-align:1px;
+}
+
+html[data-ui-theme="classic"] #screen-coin .game-title::before { content:"🪙"; }
+html[data-ui-theme="classic"] #screen-cases .game-title::before { content:"📦"; }
+html[data-ui-theme="classic"] #screen-upgrader .game-title::before { content:"⬆️"; }
+html[data-ui-theme="classic"] #screen-roulette1v1 .game-title::before { content:"🎡"; }
+html[data-ui-theme="classic"] #screen-rouletteFFA .game-title::before { content:"🌀"; }
+html[data-ui-theme="classic"] #screen-mr .game-title::before { content:"🎰"; }
+html[data-ui-theme="classic"] #screen-analytics .game-title::before { content:"📊"; }
+html[data-ui-theme="classic"] #screen-shop .game-title::before { content:"🛒"; }
+html[data-ui-theme="classic"] #screen-inventory .game-title::before { content:"🎒"; }
+html[data-ui-theme="classic"] #screen-dice .game-title::before { content:"🎲"; }
+html[data-ui-theme="classic"] #screen-players .game-title::before { content:"👥"; }
+html[data-ui-theme="classic"] #screen-profile .game-title::before { content:"👤"; }
+html[data-ui-theme="classic"] #screen-leaders .game-title::before { content:"🏆"; }
+html[data-ui-theme="classic"] #screen-faq .game-title::before { content:"❓"; }
+html[data-ui-theme="classic"] #screen-tickets .game-title::before { content:"🎫"; }
+
+html[data-ui-theme="classic"] .dice-mode-btn::before {
+  display:block;
+  margin-bottom:3px;
+  font-size:22px;
+  line-height:1;
+}
+
+html[data-ui-theme="classic"] .dice-mode-btn[data-mode="normal"]::before { content:"🎲"; }
+html[data-ui-theme="classic"] .dice-mode-btn[data-mode="epic"]::before { content:"⚡"; }
+
+/* The old dice used unmistakable colored balls instead of arcade capsules. */
+html[data-ui-theme="classic"] .dice-orb {
+  border:0;
+  border-radius:0;
+  color:inherit;
+  background:none;
+  box-shadow:none;
+}
+
+html[data-ui-theme="classic"] .dice-orb > i,
+html[data-ui-theme="classic"] .dice-orb > b { display:none; }
+
+html[data-ui-theme="classic"] .dice-orb::before {
+  position:static;
+  display:block;
+  font-size:29px;
+  line-height:1;
+  filter:none;
+}
+
+html[data-ui-theme="classic"] .dice-orb::after { display:none; }
+html[data-ui-theme="classic"] .dice-orb--red::before { content:"🔴"; }
+html[data-ui-theme="classic"] .dice-orb--orange::before { content:"🟠"; }
+html[data-ui-theme="classic"] .dice-orb--yellow::before { content:"🟡"; }
+html[data-ui-theme="classic"] .dice-orb--green::before { content:"🟢"; }
+html[data-ui-theme="classic"] .dice-orb--blue::before { content:"🔵"; }
+html[data-ui-theme="classic"] .dice-orb--purple::before { content:"🟣"; }
+html[data-ui-theme="classic"] .slots-reel .dice-orb::before { font-size:39px; }
+html[data-ui-theme="classic"] .dice-orb--compact::before { font-size:22px; }
+
+/* Original upgrader palette on the shared current wheel and mechanics. */
+html[data-ui-theme="classic"] #screen-upgrader .upg-shell-glow {
+  fill:#a656f0;
+  opacity:.18;
+}
+
+html[data-ui-theme="classic"] #screen-upgrader .upg-shell {
+  fill:#090a0f;
+  stroke:#171923;
+  stroke-width:4;
+}
+
+html[data-ui-theme="classic"] #screen-upgrader .upg-ticks {
+  stroke:#5b326f;
+  stroke-width:2;
+  stroke-dasharray:3 7;
+}
+
+html[data-ui-theme="classic"] #screen-upgrader .upg-bezel {
+  fill:#0b0c12;
+  stroke:#2b2135;
+}
+
+html[data-ui-theme="classic"] #screen-upgrader .upg-zone-lose { fill:#11131b; }
+html[data-ui-theme="classic"] #screen-upgrader #upg-wheel-fill { fill:#22cc66; opacity:.86; }
+
+html[data-ui-theme="classic"] #screen-upgrader #upg-wheel-ring {
+  stroke:#a656f0;
+  stroke-width:2;
+  filter:drop-shadow(0 0 4px rgba(166,86,240,.45));
+}
+
+html[data-ui-theme="classic"] #screen-upgrader .upg-inner-track { stroke:#252836; }
+
+html[data-ui-theme="classic"] #screen-upgrader .upg-core {
+  fill:#090a0f;
+  stroke:#33233f;
+}
+
+html[data-ui-theme="classic"] #screen-upgrader .upg-crosshairs { stroke:#4d5060; opacity:.55; }
+
+html[data-ui-theme="classic"] #screen-upgrader #upg-pointer-hub {
+  fill:#0e1017;
+  stroke:#ffd700;
+  stroke-width:2;
+}
+
+html[data-ui-theme="classic"] #screen-upgrader .upg-hub-inner {
+  fill:#151822;
+  stroke:#a656f0;
+}
+
+html[data-ui-theme="classic"] #screen-upgrader .upg-holo {
+  border:0;
+  background:transparent;
+  filter:drop-shadow(0 0 8px rgba(166,86,240,.65));
+}
+
+/* Keep every canvas roulette square in the classic theme. */
+html[data-ui-theme="classic"] #screen-roulette1v1 .wheel-wrap,
+html[data-ui-theme="classic"] #screen-rouletteFFA .wheel-wrap--ffa,
+html[data-ui-theme="classic"] #screen-mr .mr-wheel-wrap {
+  border:0;
+  border-radius:0;
+  background:none;
+  box-shadow:none;
+}
+
+html[data-ui-theme="classic"] #screen-mr .mr-wheel-wrap {
+  width:min(320px,calc(100vw - 48px));
+  aspect-ratio:1;
+}
+
+html[data-ui-theme="classic"] #screen-rouletteFFA #ffa-canvas,
+html[data-ui-theme="classic"] #screen-mr #mr-canvas {
+  display:block;
+  width:100% !important;
+  height:auto !important;
+  aspect-ratio:1;
+  border-radius:50%;
+}
+
+html[data-ui-theme="classic"] #screen-rouletteFFA #ffa-canvas {
+  width:min(300px,calc(100vw - 48px)) !important;
+}
+
+html[data-ui-theme="classic"] #screen-mr .mr-sectors,
+html[data-ui-theme="classic"] #screen-mr .mr-mult-btns {
+  grid-template-columns:repeat(3,minmax(0,1fr));
+}
+
+html[data-ui-theme="classic"] #screen-upgrader .upg-wheel-wrap[data-wheel-theme="classic"] .upg-holo > svg {
+  display:block;
+}
+
+html[data-ui-theme="classic"] #screen-upgrader .upg-wheel-wrap[data-wheel-theme="classic"] .upg-holo::before {
+  display:none;
+}
+
+/* First-launch design choice. */
+.ui-theme-welcome {
+  position:fixed;
+  z-index:10000;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:max(18px,env(safe-area-inset-top,0px)) 16px max(18px,env(safe-area-inset-bottom,0px));
+  background:rgba(3,3,5,.96);
+  backdrop-filter:blur(6px);
+}
+
+html[data-ui-theme-chosen="true"] .ui-theme-welcome { display:none; }
+html[data-ui-theme-chosen="false"] body { overflow:hidden; }
+
+.ui-theme-welcome-card {
+  width:min(100%,420px);
+  padding:22px 16px 16px;
+  border:1px solid #4e3920;
+  border-radius:6px;
+  color:#f1e5d3;
+  background:#09090d;
+  box-shadow:inset 0 0 32px #000,0 16px 60px #000;
+}
+
+.ui-theme-welcome-kicker {
+  color:#82e952;
+  text-align:center;
+  font:700 9px/1 'IBM Plex Mono',monospace;
+  letter-spacing:2px;
+}
+
+.ui-theme-welcome-title {
+  margin-top:8px;
+  color:#ffe0a4;
+  text-align:center;
+  font:24px/1.1 'Russo One','Exo 2',sans-serif;
+}
+
+.ui-theme-welcome-copy {
+  margin-top:7px;
+  color:#847869;
+  text-align:center;
+  font:10px/1.4 'IBM Plex Mono','Space Mono',monospace;
+}
+
+.ui-theme-welcome-options {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:9px;
+  margin-top:18px;
+}
+
+.ui-theme-welcome-option {
+  min-width:0;
+  min-height:142px;
+  padding:10px 8px 12px;
+  border:1px solid #343443;
+  border-radius:4px;
+  color:#aaa2b2;
+  background:#101017;
+  cursor:pointer;
+}
+
+.ui-theme-welcome-option.classic { border-color:#716020; }
+.ui-theme-welcome-option.modern { border-color:#854122; }
+.ui-theme-welcome-option b,
+.ui-theme-welcome-option small { display:block; }
+.ui-theme-welcome-option b { margin-top:12px; color:#f5d47b; font:15px/1 'Russo One','Exo 2',sans-serif; }
+.ui-theme-welcome-option small { margin-top:6px; color:#777283; font:8px/1.35 'IBM Plex Mono','Space Mono',monospace; }
+
+.ui-theme-preview {
+  height:65px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  align-items:end;
+  gap:5px;
+  padding:8px;
+  border:1px solid #292934;
+  background:#050507;
+}
+
+.ui-theme-preview i { display:block; min-width:0; }
+.classic-preview i:nth-child(1) { height:42px; border:1px solid #f5c542; background:#111118; }
+.classic-preview i:nth-child(2) { height:28px; border:1px solid #2a2a3e; background:#18181f; }
+.classic-preview i:nth-child(3) { height:50px; background:#f5c542; clip-path:polygon(8% 0,100% 0,92% 100%,0 100%); }
+.modern-preview i:nth-child(1) { height:50px; border:2px solid #b85a28; background:#301208; }
+.modern-preview i:nth-child(2) { height:38px; border:2px solid #5e9d38; background:#0b1709; }
+.modern-preview i:nth-child(3) { height:56px; border:2px solid #ca5b28; background:repeating-linear-gradient(0deg,#391408 0 4px,#170704 4px 8px); }
+
+@media (max-width:340px) {
+  .ui-theme-welcome-card { padding-inline:11px; }
+  .ui-theme-welcome-options { gap:6px; }
+  .ui-theme-welcome-option { min-height:132px; padding-inline:5px; }
+  .ui-theme-preview { padding:6px; gap:3px; }
+}
+html[data-ui-theme="classic"] .app > .header .snd-toggle {
+  color:var(--gold);
+  font-family:Arial,sans-serif;
+  font-size:20px;
+  line-height:1;
+}
+
+/* The classic upgrader is the original 210px chamber, not the modern dial recolored. */
+html[data-ui-theme="classic"] #screen-upgrader .game-header {
+  margin:0 0 7px;
+}
+
+html[data-ui-theme="classic"] #screen-upgrader .game-title {
+  margin:0;
+  font-family:'Space Mono',monospace;
+  font-size:16px;
+  font-weight:700;
+  letter-spacing:0;
+}
+
+html[data-ui-theme="classic"] #screen-upgrader .game-title::after,
+html[data-ui-theme="classic"] #screen-upgrader .game-desc {
+  display:none;
+}
+
+html[data-ui-theme="classic"] #screen-upgrader .game-title::before {
+  margin-right:4px;
+  font-size:18px;
+}
+
+html[data-ui-theme="classic"] #screen-upgrader .upg-warning {
+  display:block;
+  margin-bottom:12px;
+  padding:10px 12px;
+}
+
+html[data-ui-theme="classic"] #screen-upgrader .upg-warning::before {
+  content:"Выбери материалы, выбери результат и запусти апгрейд!";
+  display:block;
+  margin-bottom:3px;
+}
+
+html[data-ui-theme="classic"] #screen-upgrader .upg-warning > span:last-child::before {
+  content:"· ";
+}
+
+html[data-ui-theme="classic"] #screen-upgrader .upg-warning b {
+  display:none;
+}
+
+html[data-ui-theme="classic"] #screen-upgrader .upg-warning-sign {
+  display:none;
+}
+
+html[data-ui-theme="classic"] #screen-upgrader .upg-wheel-wrap {
+  width:210px;
+  height:210px;
+  aspect-ratio:auto;
+  margin:10px auto 4px;
+}
+
+html[data-ui-theme="classic"] #screen-upgrader .upg-shell,
+html[data-ui-theme="classic"] #screen-upgrader .upg-ticks,
+html[data-ui-theme="classic"] #screen-upgrader .upg-inner-track,
+html[data-ui-theme="classic"] #screen-upgrader .upg-core,
+html[data-ui-theme="classic"] #screen-upgrader .upg-crosshairs {
+  display:none;
+}
+
+html[data-ui-theme="classic"] #screen-upgrader .upg-shell-glow {
+  animation:none !important;
+  fill:none;
+  stroke:#a656f0;
+  stroke-width:3;
+  opacity:.2;
+  filter:drop-shadow(0 0 7px rgba(166,86,240,.5));
+}
+
+html[data-ui-theme="classic"] #screen-upgrader .upg-bezel {
+  r:92px;
+  fill:none;
+  stroke:rgba(255,255,255,.07);
+  stroke-width:10;
+}
+
+html[data-ui-theme="classic"] #screen-upgrader .upg-zone-lose {
+  r:92px;
+  fill:#0d0f17;
+}
+
+html[data-ui-theme="classic"] #screen-upgrader #upg-wheel-fill {
+  r:92px;
+  fill:#22cc66;
+  opacity:.86;
+}
+
+html[data-ui-theme="classic"] #screen-upgrader #upg-wheel-ring {
+  r:92px;
+  stroke:#a656f0;
+  stroke-width:2;
+  filter:drop-shadow(0 0 4px rgba(166,86,240,.45));
+}
+
+html[data-ui-theme="classic"] #screen-upgrader #upg-pointer-hub {
+  r:17px;
+  fill:#0e1319;
+  stroke:#ffd700;
+  stroke-width:2;
+}
+
+html[data-ui-theme="classic"] #screen-upgrader .upg-hub-inner {
+  r:5.5px;
+  fill:#ffd700;
+  stroke:none;
+}
+
+html[data-ui-theme="classic"] #screen-upgrader .upg-pointer-shaft {
+  top:21.5%;
+  left:calc(50% - 5px);
+  width:10px;
+  height:28%;
+  border-left:1.5px solid #f3cb47;
+  border-right:1.5px solid #f3cb47;
+  clip-path:none;
+  background:none;
+  opacity:.78;
+  filter:drop-shadow(0 0 3px rgba(255,215,0,.42));
+}
+
+html[data-ui-theme="classic"] #screen-upgrader .upg-pointer-shaft::before,
+html[data-ui-theme="classic"] #screen-upgrader .upg-pointer-shaft::after {
+  content:"";
+  position:absolute;
+  left:-4px;
+  width:15px;
+  height:1px;
+  background:rgba(243,203,71,.48);
+}
+
+html[data-ui-theme="classic"] #screen-upgrader .upg-pointer-shaft::before { top:18px; }
+html[data-ui-theme="classic"] #screen-upgrader .upg-pointer-shaft::after { top:36px; }
+
+html[data-ui-theme="classic"] #screen-upgrader .upg-pointer-tip {
+  top:9.5%;
+  left:calc(50% - 12px);
+  width:24px;
+  height:29px;
+  clip-path:polygon(50% 0,100% 65%,50% 100%,0 65%);
+  background:linear-gradient(90deg,#a77a10,#fff5a6 50%,#a77a10);
+  filter:drop-shadow(0 0 5px rgba(255,215,0,.62));
+}
+
+html[data-ui-theme="classic"] #screen-upgrader .upg-pointer-tip::after {
+  content:"";
+  position:absolute;
+  inset:6px 7px 7px;
+  clip-path:inherit;
+  background:#4b4430;
+  opacity:.55;
+}
+
+html[data-ui-theme="classic"] #screen-upgrader .upg-holo {
+  top:52%;
+  border:0;
+  background:transparent;
+  filter:drop-shadow(0 0 8px rgba(166,86,240,.65));
+}
+
+html[data-ui-theme="classic"] #screen-upgrader .upg-holo > svg {
+  display:none;
+}
+
+html[data-ui-theme="classic"] #screen-upgrader .upg-holo:not(.has-target)::before {
+  content:"";
+  display:block;
+  width:42px;
+  height:42px;
+  clip-path:polygon(50% 0,100% 48%,70% 48%,70% 100%,30% 100%,30% 48%,0 48%);
+  background:linear-gradient(180deg,#ffd700,#a656f0 72%);
+}
+
+html[data-telegram-display-mode="fullscreen"] .app {
+  padding-top:max(76px,env(safe-area-inset-top,0px),var(--tg-safe-area-inset-top,0px),var(--tg-content-safe-area-inset-top,0px));
+}
+
+/* Classic craft: compact purple/gold contract wheel to match the old arcade skin. */
+html[data-ui-theme="classic"] #screen-craft .game-header {
+  margin:0 0 8px;
+}
+
+html[data-ui-theme="classic"] #screen-craft .game-title {
+  margin:0;
+  font-family:'Space Mono',monospace;
+  font-size:16px;
+  letter-spacing:0;
+}
+
+html[data-ui-theme="classic"] #screen-craft .game-desc {
+  font-size:9px;
+  line-height:1.5;
+  color:#72748a;
+}
+
+html[data-ui-theme="classic"] #screen-craft .craft-machine {
+  border:1px solid rgba(166,86,240,.72);
+  background:
+    radial-gradient(circle at 50% 34%,rgba(166,86,240,.12),transparent 34%),
+    linear-gradient(180deg,#151421,#090a11);
+  box-shadow:inset 0 0 0 2px rgba(166,86,240,.12),0 0 24px rgba(80,45,130,.24);
+  clip-path:none;
+}
+
+html[data-ui-theme="classic"] #screen-craft .craft-machine::before,
+html[data-ui-theme="classic"] #screen-craft .craft-machine::after {
+  background:repeating-linear-gradient(180deg,#a656f0 0 5px,#191322 5px 12px);
+  opacity:.55;
+}
+
+html[data-ui-theme="classic"] #screen-craft .craft-machine-top {
+  border-bottom-color:rgba(166,86,240,.42);
+}
+
+html[data-ui-theme="classic"] #screen-craft .craft-machine-label,
+html[data-ui-theme="classic"] #screen-craft .craft-readout strong,
+html[data-ui-theme="classic"] #screen-craft .craft-inventory-head b {
+  color:#ffd83d;
+}
+
+html[data-ui-theme="classic"] #screen-craft .craft-chamber {
+  width:210px;
+  border-color:#6f3da5;
+  background:
+    radial-gradient(circle at center,rgba(166,86,240,.16) 0 22%,transparent 23%),
+    repeating-radial-gradient(circle at center,transparent 0 25px,rgba(166,86,240,.16) 26px 27px),
+    #0b0d16;
+  box-shadow:inset 0 0 36px #000,0 0 18px rgba(166,86,240,.26);
+}
+
+html[data-ui-theme="classic"] #screen-craft .craft-energy-ring {
+  border-color:rgba(166,86,240,.78);
+}
+
+html[data-ui-theme="classic"] #screen-craft .craft-energy-ring i:nth-child(2) {
+  border-color:rgba(255,216,61,.62);
+}
+
+html[data-ui-theme="classic"] #screen-craft .craft-energy-ring i:nth-child(3) {
+  border-color:rgba(166,86,240,.56);
+}
+
+html[data-ui-theme="classic"] #screen-craft .craft-result-core {
+  width:68px;
+  height:68px;
+  border-color:#ffd83d;
+  background:#171222;
+  box-shadow:0 0 0 6px rgba(166,86,240,.18),inset 0 0 20px rgba(166,86,240,.35);
+}
+
+html[data-ui-theme="classic"] #screen-craft .craft-orbit-item {
+  width:36px;
+  height:36px;
+  left:calc(50% - 18px);
+  top:calc(50% - 18px);
+  border-color:rgba(255,216,61,.58);
+  background:#12101b;
+}
+
+html[data-ui-theme="classic"] #screen-craft .craft-orbit-item img {
+  max-width:29px;
+  max-height:29px;
+}
+
+html[data-ui-theme="classic"] #screen-craft .craft-readout > div {
+  border-color:rgba(166,86,240,.38);
+  background:rgba(10,10,18,.8);
+}
+
+html[data-ui-theme="classic"] #screen-craft .craft-item {
+  min-height:116px;
+  border-color:rgba(166,86,240,.52);
+  background:linear-gradient(180deg,#151421,#0b0c14);
+}
+
+html[data-ui-theme="classic"] #screen-craft .craft-item.selected {
+  border-color:#ffd83d;
+  background:linear-gradient(180deg,rgba(75,47,112,.8),#11101a);
+  box-shadow:inset 0 0 16px rgba(166,86,240,.24),0 0 9px rgba(166,86,240,.22);
+}
+
+html[data-ui-theme="classic"] #screen-craft .craft-item-check {
+  border-color:rgba(255,216,61,.58);
+  background:#171222;
+  color:#ffd83d;
+}
+
+html[data-ui-theme="classic"] #screen-craft .craft-item.selected .craft-item-check {
+  background:#ffd83d;
+  border-color:#fff2a0;
+  color:#171222;
+}
+
+html[data-ui-theme="classic"] #screen-craft .craft-run-btn {
+  background:linear-gradient(180deg,#ffd83d,#b88712);
+  border-color:#ffe989;
+  color:#171222;
+}
+html[data-ui-theme="classic"] #screen-exchange{padding:0!important;background:#080b0f}
+html[data-ui-theme="classic"] .exchange-frame{display:block;width:100%;height:calc(100dvh - 205px);min-height:0;border:0;background:#080b0f}
+
+/* MINES / classic BrainBet */
+html[data-ui-theme="classic"] #screen-mines {
+  --mines-safe:#ffdb3d;
+  --mines-danger:#e04a4a;
+  --mines-gold:#ffd83d;
+}
+html[data-ui-theme="classic"] #screen-mines .mines-terminal {
+  border:1px solid rgba(255,216,61,.34);
+  background:
+    linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px),
+    #080910;
+  background-size:22px 22px;
+  box-shadow:0 0 22px rgba(0,0,0,.5);
+}
+html[data-ui-theme="classic"] #screen-mines .mines-terminal-rail {
+  min-height:30px;
+  border-bottom-color:rgba(255,216,61,.24);
+  color:#ffd83d;
+  background:#0d0e16;
+  letter-spacing:.13em;
+}
+html[data-ui-theme="classic"] #screen-mines .mines-lamps i {
+  width:6px;
+  height:6px;
+}
+html[data-ui-theme="classic"] #screen-mines .mines-lamps i:nth-child(1) {
+  background:#a656f0;
+  box-shadow:0 0 7px #a656f0;
+}
+html[data-ui-theme="classic"] #screen-mines .mines-lamps i:nth-child(2) {
+  background:#ffd83d;
+  box-shadow:0 0 7px #ffd83d;
+}
+html[data-ui-theme="classic"] #screen-mines .mines-lamps i:nth-child(3) {
+  background:#4de1c1;
+  box-shadow:0 0 7px #4de1c1;
+}
+html[data-ui-theme="classic"] #screen-mines .mines-board-wrap {
+  padding:8px;
+  border:1px solid rgba(166,86,240,.24);
+  background:radial-gradient(circle at center,rgba(166,86,240,.08),transparent 62%),#06070d;
+}
+html[data-ui-theme="classic"] #screen-mines .mines-board {
+  gap:7px;
+}
+html[data-ui-theme="classic"] #screen-mines .mine-cell {
+  border:1px solid rgba(110,112,154,.5);
+  border-radius:1px;
+  background:linear-gradient(180deg,#171824,#0c0d15);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.025),0 2px 0 #020204;
+}
+html[data-ui-theme="classic"] #screen-mines .mine-cell:not(:disabled):hover {
+  border-color:#ffd83d;
+}
+html[data-ui-theme="classic"] #screen-mines .mine-cell-cover {
+  inset:9px;
+  border-color:rgba(255,216,61,.22);
+  background:
+    linear-gradient(135deg,transparent 45%,rgba(255,216,61,.09) 46% 52%,transparent 53%),
+    #10111b;
+}
+html[data-ui-theme="classic"] #screen-mines .mine-cell-cover::before,
+html[data-ui-theme="classic"] #screen-mines .mine-cell-cover::after {
+  background:#585a7d;
+}
+html[data-ui-theme="classic"] #screen-mines .mine-cell-cover i {
+  border-color:#7b5cab;
+  background:#090a10;
+}
+html[data-ui-theme="classic"] #screen-mines .mine-cell.is-safe {
+  border-color:#ffd83d;
+  background:#17180c;
+  box-shadow:inset 0 0 17px rgba(255,216,61,.16),0 0 7px rgba(255,216,61,.18);
+}
+html[data-ui-theme="classic"] #screen-mines .mine-gem {
+  border-color:#fff3a3;
+  background:linear-gradient(135deg,#fff174 0 48%,#a77916 49% 100%);
+  box-shadow:0 0 11px rgba(255,216,61,.52),inset 0 0 0 3px #4d3b0f;
+}
+html[data-ui-theme="classic"] #screen-mines .mine-gem i {
+  border-color:#fff5ae;
+  background:#d8a92a;
+}
+html[data-ui-theme="classic"] #screen-mines .mine-cell.is-mine {
+  border-color:#c44b61;
+  background:#210911;
+}
+html[data-ui-theme="classic"] #screen-mines .mine-bomb {
+  border-color:#ff9eb1;
+  background:#c83959;
+  box-shadow:0 0 11px rgba(232,55,91,.55),inset 0 0 0 4px #541426;
+}
+html[data-ui-theme="classic"] #screen-mines .mine-bomb::before,
+html[data-ui-theme="classic"] #screen-mines .mine-bomb::after,
+html[data-ui-theme="classic"] #screen-mines .mine-bomb i::before,
+html[data-ui-theme="classic"] #screen-mines .mine-bomb i::after {
+  background:#ff9eb1;
+}
+html[data-ui-theme="classic"] #screen-mines .mines-board-status {
+  border-top-color:rgba(166,86,240,.28);
+  color:#77799a;
+}
+html[data-ui-theme="classic"] #screen-mines .mines-readouts > div {
+  border-color:rgba(166,86,240,.32);
+  background:rgba(10,10,18,.9);
+}
+html[data-ui-theme="classic"] #screen-mines .mines-readouts span,
+html[data-ui-theme="classic"] #screen-mines .mines-control-label span,
+html[data-ui-theme="classic"] #screen-mines .mines-bet-block > label {
+  color:#77799a;
+}
+html[data-ui-theme="classic"] #screen-mines .mines-readouts strong {
+  color:#ffd83d;
+}
+html[data-ui-theme="classic"] #screen-mines .mines-control-block,
+html[data-ui-theme="classic"] #screen-mines .mines-bet-block {
+  border-color:rgba(166,86,240,.3);
+  background:rgba(9,9,16,.86);
+}
+html[data-ui-theme="classic"] #screen-mines .mines-count-stepper {
+  border-color:#4e4165;
+  background:#07080d;
+}
+html[data-ui-theme="classic"] #screen-mines .mines-count-stepper button {
+  color:#ffd83d;
+  background:#151421;
+}
+html[data-ui-theme="classic"] #screen-mines .mines-count-stepper strong {
+  border-color:#4e4165;
+  color:#f2f0ff;
+}
+html[data-ui-theme="classic"] #screen-mines .mines-presets button {
+  border-color:#34354d;
+  color:#77799a;
+  background:#0b0c13;
+}
+html[data-ui-theme="classic"] #screen-mines .mines-presets button.active {
+  border-color:#ffd83d;
+  color:#ffd83d;
+  background:#201d0d;
+  box-shadow:none;
+}
+html[data-ui-theme="classic"] #screen-mines .mines-start-btn {
+  border-color:#ffe77c;
+  color:#14120a;
+  background:linear-gradient(180deg,#ffe45b,#bd8d13);
+  box-shadow:0 3px 0 #5b4208;
+}
+html[data-ui-theme="classic"] #screen-mines .mines-cashout-btn:not(:disabled) {
+  border-color:#a656f0 !important;
+  color:#f5e8ff !important;
+  background:linear-gradient(180deg,#6f3da5,#34204f) !important;
+  box-shadow:0 3px 0 #1a1027;
+}
+html[data-ui-theme="classic"] #screen-mines .mines-actions {
+  background:rgba(7,8,13,.96);
+}
+@media (max-width:560px) {
+  html[data-ui-theme="classic"] #screen-mines .mines-board-wrap {
+    padding:6px;
+  }
+  html[data-ui-theme="classic"] #screen-mines .mines-board {
+    gap:5px;
+  }
+  html[data-ui-theme="classic"] #screen-mines .mine-cell-cover {
+    inset:6px;
+  }
+}
+
+/* Rocket / classic BrainBet instrument panel */
+html[data-ui-theme="classic"] #screen-rocket {
+  --rocket-accent:#e6bd34;
+  --rocket-live:#63db76;
+  --rocket-panel:#06070b;
+}
+html[data-ui-theme="classic"] #screen-rocket .rocket-terminal {
+  border-color:#3b3a51;
+  background:#06070b;
+  box-shadow:0 0 24px rgba(225,187,49,.07);
+}
+html[data-ui-theme="classic"] #screen-rocket .rocket-terminal-rail {
+  border-color:#343247;
+  color:#ddd06d;
+  background:#090a11;
+}
+html[data-ui-theme="classic"] #screen-rocket .rocket-stage {
+  border-color:#302e43;
+  background:
+    radial-gradient(circle at 77% 20%,rgba(109,78,190,.13),transparent 25%),
+    linear-gradient(180deg,#070811,#0a0b12 65%,#0c0b10);
+}
+html[data-ui-theme="classic"] #screen-rocket .rocket-grid {
+  opacity:.32;
+  background-image:
+    linear-gradient(rgba(106,88,172,.28) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(220,186,54,.18) 1px,transparent 1px);
+}
+html[data-ui-theme="classic"] #screen-rocket .rocket-body { fill:#d9bd46;stroke:#fff08d; }
+html[data-ui-theme="classic"] #screen-rocket .rocket-fin { fill:#6b4bad;stroke:#ad87f0; }
+html[data-ui-theme="classic"] #screen-rocket .rocket-window { fill:#090b13;stroke:#77e587; }
+html[data-ui-theme="classic"] #screen-rocket .rocket-readout strong {
+  color:#f3e47a;
+  text-shadow:0 0 18px rgba(225,190,55,.27);
+}
+html[data-ui-theme="classic"] #screen-rocket .rocket-readout span {
+  border-color:#49435e;
+  color:#a9a2c5;
+  background:rgba(7,8,13,.9);
+}
+html[data-ui-theme="classic"] #screen-rocket .rocket-stage-stats div {
+  border-left-color:#ddc33f;
+  background:rgba(6,7,11,.86);
+}
+html[data-ui-theme="classic"] #screen-rocket .rocket-stage-stats b { color:#e6d662; }
+html[data-ui-theme="classic"] #screen-rocket .rocket-lower { background:#07080d; }
+html[data-ui-theme="classic"] #screen-rocket .rocket-input-group,
+html[data-ui-theme="classic"] #screen-rocket .rocket-roster {
+  border-color:#343247;
+  background:#090a10;
+}
+html[data-ui-theme="classic"] #screen-rocket .rocket-auto-wrap {
+  border-color:#3e3a52;
+  background:#05060a;
+}
+html[data-ui-theme="classic"] #screen-rocket .rocket-auto-toggle,
+html[data-ui-theme="classic"] #screen-rocket .rocket-auto-presets button {
+  border-color:#3e3a52;
+  color:#8f89a7;
+  background:#05060a;
+}
+html[data-ui-theme="classic"] #screen-rocket .rocket-auto-toggle.is-enabled,
+html[data-ui-theme="classic"] #screen-rocket .rocket-auto-presets button.active {
+  border-color:#e3ce5b;
+  color:#e3ce5b;
+  background:#17150a;
+}
+html[data-ui-theme="classic"] #screen-rocket .rocket-player-row { border-color:#242333; }
+html[data-ui-theme="classic"] #screen-rocket .rocket-player-row b { color:#d3cee2; }
+html[data-ui-theme="classic"] #screen-rocket .rocket-player-row em { color:#e3ce5b; }
+html[data-ui-theme="classic"] #screen-rocket .rocket-action.is-cashout {
+  border-color:#5ed477 !important;
+  color:#d9ffe1 !important;
+  background:#173c22 !important;
+  box-shadow:0 0 16px rgba(77,208,103,.2);
+}
+
+/* Keep very large balances inside the compact classic header. */
+html[data-ui-theme="classic"] .app > .header .header-stats,
+html[data-ui-theme="classic"] .app > .header .stat {
+  min-width:0;
+}
+html[data-ui-theme="classic"] .app > .header .stat {
+  width:clamp(78px,27vw,108px);
+  overflow:hidden;
+}
+html[data-ui-theme="classic"] .app > .header .stat-value {
+  display:block;
+  width:100%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+html[data-ui-theme="classic"] #screen-rocket .rocket-sky {
+  background:
+    linear-gradient(115deg,transparent 0 63%,rgba(110,82,182,.08) 63% 63.5%,transparent 63.5%),
+    repeating-linear-gradient(0deg,rgba(255,255,255,.015) 0 1px,transparent 1px 5px),
+    #06070c;
+}
+html[data-ui-theme="classic"] #screen-rocket .rocket-sky::before,
+html[data-ui-theme="classic"] #screen-rocket .rocket-sky::after {
+  border-color:rgba(112,85,185,.2);
+}
+html[data-ui-theme="classic"] #screen-rocket .rocket-route { border-color:rgba(219,187,63,.34); }
+html[data-ui-theme="classic"] #screen-rocket .rocket-route::before,
+html[data-ui-theme="classic"] #screen-rocket .rocket-route::after,
+html[data-ui-theme="classic"] #screen-rocket .rocket-route i {
+  border-color:#6d5b2d;
+  background:#07080d;
+}
+html[data-ui-theme="classic"] #screen-rocket .rocket-altimeter { border-color:#514b35; }
+html[data-ui-theme="classic"] #screen-rocket .rocket-altimeter::before,
+html[data-ui-theme="classic"] #screen-rocket .rocket-altimeter span { color:#817854; }
+html[data-ui-theme="classic"] #screen-rocket .rocket-launch-rig { border-color:#302d43; }
+html[data-ui-theme="classic"] #screen-rocket .rocket-launch-rig::before,
+html[data-ui-theme="classic"] #screen-rocket .rocket-launch-rig::after {
+  background:#514b70;
+  box-shadow:0 31px 0 #514b70,0 62px 0 #514b70;
+}
+html[data-ui-theme="classic"] #screen-rocket .rocket-panel { fill:#11111a;stroke:#5a4c84; }
+html[data-ui-theme="classic"] #screen-rocket .rocket-warning { fill:#e0c544; }
+html[data-ui-theme="classic"] #screen-rocket .rocket-window-ring { fill:#090a10;stroke:#8b6fd0; }
+html[data-ui-theme="classic"] #screen-rocket .rocket-brain-mark { fill:#76dc82; }
+html[data-ui-theme="classic"] #screen-rocket .rocket-seam { stroke:#685397; }
+html[data-ui-theme="classic"] #screen-rocket .rocket-rivet { fill:#dfcc69;stroke:#272014; }
+html[data-ui-theme="classic"] #screen-rocket .rocket-mark { fill:#ead66b; }
+html[data-ui-theme="classic"] #screen-rocket .rocket-readout-label { color:#77718d; }
+
+/* Rocket V2 / classic laboratory instrument */
+html[data-ui-theme="classic"] #screen-rocket .rocket-stage {
+  background:
+    linear-gradient(90deg,rgba(116,94,177,.04) 1px,transparent 1px) 0 0/18px 100%,
+    repeating-linear-gradient(0deg,#070811 0 5px,#0b0c14 5px 6px);
+}
+html[data-ui-theme="classic"] #screen-rocket .rocket-machine-shell {
+  border-color:#3d3853;
+  background:
+    linear-gradient(115deg,transparent 0 48%,rgba(146,112,218,.035) 49% 50%,transparent 51%),
+    radial-gradient(circle at 50% 58%,rgba(100,66,171,.18),transparent 48%),
+    #090a11;
+}
+html[data-ui-theme="classic"] #screen-rocket .rocket-porthole {
+  border-color:#15141d;
+  box-shadow:0 0 0 2px #5c5673,0 0 0 8px #07080d,0 0 0 10px #554776,0 14px 30px #000,inset 0 0 45px #000;
+}
+html[data-ui-theme="classic"] #screen-rocket .rocket-body { fill:#b99b38;stroke:#f4dd69; }
+html[data-ui-theme="classic"] #screen-rocket .rocket-fin { fill:#49316f;stroke:#9f78da; }
+html[data-ui-theme="classic"] #screen-rocket .rocket-stripe { fill:#252033; }
+html[data-ui-theme="classic"] #screen-rocket .rocket-warning { fill:#e3c841; }
+html[data-ui-theme="classic"] #screen-rocket .rocket-window-ring { fill:#0d0b14;stroke:#8d72ca; }
+html[data-ui-theme="classic"] #screen-rocket .rocket-window { fill:#070a0d;stroke:#71dc7e; }
+html[data-ui-theme="classic"] #screen-rocket .rocket-brain-mark { fill:#efcd4d; }
+html[data-ui-theme="classic"] #screen-rocket .rocket-readout strong { color:#f0dc62;text-shadow:0 0 12px rgba(226,191,55,.35); }
+html[data-ui-theme="classic"] #screen-rocket .rocket-readout span { border:0;color:#b7b0cb;background:#0e0c15; }
+html[data-ui-theme="classic"] #screen-rocket .rocket-launch-rig::before,
+html[data-ui-theme="classic"] #screen-rocket .rocket-launch-rig::after { content:none; }
+html[data-ui-theme="classic"] #screen-rocket .rocket-action.is-cashout {
+  color:#d9ffe1 !important;
+  border-color:#5ed477 !important;
+  background:repeating-linear-gradient(-45deg,rgba(0,35,8,.24) 0 10px,transparent 10px 20px),#173c22 !important;
+  box-shadow:inset 0 0 0 3px #285b34,0 5px 0 #0a2310 !important;
+}

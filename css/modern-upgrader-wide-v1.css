@@ -1,0 +1,91 @@
+/* Wide modern upgrader workspace. Classic 2.0 keeps its own layout. */
+@media (min-width: 1440px) {
+  html[data-ui-theme="modern"] #screen-upgrader.active {
+    display: grid;
+    grid-template-columns: minmax(400px, .9fr) minmax(500px, 1.1fr);
+    grid-template-rows: auto auto auto minmax(0, 1fr);
+    column-gap: clamp(18px, 1.45vw, 26px);
+    row-gap: 14px;
+    align-content: start;
+    align-items: start;
+  }
+
+  html[data-ui-theme="modern"] #screen-upgrader > .game-header {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    width: 100%;
+    margin: 0;
+  }
+
+  html[data-ui-theme="modern"] #screen-upgrader > .upg-warning {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    width: 100%;
+    margin: 0;
+  }
+
+  html[data-ui-theme="modern"] #screen-upgrader > .upg-reactor-console {
+    position: sticky;
+    top: 18px;
+    grid-column: 1;
+    grid-row: 3 / 5;
+    align-self: start;
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    margin: 0;
+    padding: 31px 15px 16px;
+  }
+
+  html[data-ui-theme="modern"] #screen-upgrader .upg-reactor-console .upg-wheel-wrap {
+    width: min(430px, 100%);
+    max-width: 100%;
+    margin: 0 auto 8px;
+  }
+
+  html[data-ui-theme="modern"] #screen-upgrader > .upg-tabs {
+    grid-column: 2;
+    grid-row: 3;
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+  }
+
+  html[data-ui-theme="modern"] #screen-upgrader > :is(#upg-inv-block, #upg-shop-block) {
+    grid-column: 2;
+    grid-row: 4;
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+  }
+
+  html[data-ui-theme="modern"] #screen-upgrader :is(#upg-inv-grid, #upg-target-grid, #upg-shop-grid) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 11px;
+  }
+
+  html[data-ui-theme="modern"] #screen-upgrader .upg-item {
+    min-width: 0;
+    min-height: 178px;
+  }
+
+  html[data-ui-theme="modern"] #screen-upgrader #upg-inv-counter {
+    margin-top: 0 !important;
+  }
+}
+
+@media (min-width: 1900px) {
+  html[data-ui-theme="modern"] #screen-upgrader.active {
+    grid-template-columns: minmax(460px, .92fr) minmax(560px, 1.08fr);
+  }
+
+  html[data-ui-theme="modern"] #screen-upgrader .upg-reactor-console .upg-wheel-wrap {
+    width: min(480px, 100%);
+  }
+}
+
+@media (min-width: 1440px) and (max-height: 900px) {
+  html[data-ui-theme="modern"] #screen-upgrader .upg-reactor-console .upg-wheel-wrap {
+    width: min(370px, 100%);
+  }
+}

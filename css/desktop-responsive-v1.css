@@ -1,0 +1,802 @@
+/* BrainBet wide-screen shell.
+   The Telegram/mobile layout remains the source of truth below 768px. */
+
+/* Resonance has a genuinely separate classic-theme mark. */
+html[data-ui-theme="classic"] #tab-resonance .theme-icon-modern,
+html[data-ui-theme="classic"] #screen-resonance .theme-icon-modern {
+  display: none !important;
+}
+
+html[data-ui-theme="classic"] #tab-resonance .theme-icon-classic {
+  display: block !important;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  filter: drop-shadow(0 0 5px rgba(230, 189, 52, .34));
+}
+
+html[data-ui-theme="classic"] #screen-resonance .theme-icon-classic {
+  display: inline-block !important;
+  width: 25px;
+  height: 25px;
+  margin-right: 8px;
+  vertical-align: -5px;
+  filter: drop-shadow(0 0 6px rgba(230, 189, 52, .38));
+}
+
+@media (min-width: 768px) {
+  html,
+  body {
+    min-width: 0;
+    min-height: 100%;
+  }
+
+  body {
+    background-attachment: fixed;
+    background-size: cover;
+  }
+
+  .app {
+    display: flex;
+    flex-direction: column;
+    width: min(calc(100% - 28px), 980px);
+    max-width: 980px;
+    min-height: 100dvh;
+    margin: 0 auto;
+    padding: 16px 0 72px;
+  }
+
+  .app > .header { order: 1; }
+  .app > .live-wins { order: 2; }
+  .app > .nav-wrapper { order: 3; }
+  .app > .screen { order: 4; }
+  .app > #snd-settings-modal,
+  .app > #player-chat-overlay { order: 10; }
+
+  .app > .header {
+    min-height: 82px;
+    margin: 0 18px 10px;
+    padding: 17px 22px;
+  }
+
+  .app > .header .header-logo {
+    font-size: clamp(24px, 3.2vw, 34px);
+    letter-spacing: 1.2px;
+  }
+
+  .app > .header .header-logo .logo-mark {
+    width: 35px;
+    height: 35px;
+  }
+
+  .app > .header .header-stats {
+    gap: 12px;
+  }
+
+  .app > .header .stat {
+    min-width: 112px;
+    min-height: 48px;
+    padding: 7px 12px;
+  }
+
+  .app > .header .stat-label {
+    font-size: 7px;
+  }
+
+  .app > .header .stat-value {
+    font-size: 18px;
+  }
+
+  .app > .header .snd-toggle {
+    width: 48px;
+    height: 48px;
+  }
+
+  .app > .live-wins {
+    min-height: 40px;
+    margin: 0 18px 10px;
+    padding: 0 18px;
+  }
+
+  .app > .nav-wrapper {
+    min-height: 66px !important;
+    height: 66px !important;
+    max-height: 66px !important;
+    margin: 0 18px 14px;
+  }
+
+  .nav-wrapper .nav,
+  .nav-wrapper .nav-arrow,
+  .nav-wrapper .nav-btn,
+  .nav-wrapper .exchange-gateway,
+  .nav-wrapper .exchange-gateway-trigger {
+    min-height: 66px !important;
+    height: 66px !important;
+    max-height: 66px !important;
+  }
+
+  .nav-wrapper .nav-btn {
+    min-width: 80px;
+    padding: 7px 10px;
+    gap: 4px;
+  }
+
+  .nav-wrapper .nav-btn .nav-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .nav-wrapper .nav-btn > span {
+    font-size: 8px;
+  }
+
+  .nav-wrapper .nav-arrow {
+    flex: 0 0 42px;
+    width: 42px;
+  }
+
+  .nav-wrapper .exchange-gateway {
+    width: 68px;
+    flex: 0 0 68px;
+  }
+
+  .nav-wrapper .exchange-gateway-icon {
+    width: 31px;
+    height: 31px;
+  }
+
+  .app > .screen {
+    min-height: 620px;
+    margin: 0 18px;
+    padding: clamp(28px, 4vw, 42px);
+  }
+
+  .game-header {
+    min-height: 86px;
+    margin-bottom: 22px;
+    padding: 16px 20px;
+  }
+
+  .game-title {
+    font-size: clamp(29px, 4vw, 40px);
+    line-height: 1;
+  }
+
+  .game-title-icon,
+  .resonance-title-icon {
+    width: 38px;
+    height: 38px;
+  }
+
+  .game-desc {
+    max-width: 660px;
+    white-space: normal;
+    font-size: 10px;
+    line-height: 1.5;
+  }
+
+  .bet-area {
+    padding: 20px;
+  }
+
+  .bet-input-wrap input,
+  .profile-input,
+  .admin-search-input {
+    min-height: 48px;
+    font-size: 17px;
+  }
+
+  .quick-bets {
+    gap: 8px;
+  }
+
+  .qbet {
+    min-height: 44px;
+    font-size: 11px;
+  }
+
+  .play-btn {
+    min-height: 58px;
+    font-size: 14px;
+  }
+
+  .result-box {
+    min-height: 48px;
+    padding: 14px 18px;
+    font-size: 12px;
+  }
+
+  .coin-visual {
+    min-height: 390px;
+  }
+
+  .coin {
+    width: clamp(214px, 29vw, 286px);
+    height: clamp(214px, 29vw, 286px);
+  }
+
+  .coin-steps {
+    max-width: 620px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .resonance-terminal {
+    padding-bottom: 22px;
+  }
+
+  .resonance-signal-zone {
+    min-height: 250px;
+  }
+
+  .resonance-signal-card {
+    width: 190px;
+    min-height: 214px;
+  }
+
+  .resonance-signal-art {
+    width: 126px;
+    height: 122px;
+  }
+
+  .resonance-hand {
+    max-width: 720px;
+    gap: 10px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .resonance-card {
+    min-height: 238px;
+  }
+
+  .resonance-card-art {
+    width: 116px;
+    height: 126px;
+  }
+
+  .resonance-card-replace {
+    min-height: 36px;
+  }
+
+  .resonance-rules,
+  .resonance-suit-legend {
+    max-width: 760px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .mines-terminal {
+    padding: 18px;
+  }
+
+  .mines-layout {
+    grid-template-columns: minmax(360px, 1.2fr) minmax(280px, .8fr);
+    gap: 22px;
+    align-items: stretch;
+  }
+
+  .mines-board {
+    width: min(100%, 520px);
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .mines-console {
+    padding: 18px;
+  }
+
+  .mines-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #screen-rocket .rocket-stage {
+    min-height: 530px;
+  }
+
+  #screen-rocket .rocket-lower {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(250px, .85fr);
+    gap: 14px;
+    align-items: stretch;
+  }
+
+  #screen-rocket .rocket-controls {
+    grid-column: 1;
+    grid-row: 1;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #screen-rocket .rocket-action {
+    grid-column: 1;
+    grid-row: 2;
+    margin: 0;
+  }
+
+  #screen-rocket .rocket-roster {
+    grid-column: 2;
+    grid-row: 1 / 3;
+  }
+
+  #screen-cases .cases-grid,
+  #screen-shop .shop-grid,
+  #screen-inventory .inv-grid,
+  #screen-upgrader #upg-inv-grid,
+  #screen-upgrader #upg-target-grid,
+  #screen-upgrader #upg-shop-grid,
+  #screen-craft .craft-inventory-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .case-card,
+  .shop-item,
+  .inv-item {
+    min-height: 218px;
+  }
+
+  .case-card img,
+  .shop-item img,
+  .inv-item img {
+    max-height: 132px;
+  }
+
+  .upg-wheel-wrap {
+    width: 310px;
+    height: 310px;
+    margin: 12px auto 18px;
+  }
+
+  .upg-wheel-svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .upg-quick {
+    max-width: 620px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .slots-color-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .slots-color-btn {
+    min-height: 104px;
+  }
+
+  .wheel-wrap {
+    max-width: 560px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .profile-style-options {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .profile-level-panel,
+  .profile-achievements,
+  .profile-card,
+  .analytics-content,
+  .admin-ip-panel {
+    max-width: none;
+  }
+
+  .profile-achievement-group > div {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .public-profile-modal {
+    width: min(calc(100vw - 54px), 760px);
+    max-width: 760px;
+  }
+
+  .admin-player-dialog {
+    width: min(calc(100vw - 54px), 980px);
+    max-width: 980px;
+  }
+
+  .admin-player-content {
+    padding: 24px;
+  }
+
+  .ld-panel {
+    width: min(calc(100vw - 54px), 860px);
+    max-width: 860px;
+  }
+
+  .case-open-result,
+  .custom-confirm-card {
+    max-width: min(760px, calc(100vw - 48px));
+  }
+
+  /* Exchange owns the whole viewport and must not inherit the casino shell. */
+  html.exchange-active body .app {
+    width: 100%;
+    max-width: none;
+    min-height: 100dvh;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@media (min-width: 1100px) {
+  body {
+    padding: 24px 0;
+  }
+
+  .app {
+    display: grid;
+    grid-template-columns: 292px minmax(0, 1fr);
+    grid-template-rows: auto auto minmax(690px, auto);
+    gap: 12px 18px;
+    width: min(calc(100% - 48px), 1480px);
+    max-width: 1480px;
+    min-height: calc(100dvh - 48px);
+    margin: 0 auto;
+    padding: 18px;
+    overflow: visible;
+  }
+
+  html[data-ui-theme="classic"] .app {
+    display: grid;
+    flex-direction: unset;
+  }
+
+  .app > .casino-set {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    max-width: none;
+    pointer-events: none;
+  }
+
+  .app > .header {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    min-height: 88px;
+    margin: 0;
+    padding: 18px 26px;
+  }
+
+  .app > .live-wins {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    min-height: 42px;
+    margin: 0;
+  }
+
+  .app > .nav-wrapper {
+    grid-column: 1;
+    grid-row: 3;
+    align-self: start;
+    position: sticky;
+    top: 24px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: calc(100dvh - 48px) !important;
+    margin: 0;
+    padding: 8px;
+    overflow: hidden;
+  }
+
+  .app > .nav-wrapper::before {
+    content: "GAME DECK // SELECT MODE";
+    display: block;
+    flex: 0 0 auto;
+    padding: 8px 10px 10px;
+    color: var(--text-dim, #69717c);
+    font: 700 8px/1.2 'IBM Plex Mono', monospace;
+    letter-spacing: 1.5px;
+    text-align: left;
+  }
+
+  .nav-wrapper .exchange-gateway {
+    order: -1;
+    width: 100%;
+    min-height: 72px !important;
+    height: 72px !important;
+    max-height: 72px !important;
+    flex: 0 0 72px;
+    margin-bottom: 8px;
+  }
+
+  .nav-wrapper .exchange-gateway-trigger {
+    display: grid;
+    grid-template-columns: 46px minmax(0, 1fr) auto;
+    min-height: 72px !important;
+    height: 72px !important;
+    max-height: 72px !important;
+    padding: 8px 10px;
+    text-align: left;
+  }
+
+  .nav-wrapper .exchange-gateway-copy,
+  .nav-wrapper .exchange-gateway-enter {
+    display: flex;
+  }
+
+  .nav-wrapper .exchange-gateway-copy {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .nav-wrapper .nav-arrow {
+    display: none !important;
+  }
+
+  .nav-wrapper .nav {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-content: start;
+    width: 100%;
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: calc(100dvh - 166px) !important;
+    padding: 2px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
+
+  .nav-wrapper .nav-btn {
+    min-width: 0;
+    min-height: 64px !important;
+    height: 64px !important;
+    max-height: 64px !important;
+    padding: 7px 4px;
+  }
+
+  .nav-wrapper .nav-btn .nav-icon {
+    width: 26px;
+    height: 26px;
+  }
+
+  .nav-wrapper .nav-btn > span {
+    max-width: 100%;
+    overflow: hidden;
+    font-size: 7px;
+    text-overflow: ellipsis;
+  }
+
+  .app > .screen {
+    grid-column: 2;
+    grid-row: 3;
+    width: auto;
+    min-width: 0;
+    min-height: 690px;
+    margin: 0;
+    padding: clamp(32px, 3vw, 48px);
+  }
+
+  html[data-ui-theme="classic"] .app > .header,
+  html[data-ui-theme="classic"] .app > .live-wins,
+  html[data-ui-theme="classic"] .app > .nav-wrapper,
+  html[data-ui-theme="classic"] .app > .screen {
+    order: unset;
+  }
+
+  .game-header {
+    min-height: 96px;
+    padding: 19px 24px;
+  }
+
+  .game-title {
+    font-size: clamp(36px, 3vw, 48px);
+  }
+
+  .game-desc {
+    font-size: 11px;
+  }
+
+  /* The two most visual solo modes become real desktop workspaces. */
+  #screen-coin.active {
+    display: grid;
+    grid-template-columns: minmax(420px, 1.18fr) minmax(310px, .82fr);
+    grid-template-rows: auto auto auto auto 1fr;
+    gap: 14px 22px;
+    align-items: start;
+  }
+
+  #screen-coin > .game-header {
+    grid-column: 1 / -1;
+    margin-bottom: 4px;
+  }
+
+  #screen-coin > .coin-visual {
+    grid-column: 1;
+    grid-row: 2 / 5;
+    min-height: 450px;
+    margin: 0;
+  }
+
+  #screen-coin > .coin-steps {
+    grid-column: 1;
+    grid-row: 5;
+    width: 100%;
+  }
+
+  #screen-coin > .bet-area {
+    grid-column: 2;
+    grid-row: 2;
+    margin: 0;
+  }
+
+  #screen-coin > .play-btn {
+    grid-column: 2;
+    grid-row: 3;
+    margin: 0;
+  }
+
+  #screen-coin > .result-box {
+    grid-column: 2;
+    grid-row: 4;
+    margin: 0;
+  }
+
+  #screen-resonance.active {
+    display: grid;
+    grid-template-columns: minmax(520px, 1.35fr) minmax(300px, .65fr);
+    grid-template-rows: auto auto auto auto auto 1fr;
+    gap: 12px 22px;
+    align-items: start;
+  }
+
+  #screen-resonance > .game-header {
+    grid-column: 1 / -1;
+    margin-bottom: 4px;
+  }
+
+  #screen-resonance > .resonance-terminal {
+    grid-column: 1;
+    grid-row: 2 / 7;
+    width: 100%;
+    margin: 0;
+  }
+
+  #screen-resonance > .resonance-rules {
+    grid-column: 2;
+    grid-row: 2;
+    width: 100%;
+    margin: 0;
+  }
+
+  #screen-resonance > .resonance-bet-area {
+    grid-column: 2;
+    grid-row: 3;
+    margin: 0;
+  }
+
+  #screen-resonance > .resonance-actions {
+    grid-column: 2;
+    grid-row: 4;
+  }
+
+  #screen-resonance > .result-box {
+    grid-column: 2;
+    grid-row: 5;
+    margin: 0;
+  }
+
+  #screen-resonance > .resonance-paytable {
+    grid-column: 2;
+    grid-row: 6;
+    align-self: start;
+  }
+
+  #screen-resonance .resonance-card {
+    min-height: 250px;
+  }
+
+  .mines-layout {
+    grid-template-columns: minmax(460px, 1.1fr) minmax(330px, .9fr);
+    gap: 26px;
+  }
+
+  .mines-board {
+    width: min(100%, 560px);
+    max-width: 560px;
+  }
+
+  #screen-rocket .rocket-stage {
+    min-height: 590px;
+  }
+
+  #screen-cases .cases-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  #screen-shop .shop-grid,
+  #screen-inventory .inv-grid,
+  #screen-upgrader #upg-inv-grid,
+  #screen-upgrader #upg-target-grid,
+  #screen-upgrader #upg-shop-grid,
+  #screen-craft .craft-inventory-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .case-card,
+  .shop-item,
+  .inv-item {
+    min-height: 246px;
+  }
+
+  .upg-reactor-console {
+    max-width: 760px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .upg-wheel-wrap {
+    width: 360px;
+    height: 360px;
+  }
+
+  .profile-style-options {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .profile-achievement-group > div {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .analytics-content,
+  .admin-player-list,
+  .admin-ip-results {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  html.exchange-active body {
+    padding: 0;
+  }
+
+  html.exchange-active body .app {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    width: 100%;
+    max-width: none;
+    min-height: 100dvh;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@media (min-width: 1500px) {
+  .app {
+    grid-template-columns: 310px minmax(0, 1fr);
+    width: min(calc(100% - 64px), 1600px);
+    max-width: 1600px;
+    padding: 22px;
+    gap: 14px 22px;
+  }
+
+  .app > .screen {
+    padding: 50px;
+  }
+
+  .nav-wrapper .nav-btn {
+    min-height: 68px !important;
+    height: 68px !important;
+    max-height: 68px !important;
+  }
+
+  .nav-wrapper .nav-btn > span {
+    font-size: 8px;
+  }
+
+  #screen-cases .cases-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}

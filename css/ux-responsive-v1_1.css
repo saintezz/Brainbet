@@ -1,0 +1,1175 @@
+/* Final exchange shell. This file intentionally loads after all legacy skins. */
+:root {
+  --exchange-vh: var(--exchange-viewport-height, 100dvh);
+  --exchange-vtop: var(--exchange-viewport-top, 0px);
+  --exchange-touch: 44px;
+  --exchange-safe-top: env(safe-area-inset-top, 0px);
+  --exchange-safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+html,
+body {
+  width: 100%;
+  height: var(--exchange-vh);
+  min-height: 0;
+  max-height: var(--exchange-vh);
+  overflow: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  isolation: isolate;
+}
+
+.exchange-exit-btn {
+  min-width: 82px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 0 10px;
+  border: 1px solid #5b6572;
+  background: #151b24;
+  color: #f1c34e;
+  font: 700 10px 'Space Mono', monospace;
+  letter-spacing: .7px;
+  cursor: pointer;
+}
+
+.exchange-exit-btn:hover,
+.exchange-exit-btn:active {
+  border-color: #f1c34e;
+  background: #282113;
+  color: #fff0b1;
+}
+
+.exchange-exit-btn span {
+  font-size: 18px;
+  line-height: 1;
+}
+
+button,
+input,
+textarea,
+select,
+[role="button"] {
+  touch-action: manipulation;
+}
+
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid #f3c64f;
+  outline-offset: 2px;
+}
+
+.grain,
+.topbar::before,
+.topbar::after,
+.mobile-nav::before,
+.mobile-nav::after,
+.messenger::before,
+.messenger::after,
+.messenger-shell::before,
+.messenger-shell::after {
+  pointer-events: none;
+}
+
+main {
+  min-width: 0;
+  min-height: 0;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.mobile-nav {
+  position: relative !important;
+  z-index: 60 !important;
+  isolation: isolate;
+}
+
+.mobile-nav button {
+  min-width: 0;
+  min-height: 60px;
+}
+
+.messenger {
+  position: fixed;
+  z-index: 500 !important;
+  inset: var(--exchange-vtop) 0 auto;
+  width: 100%;
+  height: var(--exchange-vh);
+  max-height: var(--exchange-vh);
+  padding: 0;
+  overflow: hidden;
+  align-items: stretch;
+  justify-content: center;
+  background: rgba(2, 5, 8, .96);
+  overscroll-behavior: none;
+}
+
+.messenger.hidden {
+  display: none !important;
+}
+
+.messenger-shell {
+  width: min(100%, 980px);
+  height: 100%;
+  max-height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.thread-list-pane,
+.conversation-pane {
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.conversation-pane {
+  display: flex;
+  flex-direction: column;
+}
+
+.conversation-head,
+.conversation-context,
+.call-admin-bar,
+.admin-readonly-note,
+.blocked-chat-note,
+.messenger-compose {
+  flex: 0 0 auto;
+}
+
+.conversation-head {
+  position: relative;
+  z-index: 12;
+}
+
+.conversation-context {
+  max-height: min(330px, 39dvh);
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+
+.messenger-messages {
+  flex: 1 1 auto;
+  min-height: 80px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.call-admin-bar,
+.admin-readonly-note,
+.blocked-chat-note {
+  position: relative;
+  z-index: 14;
+}
+
+.messenger-compose {
+  position: relative;
+  z-index: 20;
+  min-height: calc(62px + var(--exchange-safe-bottom));
+  padding: 8px 9px calc(8px + var(--exchange-safe-bottom));
+  grid-template-columns: minmax(0, 1fr) 48px;
+  gap: 7px;
+  border-top: 1px solid #485361;
+  background: #111821;
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, .38);
+}
+
+.messenger-compose textarea {
+  width: 100%;
+  min-width: 0;
+  min-height: 46px;
+  max-height: 112px;
+  height: 46px;
+  padding: 11px 13px;
+  border: 1px solid #485361;
+  background: #080d13;
+  color: #f4f7fa;
+  font-size: 16px;
+  line-height: 1.35;
+  resize: none;
+  overflow-y: auto;
+}
+
+.messenger-compose textarea::placeholder {
+  color: #788390;
+}
+
+.messenger-compose button {
+  width: 48px;
+  min-width: 48px;
+  height: 46px;
+  min-height: 46px;
+  border: 1px solid #f0bd42;
+  background: #d89c23;
+  color: #0a0d10;
+  font-size: 21px;
+  box-shadow: inset 0 1px rgba(255, 255, 255, .42);
+  align-self: end;
+}
+
+.messenger-compose button:active {
+  transform: translateY(1px);
+  filter: brightness(.9);
+}
+
+.conversation-actions button,
+.messenger-back,
+.messenger-close,
+.thread-list-head button {
+  min-width: var(--exchange-touch);
+  min-height: var(--exchange-touch);
+}
+
+.call-admin-bar {
+  min-height: 46px;
+  gap: 8px;
+  padding: 6px 10px;
+}
+
+.call-admin-bar button {
+  min-height: 34px;
+  white-space: nowrap;
+}
+
+.call-admin-bar small {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.modal,
+.reserve-wallet,
+.guarantee-console,
+.admin-console,
+.screenshot-viewer {
+  max-height: var(--exchange-vh);
+  overscroll-behavior: contain;
+}
+
+@media (max-width: 680px) {
+  body {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr) auto !important;
+    position: relative;
+  }
+
+  .topbar {
+    position: relative;
+    z-index: 70;
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+  }
+
+  main {
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    padding-bottom: 18px;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .mobile-nav {
+    grid-row: 3;
+    width: 100%;
+    max-width: none;
+    min-height: calc(64px + var(--exchange-safe-bottom));
+    padding-bottom: var(--exchange-safe-bottom);
+    background: rgba(8, 12, 18, .98);
+    box-shadow: 0 -8px 26px rgba(0, 0, 0, .48);
+  }
+
+  .mobile-nav button {
+    min-height: 64px;
+    padding: 7px 3px 6px;
+  }
+
+  .mobile-nav button > span {
+    font-size: 18px;
+  }
+
+  .mobile-nav button > b {
+    font-size: 8px;
+  }
+
+  .messenger {
+    align-items: stretch;
+    background: #080d13;
+  }
+
+  .messenger-shell {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr);
+    width: 100%;
+    height: 100%;
+    border: 0;
+    box-shadow: none;
+  }
+
+  .thread-list-pane,
+  .conversation-pane {
+    grid-column: 1;
+    grid-row: 1;
+    width: 100%;
+    height: 100%;
+  }
+
+  .messenger-shell:not(.has-active) .thread-list-pane {
+    display: flex;
+  }
+
+  .messenger-shell:not(.has-active) .conversation-pane {
+    display: none;
+  }
+
+  .messenger-shell.has-active .thread-list-pane {
+    display: none;
+  }
+
+  .messenger-shell.has-active .conversation-pane {
+    display: flex;
+  }
+
+  .thread-list-pane {
+    flex-direction: column;
+    padding-top: var(--exchange-safe-top);
+  }
+
+  .conversation-pane {
+    padding-top: var(--exchange-safe-top);
+  }
+
+  .thread-list-head {
+    flex: 0 0 auto;
+    min-height: 64px;
+  }
+
+  .thread-search {
+    flex: 0 0 auto;
+  }
+
+  .thread-list {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .thread-row {
+    min-height: 72px;
+  }
+
+  .conversation-head {
+    height: 60px;
+    min-height: 60px;
+    grid-template-columns: 44px 38px minmax(0, 1fr) auto;
+    padding: 7px 9px;
+    background: #101720;
+  }
+
+  .messenger-back,
+  .conversation-actions button {
+    width: 44px;
+    height: 44px;
+  }
+
+  .conversation-context {
+    max-height: min(236px, 29dvh);
+    border-bottom: 1px solid #313a46;
+    background: #0c1219;
+  }
+
+  .conversation-listing {
+    grid-template-columns: 54px minmax(0, 1fr) !important;
+    gap: 8px;
+    min-height: 0 !important;
+    padding: 7px 10px;
+  }
+
+  .conversation-listing-visual {
+    grid-row: 1 / span 2;
+    width: 54px !important;
+    min-width: 54px;
+    height: 54px !important;
+  }
+
+  .conversation-listing-visual img,
+  .conversation-listing-visual .listing-media {
+    width: 54px !important;
+    height: 54px !important;
+  }
+
+  .conversation-listing-copy b {
+    max-width: 100%;
+  }
+
+  .conversation-method strong {
+    max-width: none;
+  }
+
+  .conversation-listing .conversation-method {
+    grid-column: 2 !important;
+    display: flex;
+    flex-direction: row;
+    align-items: center !important;
+    justify-content: flex-start;
+    gap: 8px;
+  }
+
+  .conversation-reserve-board {
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    padding: 7px 10px;
+  }
+
+  .conversation-reserve-board > i {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    writing-mode: horizontal-tb;
+    transform: none;
+    text-align: center;
+  }
+
+  .messenger-messages {
+    min-height: 96px;
+    padding: 14px 10px 18px;
+    scroll-padding-bottom: 18px;
+  }
+
+  .message-row {
+    max-width: 92%;
+  }
+
+  .call-admin-bar {
+    min-height: 48px;
+    display: grid;
+    grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+    padding: 6px 9px;
+    background: #0d131b;
+  }
+
+  .call-admin-bar small {
+    max-width: 38vw;
+  }
+
+  .messenger-compose {
+    min-height: calc(64px + var(--exchange-safe-bottom));
+    align-items: end;
+    background: #0d141d;
+  }
+
+  .modal,
+  .reserve-wallet,
+  .guarantee-console,
+  .admin-console,
+  .screenshot-viewer {
+    height: var(--exchange-vh);
+    padding: var(--exchange-safe-top) 0 0;
+  }
+
+  .modal-box,
+  .reserve-wallet-shell,
+  .guarantee-shell,
+  .admin-shell {
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    max-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border-inline: 0;
+  }
+
+  .modal-box input,
+  .modal-box textarea,
+  .modal-box select,
+  .filter-panel input,
+  .filter-panel select,
+  .messenger input {
+    font-size: 16px;
+  }
+
+  .modal-box button,
+  .filter-panel button,
+  .deal-panel button,
+  .admin-shell button,
+  .guarantee-shell button {
+    min-height: var(--exchange-touch);
+  }
+
+  .mobile-deal-close {
+    min-height: 48px;
+  }
+
+  .filter-panel {
+    height: var(--exchange-vh);
+    max-height: var(--exchange-vh);
+    padding-bottom: calc(76px + var(--exchange-safe-bottom));
+  }
+
+  body.messenger-open > .mobile-nav,
+  body.messenger-open > .topbar,
+  body.messenger-open > main {
+    pointer-events: none;
+  }
+
+  body.messenger-open {
+    touch-action: none;
+  }
+}
+
+@media (max-width: 380px) {
+  .conversation-head {
+    grid-template-columns: 42px 34px minmax(0, 1fr) auto;
+    gap: 5px;
+    padding-inline: 6px;
+  }
+
+  .conversation-actions {
+    gap: 3px;
+  }
+
+  .conversation-actions button,
+  .messenger-back {
+    width: 42px;
+    min-width: 42px;
+  }
+
+  .conversation-listing {
+    grid-template-columns: 42px minmax(0, 1fr);
+  }
+
+  .conversation-listing-visual {
+    width: 42px;
+  }
+
+  .conversation-method {
+    grid-column: 2;
+    align-items: flex-start;
+  }
+
+  .call-admin-bar small {
+    display: none;
+  }
+
+  .call-admin-bar button {
+    width: 100%;
+  }
+
+  .messenger-compose {
+    grid-template-columns: minmax(0, 1fr) 46px;
+    padding-inline: 7px;
+  }
+}
+
+@media (min-width: 681px) {
+  .messenger {
+    padding: 20px;
+    align-items: center;
+  }
+
+  .messenger-shell {
+    display: block;
+    width: min(100%, 520px);
+    height: min(760px, calc(var(--exchange-vh) - 40px));
+  }
+
+  .messenger-shell.has-active .thread-list-pane {
+    display: none;
+  }
+
+  .messenger-shell:not(.has-active) .conversation-pane {
+    display: none;
+  }
+
+  .thread-list-pane,
+  .conversation-pane {
+    height: 100%;
+  }
+
+  .messenger-back {
+    display: block;
+  }
+}
+
+/* Compact information architecture for listing details and conversations. */
+.exchange-tools-toggle {
+  display: none;
+}
+
+.mobile-reserve-shortcut {
+  grid-area: account;
+  position: relative;
+  width: 40px;
+  min-width: 40px;
+  height: 40px;
+  margin-left: auto;
+  padding: 3px 2px 2px;
+  display: grid;
+  grid-template-rows: 18px 12px;
+  place-items: center;
+  border: 1px solid #3f7950;
+  background: #102019;
+  color: #98f5a8;
+  cursor: pointer;
+}
+
+.mobile-reserve-shortcut > span {
+  font-size: 15px;
+  line-height: 1;
+}
+
+.mobile-reserve-shortcut > b {
+  max-width: 34px;
+  overflow: hidden;
+  color: #baffc5;
+  font-size: 8px;
+  line-height: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.conversation-summary-bar {
+  flex: 0 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  min-width: 0;
+  padding: 1px;
+  border-bottom: 1px solid #303a46;
+  background: #303a46;
+}
+
+.conversation-summary-bar button {
+  min-width: 0;
+  min-height: 54px;
+  border: 0;
+  background: #0d141c;
+  color: #eef2f5;
+  cursor: pointer;
+}
+
+.conversation-summary-bar button:hover,
+.conversation-summary-bar button.active {
+  background: #17212c;
+  box-shadow: inset 0 -2px #e8b73c;
+}
+
+.conversation-summary-tile.warning {
+  box-shadow: inset 3px 0 #ef5365;
+}
+
+.conversation-summary-tile small {
+  color: #74808d;
+  font-size: 7px;
+  letter-spacing: 1px;
+}
+
+.conversation-summary-tile em {
+  overflow: hidden;
+  color: #98a3af;
+  font-size: 8px;
+  font-style: normal;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.conversation-summary-tile {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  padding: 7px 9px;
+  text-align: left;
+}
+
+.conversation-summary-tile.listing b {
+  color: #f1f4f6;
+}
+
+.conversation-summary-tile b {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  margin: 3px 0;
+  color: #dce3e9;
+  font-size: 9px;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.conversation-summary-tile:first-of-type b {
+  color: #83f89d;
+}
+
+.conversation-summary-tile.deal b {
+  color: #ffd66f;
+}
+
+.conversation-summary-tile.deal.done b {
+  color: #83f89d;
+}
+
+.conversation-summary-tile.deal.danger b {
+  color: #ff8896;
+}
+
+.conversation-drawer {
+  position: absolute;
+  z-index: 24;
+  top: 120px;
+  right: 0;
+  bottom: calc(116px + var(--exchange-safe-bottom));
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  max-height: none;
+  overflow: hidden;
+  border-bottom: 1px solid #46515d;
+  background: #0a1017;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, .32);
+}
+
+.conversation-drawer > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 44px;
+  padding: 4px 8px 4px 13px;
+  border-bottom: 1px solid #2e3944;
+  background: #141c25;
+}
+
+.conversation-drawer > header div {
+  display: flex;
+  flex-direction: column;
+}
+
+.conversation-drawer > header small {
+  color: #788491;
+  font-size: 7px;
+  letter-spacing: 1.2px;
+}
+
+.conversation-drawer > header b {
+  font-size: 12px;
+}
+
+.conversation-drawer > header button {
+  width: 36px;
+  height: 36px;
+  border: 1px solid #4d5966;
+  background: #1a232d;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.conversation-drawer-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: none;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.conversation-drawer .conversation-listing,
+.conversation-drawer .conversation-reserve-board,
+.conversation-drawer .deal-workflow {
+  border-bottom: 0;
+}
+
+.conversation-drawer .conversation-listing {
+  grid-template-columns: 76px minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  align-items: center;
+  min-height: 94px;
+  gap: 4px 11px;
+  padding: 10px 12px;
+}
+
+.conversation-drawer .conversation-listing-visual {
+  grid-row: 1 / 3;
+  width: 76px;
+  height: 72px;
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+  border: 1px solid #3a4652;
+  background: #202830;
+}
+
+.conversation-drawer .conversation-listing-visual > .listing-media {
+  flex: 1 1 auto;
+  min-width: 100%;
+  max-width: 100%;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0;
+}
+
+.conversation-drawer .conversation-listing-visual > .listing-media .listing-brainrot-visual {
+  min-width: 0;
+  height: 100%;
+  flex: 1 1 0;
+}
+
+.conversation-drawer .conversation-listing-visual > .listing-media .brainrot-image {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain;
+}
+
+.conversation-drawer .conversation-listing-copy {
+  align-self: end;
+}
+
+.conversation-drawer .conversation-listing-copy b {
+  white-space: normal;
+  line-height: 1.25;
+}
+
+.conversation-drawer .conversation-method {
+  grid-column: 2;
+  align-self: start;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 7px;
+}
+
+.conversation-drawer .conversation-method strong {
+  max-width: 100%;
+}
+
+.conversation-drawer .conversation-listing-visual .listing-trait-icons,
+.conversation-drawer .conversation-listing-visual .listing-quantity,
+.conversation-drawer .conversation-listing-visual .listing-income {
+  display: none !important;
+}
+
+.conversation-drawer .conversation-reserve-board small {
+  font-size: 8px;
+}
+
+.conversation-drawer .conversation-reserve-board strong {
+  font-size: 12px;
+}
+
+.conversation-drawer .conversation-reserve-board span {
+  font-size: 8px;
+}
+
+.conversation-panel-note,
+.conversation-panel-empty {
+  padding: 12px 14px;
+  color: #919ca7;
+  font-size: 9px;
+  line-height: 1.55;
+}
+
+.conversation-panel-empty {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.conversation-panel-empty b {
+  color: #eef2f5;
+  font-size: 12px;
+}
+
+.deal-disclosure {
+  margin: 12px 0 0;
+  border: 1px solid #414b57;
+  background: #111820;
+}
+
+.deal-disclosure > summary {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 9px 11px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.deal-disclosure > summary::-webkit-details-marker {
+  display: none;
+}
+
+.deal-disclosure > summary > span {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  gap: 8px;
+}
+
+.deal-disclosure > summary i {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #68552b;
+  color: #ffd05b;
+  font-style: normal;
+}
+
+.deal-disclosure > summary b {
+  font-size: 11px;
+}
+
+.deal-disclosure > summary em {
+  color: #8d98a5;
+  font-size: 9px;
+  font-style: normal;
+}
+
+.deal-disclosure[open] > summary {
+  border-bottom: 1px solid #353f4a;
+  background: #171f29;
+}
+
+.deal-disclosure[open] > summary em::before {
+  content: "Закрыть · ";
+}
+
+.screenshot-disclosure .seller-screenshots {
+  margin: 0;
+  padding: 10px;
+  border: 0;
+}
+
+.owner-control-disclosure .owner-tools {
+  margin: 0;
+  padding: 9px;
+}
+
+@media (max-width: 680px) {
+  .topbar {
+    height: calc(48px + var(--exchange-safe-top)) !important;
+    min-height: calc(48px + var(--exchange-safe-top)) !important;
+    grid-template-columns: 40px minmax(0, 1fr) 40px 40px !important;
+    grid-template-areas: "exit section reserve tools" !important;
+    padding: calc(var(--exchange-safe-top) + 4px) 8px 4px !important;
+    gap: 6px !important;
+  }
+
+  .exchange-exit-btn {
+    grid-area: exit;
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    padding: 0;
+  }
+
+  .exchange-exit-btn b {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  html[data-parent-theme="modern"] .topbar {
+    height: calc(48px + var(--exchange-safe-top)) !important;
+    min-height: calc(48px + var(--exchange-safe-top)) !important;
+  }
+
+  .topbar::before {
+    content: "БИРЖА / КАБИНЕТ";
+    position: static;
+    grid-area: section;
+    align-self: center;
+    color: #e9edf2;
+    font: 700 11px 'Space Mono', monospace;
+    letter-spacing: 1px;
+  }
+
+  .topbar > .brand,
+  .topbar > .balance {
+    display: none !important;
+  }
+
+  .topbar > .account-identity {
+    display: none !important;
+  }
+
+  .topbar .account-identity-copy {
+    display: none;
+  }
+
+  .topbar .account-identity > .avatar {
+    width: 38px;
+    height: 38px;
+  }
+
+  .mobile-reserve-shortcut {
+    grid-area: reserve;
+    position: relative;
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    padding: 3px 2px 2px;
+    display: grid;
+    grid-template-rows: 18px 12px;
+    place-items: center;
+    border: 1px solid #3f7950;
+    background: #102019;
+    color: #98f5a8;
+    cursor: pointer;
+  }
+
+  .mobile-reserve-shortcut > span {
+    font-size: 15px;
+    line-height: 1;
+  }
+
+  .mobile-reserve-shortcut > b {
+    max-width: 34px;
+    overflow: hidden;
+    color: #baffc5;
+    font-size: 8px;
+    line-height: 1;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .mobile-reserve-shortcut:active {
+    background: #193424;
+    transform: translateY(1px);
+  }
+
+  .exchange-tools-toggle {
+    grid-area: tools;
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    border: 1px solid #4b5662;
+    background: #131a23;
+    color: #f0c24c;
+    cursor: pointer;
+  }
+
+  .exchange-tools-toggle span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  .exchange-tools-toggle b {
+    font-size: 15px;
+    letter-spacing: 2px;
+  }
+
+  .exchange-head-actions {
+    display: none !important;
+    position: absolute !important;
+    z-index: 90;
+    top: calc(100% + 6px);
+    left: 8px;
+    right: 8px;
+    width: auto !important;
+    padding: 8px !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px !important;
+    border: 1px solid #52606e !important;
+    background: #0c1219;
+    box-shadow: 0 14px 36px rgba(0, 0, 0, .68);
+  }
+
+  .topbar.tools-open .exchange-head-actions {
+    display: grid !important;
+  }
+
+  .exchange-head-actions .icon-btn:not(.hidden),
+  .exchange-head-actions .display-currency {
+    width: 100% !important;
+    min-width: 0 !important;
+    height: 48px !important;
+    flex: none !important;
+  }
+
+  .exchange-head-actions .display-currency {
+    display: grid !important;
+  }
+
+  .exchange-head-actions .reserve-wallet-btn {
+    display: none !important;
+  }
+
+  .conversation-summary-bar button {
+    min-height: 52px;
+  }
+
+  .conversation-summary-tile {
+    padding: 6px 8px;
+  }
+
+  .conversation-summary-tile b {
+    font-size: 9px;
+  }
+
+  .conversation-summary-tile em {
+    font-size: 7px;
+  }
+
+  .conversation-drawer {
+    top: 112px;
+    bottom: calc(112px + var(--exchange-safe-bottom));
+  }
+
+  .conversation-drawer .conversation-listing {
+    grid-template-columns: 72px minmax(0, 1fr) !important;
+    grid-template-rows: auto auto;
+  }
+
+  .conversation-drawer .conversation-listing-visual {
+    width: 72px !important;
+    height: 64px !important;
+  }
+
+  .deal-content {
+    padding-bottom: calc(88px + var(--exchange-safe-bottom));
+  }
+
+  .open-listing-chats {
+    position: sticky;
+    bottom: 0;
+    z-index: 4;
+    min-height: 52px;
+    background: #17212b;
+    box-shadow: 0 -8px 22px rgba(0, 0, 0, .45);
+  }
+}
+
+@media (max-width: 360px) {
+  .conversation-summary-tile {
+    padding-inline: 6px;
+  }
+}

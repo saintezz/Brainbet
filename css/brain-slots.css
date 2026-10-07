@@ -1,0 +1,293 @@
+/* Brain Slots: bounded reel strips, transform-only motion; both released themes. */
+#screen-brain-slots { --bs-ink:#f1f4ff; --bs-dim:#8da1bc; --bs-line:#2c405b; --bs-panel:#101b2e; --bs-deep:#070c19; --bs-mint:#79f5d3; --bs-violet:#b18aff; --bs-warm:#ffd777; }
+#screen-brain-slots .bs-shell { max-width:1360px; margin:0 auto; color:var(--bs-ink); font-family:'Exo 2',system-ui,sans-serif; }
+#screen-brain-slots .bs-shell *, #screen-brain-slots .bs-shell *::before, #screen-brain-slots .bs-shell *::after { box-sizing:border-box; }
+#screen-brain-slots [hidden] { display:none !important; }
+#screen-brain-slots button { font:inherit; cursor:pointer; touch-action:manipulation; -webkit-tap-highlight-color:transparent; }
+#screen-brain-slots button:disabled { opacity:.42; cursor:default; }
+#screen-brain-slots button:focus-visible, #screen-brain-slots input:focus-visible { outline:2px solid var(--bs-mint); outline-offset:4px; }
+#screen-brain-slots .bs-heading { display:flex; align-items:center; justify-content:space-between; gap:20px; padding:10px 2px 26px; }
+#screen-brain-slots .bs-kicker { display:block; color:var(--bs-dim); font:700 9px/1.6 'IBM Plex Mono',monospace; letter-spacing:.2em; }
+#screen-brain-slots .bs-heading h2 { display:flex; align-items:center; gap:0; margin:5px 0 7px; font-size:clamp(29px,3.5vw,52px); line-height:1; font-weight:950; letter-spacing:-.055em; }
+#screen-brain-slots .bs-heading h2 span { color:var(--bs-mint); }
+#screen-brain-slots .bs-heading h2 i { color:var(--bs-violet); font-style:normal; font-size:.58em; margin-left:14px; }
+#screen-brain-slots .bs-heading p { color:var(--bs-dim); font-size:12px; margin:0; line-height:1.6; }
+#screen-brain-slots .bs-rules-button { flex-shrink:0; display:flex; align-items:center; gap:23px; padding:13px 17px; border:1px solid var(--bs-line); border-radius:10px; background:var(--bs-panel); color:var(--bs-ink); font-size:12px; }
+#screen-brain-slots .bs-rules-button span { color:var(--bs-mint); font-size:20px; }
+#screen-brain-slots .bs-layout { display:grid; grid-template-columns:minmax(0,1fr) 290px; align-items:start; gap:18px; }
+#screen-brain-slots .bs-machine { min-width:0; padding:0 18px 16px; border:1px solid #3c496c; border-radius:24px; background:linear-gradient(145deg,#242943 0%,#101b2e 38%,#0b1526 100%); box-shadow:inset 0 1px #ffffff15,0 12px 35px #0003; overflow:hidden; }
+#screen-brain-slots .bs-machine-top { display:flex; justify-content:space-between; align-items:center; gap:10px; min-height:60px; font:600 9px 'IBM Plex Mono',monospace; color:var(--bs-dim); letter-spacing:.06em; }
+#screen-brain-slots .bs-machine-top > span:first-child { color:var(--bs-ink); letter-spacing:.17em; }
+#screen-brain-slots .bs-machine-top i { display:inline-block; width:6px; height:6px; margin-right:7px; background:var(--bs-mint); border-radius:50%; box-shadow:0 0 9px #79f5d366; }
+#screen-brain-slots .bs-machine-top b { font-size:14px; color:var(--bs-ink); margin-right:4px; }
+#screen-brain-slots .bs-machine-top em { font-style:normal; color:var(--bs-line); margin:0 8px; }
+#screen-brain-slots .bs-edition { opacity:.65; }
+#screen-brain-slots .bs-feature-strip { display:flex; align-items:center; justify-content:center; gap:24px; min-height:34px; margin:0 8px 12px; color:#bac5dd; font-size:10px; }
+#screen-brain-slots .bs-feature-strip b { margin-right:6px; font:800 10px 'IBM Plex Mono',monospace; letter-spacing:.02em; }
+#screen-brain-slots .bs-wild-label { color:var(--bs-violet); }
+#screen-brain-slots .bs-scatter-label { color:var(--bs-warm); }
+#screen-brain-slots .bs-reel-frame { border:1px solid #5c547e; border-radius:15px; padding:0 8px; background:var(--bs-deep); box-shadow:0 0 0 5px #080d1955,0 0 0 6px #ffffff05; position:relative; }
+#screen-brain-slots .bs-reel-numbers, #screen-brain-slots .bs-reel-baseline { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:5px; text-align:center; }
+#screen-brain-slots .bs-reel-numbers { height:23px; align-items:center; color:#687090; font:600 8px 'IBM Plex Mono',monospace; letter-spacing:.2em; }
+#screen-brain-slots .bs-window { position:relative; display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:5px; aspect-ratio:1.67; overflow:hidden; border-radius:6px; isolation:isolate; }
+#screen-brain-slots .bs-window::after { content:''; position:absolute; z-index:3; inset:0; pointer-events:none; box-shadow:inset 0 10px 16px #03081277,inset 0 -10px 16px #03081277; border:1px solid #7583b31c; border-radius:6px; }
+#screen-brain-slots .bs-reel { position:relative; min-width:0; overflow:hidden; background:linear-gradient(180deg,#182039,#10182c 50%,#161f35); contain:layout paint; }
+#screen-brain-slots .bs-reel::after { content:''; pointer-events:none; position:absolute; inset:0; border-left:1px solid #ffffff05; border-right:1px solid #ffffff04; background:linear-gradient(to bottom,transparent calc(33.333% - 1px),#7b95d51e calc(33.333% - 1px),#7b95d51e 33.333%,transparent 33.333%,transparent calc(66.666% - 1px),#7b95d51e calc(66.666% - 1px),#7b95d51e 66.666%,transparent 66.666%); }
+#screen-brain-slots .bs-strip { display:flex; flex-direction:column; transform:translate3d(0,0,0); }
+#screen-brain-slots .bs-symbol { position:relative; flex:0 0 var(--bs-row,100px); height:var(--bs-row,100px); display:flex; align-items:center; justify-content:center; padding:10%; isolation:isolate; }
+#screen-brain-slots .bs-symbol img { display:block; width:100%; height:100%; object-fit:contain; position:relative; z-index:1; pointer-events:none; user-select:none; }
+#screen-brain-slots .bs-symbol .bs-symbol-fallback { display:flex; justify-content:center; align-items:center; width:100%; height:100%; font-size:clamp(22px,4vw,47px); }
+#screen-brain-slots .bs-symbol::before { content:''; position:absolute; inset:14%; border-radius:50%; z-index:0; background:radial-gradient(ellipse,#99b1df14,transparent 68%); }
+#screen-brain-slots .bs-symbol.is-wild::before { background:radial-gradient(ellipse,#b18aff42,transparent 68%); }
+#screen-brain-slots .bs-symbol.is-scatter::before { background:radial-gradient(ellipse,#ffd77738,transparent 68%); }
+#screen-brain-slots .bs-symbol-tag { position:absolute; z-index:2; bottom:6%; left:50%; transform:translateX(-50%); padding:2px 5px; border-radius:4px; font:900 clamp(6px,.9vw,10px) 'IBM Plex Mono',monospace; line-height:1.15; letter-spacing:.06em; background:#241d3e; color:#d2baff; box-shadow:0 1px 4px #0006; }
+#screen-brain-slots .bs-symbol.is-scatter .bs-symbol-tag { color:#ffe597; background:#392a12; }
+/* A confirmed BONUS lands above the reels: one impact per real symbol. */
+#screen-brain-slots .bs-bonus-effects { position:absolute; inset:0; z-index:6; pointer-events:none; display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); grid-template-rows:repeat(3,minmax(0,1fr)); gap:5px; --bs-impact-time:1100ms; --bs-burst-distance:clamp(32px,7vw,105px); }
+#screen-brain-slots .bs-bonus-effects[data-speed="quick"] { --bs-impact-time:720ms; }
+#screen-brain-slots .bs-bonus-effects[data-level="3"] { background:radial-gradient(ellipse,#ffd7770d,transparent 70%); }
+#screen-brain-slots .bs-bonus-impact { position:relative; display:grid; place-items:center; min-width:0; min-height:0; isolation:isolate; }
+#screen-brain-slots .bs-bonus-impact::before { content:""; position:absolute; inset:-18%; border-radius:50%; background:radial-gradient(ellipse,#fff3bf99,#ffcb5a3b 35%,transparent 68%); animation:bsBonusGlow var(--bs-impact-time) ease-out both; }
+#screen-brain-slots .bs-bonus-impact-art { position:absolute; inset:8%; display:grid; place-items:center; z-index:2; filter:drop-shadow(0 0 10px #ffd36faa) drop-shadow(0 8px 12px #030714aa); animation:bsBonusLand var(--bs-impact-time) cubic-bezier(.2,.8,.24,1) both; }
+#screen-brain-slots .bs-bonus-impact-art img { width:100%; height:100%; object-fit:contain; }
+#screen-brain-slots .bs-bonus-impact > b { position:absolute; z-index:3; bottom:5%; padding:4px 9px; border:1px solid #ffe7a4aa; border-radius:5px; background:#35240eef; color:#fff2bd; font:900 clamp(8px,1.2vw,16px) 'IBM Plex Mono',monospace; letter-spacing:.1em; box-shadow:0 0 20px #ffd77738; animation:bsBonusLabel var(--bs-impact-time) ease-out both; }
+#screen-brain-slots .bs-bonus-shock { position:absolute; inset:7%; border:2px solid #fff3c4; border-radius:50%; box-shadow:0 0 14px #ffc96088,inset 0 0 12px #ffc96055; animation:bsBonusRing var(--bs-impact-time) ease-out both; }
+#screen-brain-slots .bs-bonus-shock--outer { border-color:#8ff8ed; animation-delay:100ms; }
+#screen-brain-slots .bs-bonus-rays { position:absolute; inset:0; }
+#screen-brain-slots .bs-bonus-rays i { position:absolute; left:50%; top:50%; width:3px; height:12px; border-radius:3px; background:linear-gradient(#fffce1,#ffd36f00); box-shadow:0 0 5px #ffe69a; animation:bsBonusRay var(--bs-impact-time) ease-out both; animation-delay:var(--bs-ray-delay); }
+#screen-brain-slots .bs-bonus-callout { position:absolute; z-index:7; top:8px; right:8px; display:flex; align-items:center; gap:9px; padding:7px 11px; border:1px solid #ffe5a47a; border-radius:8px; background:#142133ed; box-shadow:0 3px 18px #0005; pointer-events:none; }
+#screen-brain-slots .bs-bonus-callout span { color:#ffdda0; font:900 clamp(8px,1vw,12px) 'IBM Plex Mono',monospace; letter-spacing:.1em; }
+#screen-brain-slots .bs-bonus-callout b { color:#fff6dc; font:900 clamp(12px,1.6vw,20px) 'Exo 2',sans-serif; }
+@keyframes bsBonusLand { 0%{transform:translateY(-28%) scale(.6) rotate(-8deg);opacity:0} 18%{opacity:1} 35%{transform:translateY(2%) scale(1.24) rotate(3deg)} 58%{transform:translateY(0) scale(1.08) rotate(0);opacity:1} 100%{transform:scale(1);opacity:0} }
+@keyframes bsBonusGlow { 0%{transform:scale(.4);opacity:0} 22%{transform:scale(1.1);opacity:1} 100%{transform:scale(1.5);opacity:0} }
+@keyframes bsBonusRing { 0%{transform:scale(.3);opacity:0} 18%{opacity:.95} 100%{transform:scale(1.6);opacity:0} }
+@keyframes bsBonusRay { 0%{transform:rotate(var(--bs-ray)) translateY(0) scaleY(.4);opacity:0} 18%{opacity:1} 100%{transform:rotate(var(--bs-ray)) translateY(calc(-1 * var(--bs-burst-distance))) scaleY(.2);opacity:0} }
+@keyframes bsBonusLabel { 0%{transform:translateY(8px) scale(.8);opacity:0} 28%,70%{transform:translateY(0) scale(1);opacity:1} 100%{opacity:0} }
+@media(prefers-reduced-motion:reduce) { #screen-brain-slots .bs-bonus-effects, #screen-brain-slots .bs-bonus-callout { display:none; } }
+#screen-brain-slots .bs-reel-baseline { height:18px; align-items:center; justify-items:center; }
+#screen-brain-slots .bs-reel-baseline i { width:15px; height:2px; border-radius:2px; background:#526181; transition:background .15s; }
+#screen-brain-slots .bs-reel-baseline i.is-stopped { background:var(--bs-mint); box-shadow:0 0 8px #79f5d34d; }
+#screen-brain-slots .is-rolling .bs-strip { will-change:transform; }
+#screen-brain-slots .is-rolling .bs-symbol img { opacity:.78; }
+#screen-brain-slots .bs-reel.is-settled::after { content:''; position:absolute; inset:0; pointer-events:none; z-index:3; border:1px solid #adffe480; border-radius:4px; background:linear-gradient(180deg,#b18aff25,transparent 60%); animation:bs-reel-land .32s ease-out both; }
+@keyframes bs-reel-land { from { opacity:1; } to { opacity:0; } }
+@media (prefers-reduced-motion:reduce) { #screen-brain-slots .bs-reel.is-settled::after { display:none; } }
+#screen-brain-slots .bs-win-lines { position:absolute; inset:0; width:100%; height:100%; z-index:4; pointer-events:none; overflow:visible; }
+#screen-brain-slots .bs-win-lines polyline { stroke:var(--bs-mint); stroke-width:2.5; vector-effect:non-scaling-stroke; stroke-linejoin:round; stroke-linecap:round; fill:none; opacity:.85; }
+#screen-brain-slots .bs-win-lines circle { fill:var(--bs-mint); stroke:#effff9; stroke-width:1; }
+#screen-brain-slots .bs-symbol.is-winning { background:linear-gradient(135deg,#79f5d32b,#b18aff20); border-radius:7px; box-shadow:inset 0 0 0 1px #9fffe999; }
+#screen-brain-slots .bs-symbol.is-winning img { animation:bs-symbol-pop .45s ease both; }
+#screen-brain-slots .bs-readout { display:flex; justify-content:space-between; align-items:center; gap:20px; padding:20px 5px 2px; min-height:82px; }
+#screen-brain-slots .bs-readout > div { display:flex; flex-direction:column; gap:4px; flex-shrink:0; }
+#screen-brain-slots .bs-readout span { font:700 8px 'IBM Plex Mono',monospace; letter-spacing:.14em; color:var(--bs-dim); }
+#screen-brain-slots .bs-readout strong { font-size:clamp(24px,3vw,38px); line-height:1; font-weight:900; color:var(--bs-ink); font-variant-numeric:tabular-nums; letter-spacing:-.03em; }
+#screen-brain-slots .bs-readout p { max-width:230px; text-align:right; font-size:11px; line-height:1.6; color:var(--bs-dim); margin:0; }
+#screen-brain-slots .bs-readout.is-win strong { color:var(--bs-mint); }
+#screen-brain-slots .bs-win-list { display:flex; flex-wrap:wrap; gap:6px; margin-top:14px; max-height:108px; overflow:auto; }
+#screen-brain-slots .bs-win-list button { border:1px solid var(--bs-line); border-radius:6px; color:var(--bs-dim); background:#091426; padding:7px 9px; font-size:10px; }
+#screen-brain-slots .bs-win-list button.is-selected { border-color:var(--bs-mint); color:var(--bs-mint); background:#183634; }
+#screen-brain-slots .bs-big-win { position:absolute; z-index:6; left:8%; right:8%; top:28%; bottom:28%; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:3px; border:1px solid #fff4b7aa; border-radius:16px; background:linear-gradient(135deg,#392651f5,#152f39f5); box-shadow:0 0 70px #ffe78c33,0 15px 40px #0008; pointer-events:none; animation:bs-award-in .45s cubic-bezier(.2,.9,.2,1.1) both; }
+#screen-brain-slots .bs-big-win span { font-size:clamp(16px,3vw,34px); font-weight:950; letter-spacing:.14em; color:#ffe9a1; }
+#screen-brain-slots .bs-big-win b { font-size:clamp(25px,5vw,63px); line-height:1.1; font-weight:950; color:#fff6d8; font-variant-numeric:tabular-nums; }
+#screen-brain-slots .bs-big-win small { font:700 7px 'IBM Plex Mono',monospace; letter-spacing:.3em; color:#d7c998; }
+#screen-brain-slots .bs-start-cover { position:absolute; inset:0; z-index:7; background:var(--bs-deep); display:flex; flex-direction:column; gap:18px; align-items:center; justify-content:center; color:var(--bs-dim); font-size:12px; }
+#screen-brain-slots .bs-loader { width:28px; height:28px; border:2px solid var(--bs-line); border-top-color:var(--bs-mint); border-radius:50%; animation:bs-loader-turn .75s linear infinite; }
+#screen-brain-slots .bs-controls { border:1px solid var(--bs-line); background:linear-gradient(150deg,#152339,#0d1728); border-radius:19px; padding:22px; }
+#screen-brain-slots .bs-control-heading { display:flex; justify-content:space-between; align-items:center; margin-bottom:28px; font:700 9px 'IBM Plex Mono',monospace; letter-spacing:.12em; color:var(--bs-dim); }
+#screen-brain-slots .bs-control-heading i { font-style:normal; color:var(--bs-violet); font-size:21px; }
+#screen-brain-slots .bs-bet-label { display:flex; justify-content:space-between; color:var(--bs-dim); font-size:11px; margin-bottom:10px; }
+#screen-brain-slots .bs-bet-box { display:flex; border:1px solid #526581; background:#080f1f; border-radius:10px; overflow:hidden; height:60px; }
+#screen-brain-slots .bs-bet-box button { flex:0 0 39px; border:0; color:var(--bs-mint); background:transparent; font-size:22px; }
+#screen-brain-slots .bs-bet-box input { appearance:textfield; -moz-appearance:textfield; min-width:0; width:100%; border:0; background:transparent; color:var(--bs-ink); text-align:center; font:800 26px 'Exo 2',sans-serif; font-variant-numeric:tabular-nums; padding:0 2px; }
+#screen-brain-slots .bs-bet-box input::-webkit-inner-spin-button, #screen-brain-slots .bs-bet-box input::-webkit-outer-spin-button { -webkit-appearance:none; margin:0; }
+#screen-brain-slots .bs-presets { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:5px; margin:9px 0 14px; }
+#screen-brain-slots .bs-presets button { padding:9px 2px; border:1px solid var(--bs-line); border-radius:6px; color:var(--bs-dim); background:#142238; font:700 10px 'IBM Plex Mono',monospace; }
+#screen-brain-slots .bs-presets button.is-selected { color:var(--bs-mint); border-color:#79f5d378; background:#163634; }
+#screen-brain-slots .bs-stake-breakdown { display:flex; align-items:center; justify-content:space-between; gap:8px; padding:0 1px 21px; color:var(--bs-dim); font-size:10px; }
+#screen-brain-slots .bs-stake-breakdown b { color:var(--bs-ink); font-weight:600; }
+#screen-brain-slots .bs-tempo { display:flex; gap:4px; padding:4px; border:1px solid var(--bs-line); background:#091324; border-radius:8px; margin-bottom:16px; }
+#screen-brain-slots .bs-tempo button { flex:1; padding:9px 4px; border:0; border-radius:5px; background:transparent; color:var(--bs-dim); font-size:10px; font-weight:700; }
+#screen-brain-slots .bs-tempo button.is-selected { background:#28354e; color:var(--bs-ink); box-shadow:inset 0 1px #ffffff15; }
+#screen-brain-slots .bs-tempo span { color:var(--bs-warm); }
+#screen-brain-slots .bs-spin-button { width:100%; min-height:68px; display:grid; grid-template-columns:auto 1fr; gap:2px 14px; align-items:center; padding:12px 16px; border:1px solid #c9fff4; border-radius:12px; color:#073128; background:linear-gradient(115deg,#a3ffdb,#7ee5e9); box-shadow:0 5px 0 #245b62,0 9px 20px #0003; transition:transform .12s,box-shadow .12s; }
+#screen-brain-slots .bs-spin-button:not(:disabled):active { transform:translateY(3px); box-shadow:0 2px 0 #245b62; }
+#screen-brain-slots .bs-spin-icon { grid-row:1 / 3; font:500 34px/1 system-ui,sans-serif; }
+#screen-brain-slots #bs-spin-label { text-align:left; font-size:15px; font-weight:950; letter-spacing:.07em; }
+#screen-brain-slots #bs-spin-bet { text-align:left; font:600 9px 'IBM Plex Mono',monospace; opacity:.7; }
+#screen-brain-slots .bs-skip-button { width:100%; border:1px solid var(--bs-line); border-radius:8px; padding:12px; margin-top:13px; background:#172a3c; color:var(--bs-mint); font-size:11px; }
+#screen-brain-slots .bs-skip-button span { margin-left:10px; }
+#screen-brain-slots .bs-status { min-height:40px; margin-top:17px; color:var(--bs-dim); text-align:center; font-size:10px; line-height:1.6; overflow-wrap:anywhere; }
+#screen-brain-slots .bs-status.is-error { color:#ffacb8; }
+#screen-brain-slots .bs-retry-button { width:100%; padding:12px 8px; border:1px solid #d4ad70; border-radius:8px; background:#362c20; color:#ffdc9e; font-size:11px; }
+#screen-brain-slots .bs-mini-guide { display:flex; gap:13px; padding-top:18px; margin-top:9px; border-top:1px solid var(--bs-line); color:var(--bs-dim); }
+#screen-brain-slots .bs-guide-symbol { color:var(--bs-violet); font-size:30px; line-height:1.2; }
+#screen-brain-slots .bs-mini-guide p { margin:0; font-size:10px; line-height:1.7; }
+#screen-brain-slots .bs-mini-guide b { display:block; color:var(--bs-ink); font-size:11px; margin-bottom:4px; }
+#screen-brain-slots .bs-rules { margin-top:20px; padding:25px; border:1px solid var(--bs-line); border-radius:18px; background:#0d1728; scroll-margin-top:20px; }
+#screen-brain-slots .bs-rules-heading { display:flex; align-items:start; justify-content:space-between; gap:15px; }
+#screen-brain-slots .bs-rules h3 { margin:5px 0 12px; font-size:22px; }
+#screen-brain-slots .bs-rules-heading button { border:1px solid var(--bs-line); border-radius:7px; background:#17263c; color:var(--bs-dim); width:35px; height:35px; font:24px system-ui; }
+#screen-brain-slots .bs-rules-intro, #screen-brain-slots .bs-rules-footnote { font-size:11px; line-height:1.7; color:var(--bs-dim); margin:0 0 18px; max-width:880px; }
+#screen-brain-slots .bs-rules-footnote { margin:15px 0 0; }
+#screen-brain-slots .bs-paytable { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
+#screen-brain-slots .bs-pay-card { min-width:0; display:grid; grid-template-columns:55px 1fr; align-items:center; gap:5px 12px; border:1px solid var(--bs-line); border-radius:10px; padding:14px; background:#131f32; }
+#screen-brain-slots .bs-pay-art { grid-row:1 / 3; height:62px; display:flex; align-items:center; justify-content:center; font-size:33px; }
+#screen-brain-slots .bs-pay-art img { max-width:100%; max-height:100%; object-fit:contain; }
+#screen-brain-slots .bs-pay-card > b { font-size:11px; overflow-wrap:anywhere; }
+#screen-brain-slots .bs-pay-values { display:flex; justify-content:space-between; gap:7px; font:600 10px 'IBM Plex Mono',monospace; color:var(--bs-mint); }
+#screen-brain-slots .bs-pay-values small { display:block; color:var(--bs-dim); font-size:8px; margin-bottom:4px; }
+#screen-brain-slots .bs-rule-specials { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px; }
+#screen-brain-slots .bs-rule-specials article { border:1px solid #5f4a7d; padding:15px; border-radius:10px; background:#201b33; }
+#screen-brain-slots .bs-rule-specials article:last-child { border-color:#705b36; background:#262217; }
+#screen-brain-slots .bs-rule-specials b { color:#dbbcff; font-size:12px; }
+#screen-brain-slots .bs-rule-specials article:last-child b { color:#ffdfa0; }
+#screen-brain-slots .bs-rule-specials p { color:#b7b4ca; font-size:10px; line-height:1.7; margin:7px 0 0; }
+#screen-brain-slots .bs-rules h4 { margin:24px 0 12px; font-size:13px; }
+#screen-brain-slots .bs-paylines { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:7px; }
+#screen-brain-slots .bs-payline-card { position:relative; border:1px solid var(--bs-line); border-radius:6px; padding:17px 5px 7px; background:#0a1222; }
+#screen-brain-slots .bs-payline-card > span { position:absolute; left:6px; top:4px; color:var(--bs-dim); font:600 7px 'IBM Plex Mono',monospace; }
+#screen-brain-slots .bs-payline-card svg { display:block; width:100%; height:auto; }
+#screen-brain-slots .bs-payline-card polyline { stroke:var(--bs-mint); stroke-width:5; fill:none; stroke-linejoin:round; }
+#screen-brain-slots .bs-payline-card circle { fill:#607294; opacity:.65; }
+html[data-ui-theme="modern"] #screen-brain-slots { --bs-ink:#fff0d9; --bs-dim:#c09b77; --bs-line:#684226; --bs-panel:#23170e; --bs-deep:#100b08; --bs-mint:#caff82; --bs-violet:#ffac63; --bs-warm:#ffe177; }
+html[data-ui-theme="modern"] #screen-brain-slots .bs-machine { background:linear-gradient(135deg,#452919,#20160d 42%,#15150b); border-color:#a56a3e; border-radius:13px; box-shadow:inset 0 2px #ffb36a38,0 12px 35px #0006; }
+html[data-ui-theme="modern"] #screen-brain-slots .bs-reel-frame { border-color:#a5703c; }
+html[data-ui-theme="modern"] #screen-brain-slots .bs-reel { background:linear-gradient(180deg,#2c2016,#19150e 50%,#2d2116); }
+html[data-ui-theme="modern"] #screen-brain-slots .bs-controls { background:linear-gradient(145deg,#382619,#1b160e); border-radius:10px; }
+html[data-ui-theme="modern"] #screen-brain-slots .bs-bet-box, html[data-ui-theme="modern"] #screen-brain-slots .bs-tempo { background:#150d08; }
+html[data-ui-theme="modern"] #screen-brain-slots .bs-presets button, html[data-ui-theme="modern"] #screen-brain-slots .bs-rules-button { background:#2e2116; }
+html[data-ui-theme="modern"] #screen-brain-slots .bs-tempo button.is-selected { background:#604026; }
+html[data-ui-theme="modern"] #screen-brain-slots .bs-spin-button { background:linear-gradient(115deg,#ffdc89,#bef278); border-color:#fff2ab; color:#352609; box-shadow:0 5px 0 #675124,0 9px 20px #0004; }
+html[data-ui-theme="modern"] #screen-brain-slots .bs-rules { background:#1d160f; }
+html[data-ui-theme="modern"] #screen-brain-slots .bs-pay-card, html[data-ui-theme="modern"] #screen-brain-slots .bs-payline-card { background:#2a2015; }
+@keyframes bs-loader-turn { to { transform:rotate(360deg); } }
+/* Legends: the paths and the bonus are part of the cabinet, not hidden rules. */
+#screen-brain-slots .bs-machine { background:radial-gradient(ellipse at 70% 0,#7349b424,transparent 48%),linear-gradient(145deg,#252e4a,#101b2e 44%,#0b1526); }
+#screen-brain-slots .bs-machine.is-bonus { border-color:#bb96e8; box-shadow:inset 0 1px #f2d9ff50,0 0 35px #9256d528,0 12px 35px #0003; }
+#screen-brain-slots .bs-machine.is-bonus .bs-reel-frame { border-color:#b889ee; box-shadow:0 0 0 5px #6d45931c,0 0 0 6px #d5b4ff25; }
+#screen-brain-slots .bs-line-selector { margin-top:15px; padding:12px 0 1px; border-top:1px solid var(--bs-line); }
+#screen-brain-slots .bs-line-selector > div:first-child { display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:9px; }
+#screen-brain-slots .bs-line-selector b { font:800 8px 'IBM Plex Mono',monospace; letter-spacing:.07em; color:var(--bs-ink); }
+#screen-brain-slots .bs-line-selector > div > span { color:var(--bs-dim); font-size:9px; }
+#screen-brain-slots .bs-line-buttons { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:5px; }
+#screen-brain-slots .bs-line-buttons button { position:relative; min-width:0; min-height:43px; padding:4px; border:1px solid #40516e; border-radius:7px; background:#141e32; color:#7e94b6; }
+#screen-brain-slots .bs-line-buttons button > b { display:block; font-size:10px; line-height:1.1; color:inherit; }
+#screen-brain-slots .bs-line-buttons svg { display:block; width:100%; height:15px; margin-top:4px; }
+#screen-brain-slots .bs-line-buttons polyline { fill:none; stroke:currentColor; stroke-width:26; stroke-linecap:round; stroke-linejoin:round; }
+#screen-brain-slots .bs-line-buttons button.is-winning-line { border-color:#79f5d366; color:var(--bs-mint); }
+#screen-brain-slots .bs-line-buttons button.is-selected { color:#e3fff7; border-color:var(--bs-mint); background:#245d544f; box-shadow:inset 0 0 0 1px #b3ffed32; }
+#screen-brain-slots .bs-win-lines.is-preview polyline { stroke:#ffe58c; stroke-width:3; stroke-dasharray:6 4; }
+#screen-brain-slots .bs-win-lines.is-preview circle { fill:#ffe58c; }
+#screen-brain-slots .bs-sticky-layer { position:absolute; inset:0; z-index:3; pointer-events:none; display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); grid-template-rows:repeat(3,minmax(0,1fr)); gap:0 5px; }
+#screen-brain-slots .bs-sticky-cell { min-width:0; min-height:0; border-radius:6px; background:linear-gradient(145deg,#50366e,#211b3d); box-shadow:inset 0 0 0 1px #d5b4ffad; }
+#screen-brain-slots .bs-sticky-cell .bs-symbol { width:100%; height:100%; min-height:0; flex-basis:100%; padding:9%; }
+#screen-brain-slots .bs-sticky-cell .bs-symbol::before { inset:3%; background:radial-gradient(ellipse,#c487e949,#ffc2751c 48%,transparent 70%); }
+#screen-brain-slots .bs-sticky-cell .bs-symbol-tag { color:#fff0be; border:1px solid #e2bd7577; background:#422e59; }
+#screen-brain-slots .bs-pin { position:absolute; top:6%; right:6%; color:#ffe091; font-size:clamp(7px,1vw,12px); z-index:2; text-shadow:0 0 8px #e7be74; }
+#screen-brain-slots .bs-bonus-progress { position:relative; display:flex; justify-content:space-between; align-items:center; gap:15px; padding:12px 15px 16px; margin:0 0 13px; overflow:hidden; background:linear-gradient(110deg,#3f285b,#282341); border:1px solid #a47cc873; border-radius:11px; }
+#screen-brain-slots .bs-bonus-progress > div:not(.bs-free-meter) { display:flex; flex-direction:column; gap:4px; }
+#screen-brain-slots .bs-bonus-progress > div:nth-child(2) { text-align:right; }
+#screen-brain-slots .bs-bonus-progress span { font:700 8px 'IBM Plex Mono',monospace; letter-spacing:.08em; color:#c7acdd; }
+#screen-brain-slots .bs-bonus-progress b { font-size:17px; font-weight:850; font-variant-numeric:tabular-nums; color:#fff0d6; }
+#screen-brain-slots .bs-free-meter { position:absolute; left:0; right:0; bottom:0; height:3px; background:#1a1324; }
+#screen-brain-slots .bs-free-meter i { display:block; height:100%; background:linear-gradient(90deg,#ae80f9,#ffe29f); transform:scaleX(0); transform-origin:left; transition:transform .2s linear; }
+#screen-brain-slots .bs-bonus-wheel-stage { position:absolute; z-index:8; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:9px; overflow:hidden; border-radius:14px; background:radial-gradient(ellipse at 50% 40%,#61335ad9,#151128fa 68%); box-shadow:inset 0 0 50px #d09eff1c; }
+#screen-brain-slots .bs-wheel-heading { text-align:center; display:flex; flex-direction:column; gap:5px; z-index:2; }
+#screen-brain-slots .bs-wheel-heading span { font:800 9px 'IBM Plex Mono',monospace; color:#e9bdff; letter-spacing:.23em; }
+#screen-brain-slots .bs-wheel-heading b { font-size:clamp(12px,1.6vw,20px); color:#fff4d8; }
+#screen-brain-slots .bs-bonus-wheel-shell { position:relative; width:clamp(130px,24vw,275px); aspect-ratio:1; flex-shrink:1; min-height:0; max-height:62%; border-radius:50%; filter:drop-shadow(0 8px 20px #0005); }
+#screen-brain-slots .bs-bonus-wheel { position:absolute; inset:0; border-radius:50%; border:5px solid #eac78b; background:conic-gradient(from -25.714deg,#694876 0deg 51.428deg,#302648 51.428deg 102.857deg,#835e90 102.857deg 154.285deg,#42304e 154.285deg 205.714deg,#694876 205.714deg 257.142deg,#302648 257.142deg 308.571deg,#90696c 308.571deg 360deg); box-shadow:inset 0 0 0 3px #503a53,inset 0 0 0 8px #ffe2ad25,0 0 0 2px #927191,0 0 0 6px #221b33,0 0 0 7px #e7c09e66; }
+#screen-brain-slots .bs-bonus-wheel > span { position:absolute; inset:0; transform:rotate(var(--bs-wheel-angle)); }
+#screen-brain-slots .bs-bonus-wheel > span b { position:absolute; left:50%; top:8%; transform:translateX(-50%); color:#fff3d7; font-size:clamp(13px,2.5vw,26px); font-weight:900; text-shadow:0 2px #442845; }
+#screen-brain-slots .bs-wheel-pointer { position:absolute; z-index:3; left:50%; top:-8px; transform:translateX(-50%); width:22px; height:29px; clip-path:polygon(0 0,100% 0,50% 100%); background:linear-gradient(90deg,#bf7a4b,#fff0ae 50%,#f3b766); filter:drop-shadow(0 3px 2px #0008); }
+#screen-brain-slots .bs-wheel-hub { position:absolute; inset:34%; z-index:2; display:flex; flex-direction:column; align-items:center; justify-content:center; border:2px solid #f0d18d; border-radius:50%; background:radial-gradient(ellipse at 35% 20%,#70526e,#211c33 75%); box-shadow:0 4px 15px #0008,0 0 0 5px #201a354d; }
+#screen-brain-slots .bs-wheel-hub b { font-size:clamp(24px,4vw,42px); line-height:1; font-weight:900; color:#fff0c1; font-variant-numeric:tabular-nums; }
+#screen-brain-slots .bs-wheel-hub span { font:700 clamp(5px,.8vw,8px) 'IBM Plex Mono',monospace; letter-spacing:.05em; color:#d7bddb; margin-top:4px; }
+#screen-brain-slots .bs-bonus-wheel-stage > p { margin:0 10px; text-align:center; color:#dec5e7; font-size:clamp(8px,1vw,11px); }
+#screen-brain-slots #bs-wheel-skip { padding:6px 12px; border:1px solid #bcb5d047; border-radius:6px; background:#16102555; color:#c5b5d2; font-size:9px; }
+html[data-ui-theme="modern"] #screen-brain-slots .bs-line-buttons button { background:#2d2117; border-color:#725139; color:#ccaa7b; }
+html[data-ui-theme="modern"] #screen-brain-slots .bs-line-buttons button.is-selected { color:#fff3bc; border-color:#d9cc78; background:#493d1d; }
+html[data-ui-theme="modern"] #screen-brain-slots .bs-machine.is-bonus { border-color:#e9b66d; box-shadow:0 0 30px #ffb95022,inset 0 1px #ffe5ac66; }
+html[data-ui-theme="modern"] #screen-brain-slots .bs-bonus-progress { background:linear-gradient(110deg,#55321c,#352818); border-color:#c9904d; }
+html[data-ui-theme="modern"] #screen-brain-slots .bs-bonus-progress span { color:#deb67e; }
+html[data-ui-theme="modern"] #screen-brain-slots .bs-sticky-cell { background:linear-gradient(145deg,#70502b,#372315); box-shadow:inset 0 0 0 1px #efcd82bb; }
+html[data-ui-theme="modern"] #screen-brain-slots .bs-sticky-cell .bs-symbol-tag { background:#49331d; }
+html[data-ui-theme="modern"] #screen-brain-slots .bs-bonus-wheel-stage { background:radial-gradient(ellipse at 50% 40%,#745431eb,#19130afa 70%); }
+@keyframes bs-symbol-pop { 0% { transform:scale(.94); } 50% { transform:scale(1.08); } 100% { transform:scale(1); } }
+@keyframes bs-award-in { from { opacity:0; transform:scale(.83) translateY(8px); } to { opacity:1; transform:scale(1) translateY(0); } }
+@media (max-width:1080px) { #screen-brain-slots .bs-layout { grid-template-columns:minmax(0,1fr) 245px; gap:13px; } #screen-brain-slots .bs-controls { padding:18px; } #screen-brain-slots .bs-edition { display:none; } #screen-brain-slots .bs-paytable { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media (max-width:760px) {
+  #screen-brain-slots .bs-heading { gap:10px; padding-bottom:18px; align-items:flex-end; }
+  #screen-brain-slots .bs-heading p { font-size:10px; max-width:260px; }
+  #screen-brain-slots .bs-kicker { font-size:7px; }
+  #screen-brain-slots .bs-rules-button { padding:10px; gap:8px; font-size:9px; border-radius:8px; }
+  #screen-brain-slots .bs-layout { grid-template-columns:minmax(0,1fr); gap:12px; }
+  #screen-brain-slots .bs-machine { padding:0 10px 12px; border-radius:18px; }
+  #screen-brain-slots .bs-machine-top { min-height:44px; font-size:8px; }
+  #screen-brain-slots .bs-machine-top b { font-size:12px; }
+  #screen-brain-slots .bs-feature-strip { min-height:22px; gap:15px; font-size:9px; margin-bottom:9px; }
+  #screen-brain-slots .bs-feature-strip b { font-size:9px; }
+  #screen-brain-slots .bs-reel-frame { padding:0 5px; border-radius:10px; }
+  #screen-brain-slots .bs-window { gap:3px; }
+  #screen-brain-slots .bs-sticky-layer { column-gap:3px; }
+  #screen-brain-slots .bs-line-selector { margin-top:9px; padding-top:9px; }
+  #screen-brain-slots .bs-line-selector > div:first-child { flex-wrap:wrap; gap:4px; margin-bottom:7px; }
+  #screen-brain-slots .bs-line-selector > div > span { font-size:8px; }
+  #screen-brain-slots .bs-line-buttons { gap:3px; }
+  #screen-brain-slots .bs-line-buttons button { min-height:40px; padding:4px 2px; }
+  #screen-brain-slots .bs-line-buttons button > b { font-size:9px; }
+  #screen-brain-slots .bs-line-buttons svg { height:12px; }
+  #screen-brain-slots .bs-bonus-progress { padding:8px 10px 11px; margin-bottom:10px; }
+  #screen-brain-slots .bs-bonus-progress span { font-size:7px; }
+  #screen-brain-slots .bs-bonus-progress b { font-size:13px; }
+  #screen-brain-slots .bs-bonus-wheel-stage { gap:7px; border-radius:9px; }
+  #screen-brain-slots .bs-wheel-heading { gap:3px; }
+  #screen-brain-slots .bs-wheel-heading span { font-size:7px; }
+  #screen-brain-slots .bs-bonus-wheel-shell { width:43%; max-height:none; }
+  #screen-brain-slots .bs-bonus-wheel { border-width:3px; }
+  #screen-brain-slots .bs-wheel-pointer { width:14px; height:19px; top:-6px; }
+  #screen-brain-slots .bs-wheel-hub { border-width:1px; }
+  #screen-brain-slots #bs-wheel-skip { padding:5px 8px; font-size:8px; }
+  #screen-brain-slots .bs-reel-numbers { height:19px; }
+  #screen-brain-slots .bs-reel-baseline { height:14px; }
+  #screen-brain-slots .bs-symbol { padding:9%; }
+  #screen-brain-slots .bs-readout { min-height:69px; padding:15px 2px 0; gap:12px; }
+  #screen-brain-slots .bs-readout p { font-size:9px; max-width:190px; }
+  #screen-brain-slots .bs-controls { display:grid; grid-template-columns:1fr 1fr; gap:10px 14px; padding:16px; }
+  #screen-brain-slots .bs-control-heading { display:none; }
+  #screen-brain-slots .bs-bet-label { margin:0; grid-column:1; }
+  #screen-brain-slots .bs-bet-box { grid-column:1; grid-row:2; height:52px; }
+  #screen-brain-slots .bs-presets { grid-column:1; grid-row:3; margin:0; }
+  #screen-brain-slots .bs-stake-breakdown { grid-column:1; grid-row:4; padding:0; font-size:9px; }
+  #screen-brain-slots .bs-tempo { grid-column:2; grid-row:1 / 3; margin:0; align-self:start; }
+  #screen-brain-slots .bs-spin-button { grid-column:2; grid-row:2 / 4; align-self:end; min-height:75px; margin-top:38px; gap:2px 9px; padding:12px; }
+  #screen-brain-slots #bs-spin-label { font-size:13px; }
+  #screen-brain-slots .bs-skip-button { grid-column:2; grid-row:4; margin:0; padding:7px 4px; font-size:9px; }
+  #screen-brain-slots .bs-status { grid-column:1 / -1; margin:2px 0 0; min-height:0; font-size:10px; }
+  #screen-brain-slots .bs-retry-button { grid-column:1 / -1; }
+  #screen-brain-slots .bs-mini-guide { display:none; }
+  #screen-brain-slots .bs-paylines { grid-template-columns:repeat(5,minmax(0,1fr)); }
+  #screen-brain-slots .bs-rules { padding:17px; }
+  #screen-brain-slots .bs-rules h3 { font-size:18px; }
+  #screen-brain-slots .bs-pay-card { grid-template-columns:40px 1fr; padding:10px; gap:5px 8px; }
+  #screen-brain-slots .bs-pay-card > b { font-size:9px; }
+  #screen-brain-slots .bs-pay-values { font-size:9px; gap:4px; }
+  #screen-brain-slots .bs-rule-specials { grid-template-columns:1fr; }
+}
+@media (max-width:370px) {
+  #screen-brain-slots .bs-heading h2 { font-size:27px; }
+  #screen-brain-slots .bs-heading p { max-width:180px; }
+  #screen-brain-slots .bs-feature-strip { gap:8px; font-size:8px; }
+  #screen-brain-slots .bs-feature-strip b { font-size:8px; }
+  #screen-brain-slots .bs-machine-top { gap:5px; font-size:7px; }
+  #screen-brain-slots .bs-machine-top b { font-size:10px; margin-right:2px; }
+  #screen-brain-slots .bs-machine-top em { margin:0 3px; }
+  #screen-brain-slots .bs-bonus-wheel-stage { gap:5px; }
+  #screen-brain-slots .bs-wheel-heading b { font-size:10px; }
+  #screen-brain-slots .bs-controls { padding:12px; gap:10px; }
+  #screen-brain-slots .bs-bet-box button { flex-basis:28px; }
+  #screen-brain-slots .bs-spin-icon { font-size:25px; }
+  #screen-brain-slots #bs-spin-label { font-size:11px; }
+  #screen-brain-slots .bs-paytable { grid-template-columns:1fr; }
+}
+@media (prefers-reduced-motion:reduce) { #screen-brain-slots *, #screen-brain-slots *::before, #screen-brain-slots *::after { animation:none !important; transition:none !important; scroll-behavior:auto !important; } }

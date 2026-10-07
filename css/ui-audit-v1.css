@@ -1,0 +1,807 @@
+/* Final cross-theme usability pass: safe areas, readable copy and explicit states. */
+:root {
+  --bb-safe-left: max(env(safe-area-inset-left, 0px), var(--tg-safe-area-inset-left, 0px), var(--tg-content-safe-area-inset-left, 0px));
+  --bb-safe-right: max(env(safe-area-inset-right, 0px), var(--tg-safe-area-inset-right, 0px), var(--tg-content-safe-area-inset-right, 0px));
+  --bb-modal-safe-top: max(12px, var(--bb-safe-top, 0px));
+  --bb-modal-safe-bottom: max(12px, var(--bb-safe-bottom, 0px));
+  --bb-readable-small: 10px;
+}
+
+html.is-telegram-webapp[data-telegram-display-mode="fullscreen"] {
+  --bb-modal-safe-top: max(72px, var(--bb-safe-top, 0px));
+}
+
+img, svg, canvas, video { max-width: 100%; }
+
+.game-desc,
+.withdraw-hint,
+.inv-source,
+.shop-rarity,
+.result-detail,
+.ticket-card small,
+.admin-player-row small,
+.profile-private-meta span,
+.public-profile-identity span,
+.public-profile-list span small,
+.public-profile-stat-grid small,
+.public-profile-balance small {
+  font-size: max(var(--bb-readable-small), .68rem) !important;
+  line-height: 1.45 !important;
+  overflow-wrap: anywhere;
+}
+
+.stat-label,
+.case-badge,
+.deposit-reward-tag,
+.deposit-reward-heading small,
+.public-profile-identity small,
+.public-profile-games small,
+.public-profile-section > header b {
+  font-size: 8px !important;
+  line-height: 1.25 !important;
+}
+
+.game-title,
+.case-name,
+.shop-name,
+.inv-name,
+.result-title,
+.public-profile-identity h2,
+.player-chat-name {
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+
+button,
+[role="button"],
+[role="checkbox"] { user-select: none; }
+
+button:disabled,
+[aria-disabled="true"] { cursor: not-allowed; }
+
+/* Withdrawal cards must never rely on a faint color change alone. */
+#inv-withdraw-panel { position: relative; }
+
+#withdraw-counter {
+  position: sticky;
+  top: 0;
+  z-index: 8;
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  border: 1px solid var(--border, #344052);
+  background: color-mix(in srgb, var(--surface, #10151d) 94%, transparent);
+  box-shadow: 0 5px 18px rgba(0,0,0,.28);
+  backdrop-filter: blur(10px);
+}
+
+#withdraw-counter.has-selection {
+  color: var(--gold, #f5c542) !important;
+  border-color: color-mix(in srgb, var(--gold, #f5c542) 60%, var(--border, #344052));
+}
+
+#withdraw-counter.is-full::after {
+  content: "ЛИМИТ";
+  margin-left: 9px;
+  padding: 2px 5px;
+  border: 1px solid currentColor;
+  font-size: 8px;
+}
+
+#inv-select-grid .withdraw-select-item {
+  position: relative;
+  isolation: isolate;
+  min-height: 144px;
+  cursor: pointer;
+  transition: border-color .15s ease, box-shadow .15s ease, transform .15s ease, filter .15s ease;
+}
+
+#inv-select-grid .withdraw-select-item::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  z-index: 4;
+  border: 1px solid transparent;
+  pointer-events: none;
+}
+
+.inv-select-state {
+  position: absolute;
+  inset: 7px 7px auto;
+  z-index: 7;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 26px;
+  opacity: 0;
+  transform: translateY(-4px);
+  pointer-events: none;
+  transition: opacity .15s ease, transform .15s ease;
+}
+
+.inv-select-check,
+.inv-select-order {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  border: 1px solid #09120a;
+  background: var(--green, #56f08b);
+  color: #061108;
+  font: 900 15px/1 system-ui, sans-serif;
+  box-shadow: 0 0 0 2px rgba(86,240,139,.22);
+}
+
+.inv-select-copy {
+  padding: 5px 7px;
+  border: 1px solid var(--green, #56f08b);
+  background: rgba(4,18,9,.92);
+  color: var(--green, #56f08b);
+  font: 700 8px/1.1 'Space Mono', monospace;
+  letter-spacing: .8px;
+}
+
+.inv-select-order {
+  margin-left: auto;
+  background: var(--gold, #f5c542);
+  box-shadow: 0 0 0 2px rgba(245,197,66,.22);
+}
+
+#inv-select-grid .withdraw-select-item.selected {
+  border: 2px solid var(--green, #56f08b) !important;
+  background: linear-gradient(rgba(86,240,139,.12), rgba(86,240,139,.035)), var(--surface2, #151c26) !important;
+  box-shadow: 0 0 0 2px rgba(86,240,139,.22), inset 0 0 0 2px rgba(5,15,9,.78), inset 0 0 28px rgba(86,240,139,.09), 0 7px 18px rgba(0,0,0,.34) !important;
+  filter: saturate(1.08) brightness(1.06);
+  transform: translateY(-2px);
+}
+
+#inv-select-grid .withdraw-select-item.selected::after { border-color: rgba(86,240,139,.55); }
+#inv-select-grid .withdraw-select-item.selected .inv-select-state { opacity: 1; transform: none; }
+#inv-select-grid .withdraw-select-item.selected .inv-emoji { transform: translateY(12px) scale(.92); }
+
+#inv-select-grid .withdraw-select-item:focus-visible {
+  outline: 3px solid var(--gold, #f5c542) !important;
+  outline-offset: 3px;
+}
+
+html[data-ui-theme="classic"] #inv-select-grid .withdraw-select-item.selected {
+  border-color: #83ff3f !important;
+  background: repeating-linear-gradient(0deg, rgba(131,255,63,.075) 0 1px, transparent 1px 5px), linear-gradient(#18300f, #071006) !important;
+  box-shadow: 0 0 0 2px #2d6019, inset 0 0 22px #030, 0 0 17px rgba(131,255,63,.24) !important;
+}
+
+/* Every full-screen layer uses Telegram's real viewport and safe areas. */
+#snd-settings-modal,
+#case-select-modal,
+#case-overlay,
+#player-profile-overlay,
+#admin-player-modal,
+#player-chat-overlay,
+#public-profile-overlay,
+#lb-image-editor,
+#lucky-draw-overlay,
+#ticket-modal,
+#ticket-create-modal,
+#custom-confirm-overlay {
+  box-sizing: border-box;
+  max-width: 100vw;
+  max-height: var(--bb-view-height, 100dvh);
+  padding-top: var(--bb-modal-safe-top) !important;
+  padding-right: max(10px, var(--bb-safe-right)) !important;
+  padding-bottom: var(--bb-modal-safe-bottom) !important;
+  padding-left: max(10px, var(--bb-safe-left)) !important;
+  overscroll-behavior: contain;
+}
+
+#player-chat-overlay { padding-bottom: 0 !important; }
+
+.snd-card,
+.csm-card,
+.lb-image-editor-panel,
+.ld-panel,
+.public-profile-modal,
+#ticket-modal > div,
+#ticket-create-modal > div,
+#admin-player-modal > div,
+#player-profile-overlay > div {
+  max-height: calc(var(--bb-view-height, 100dvh) - var(--bb-modal-safe-top) - var(--bb-modal-safe-bottom));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.csm-close,
+.ld-close,
+.lb-image-editor-close,
+.public-profile-modal-header button,
+#ticket-create-modal button[onclick="closeTicketCreate()"],
+#admin-player-modal button[onclick="closePlayerModal()"] {
+  z-index: 50;
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
+  min-height: 44px !important;
+  padding: 0 !important;
+  display: grid !important;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--text, #fff) 28%, var(--border, #344052)) !important;
+  background: color-mix(in srgb, var(--surface2, #151c26) 94%, transparent) !important;
+  color: var(--text, #fff) !important;
+  font-size: 22px !important;
+  line-height: 1 !important;
+  box-shadow: 0 5px 16px rgba(0,0,0,.32);
+}
+
+.public-profile-modal-header,
+.lb-image-editor-head {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  min-height: 54px !important;
+  background: color-mix(in srgb, var(--surface, #10151d) 96%, transparent) !important;
+  backdrop-filter: blur(10px);
+}
+
+button[aria-label^="Закрыть"],
+button[aria-label="Назад"] {
+  min-width: 44px !important;
+  min-height: 44px !important;
+  touch-action: manipulation;
+}
+
+.app-modal-close {
+  position: relative;
+  z-index: 3;
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  padding: 0 !important;
+  line-height: 1;
+  margin-left: auto !important;
+  margin-right: 0 !important;
+}
+
+/* Keep every close action on the familiar right edge.  Some close buttons
+   live inside a flex header, while the case/settings close floats over a card. */
+.csm-close,
+.csm-close.app-modal-close {
+  position: absolute !important;
+  top: 14px !important;
+  right: max(12px, var(--bb-safe-right)) !important;
+  left: auto !important;
+  margin: 0 !important;
+}
+
+.ld-close,
+.lb-image-editor-close,
+.public-profile-modal-header button,
+#ticket-create-modal button[onclick="closeTicketCreate()"],
+#admin-player-modal button[onclick="closePlayerModal()"] {
+  margin-left: auto !important;
+  margin-right: 0 !important;
+  left: auto !important;
+  right: auto;
+}
+
+/* Text that conveys status or a reward stays readable on a real phone. */
+#screen-cases .daily-case-kicker span,
+#screen-cases .daily-case-kicker b,
+#screen-cases .daily-case-copy p,
+#screen-cases .daily-case-copy small,
+#screen-cases .daily-case-level span,
+#screen-cases .daily-case-status span,
+#screen-cases .daily-case-status b,
+#screen-cases .daily-case-loading span,
+#screen-cases .deposit-reward-heading p,
+#screen-cases .deposit-reward-heading small,
+#screen-cases .deposit-reward-card-top > strong i,
+#screen-cases .deposit-reward-progress-copy span,
+#screen-cases .deposit-reward-progress-copy b,
+#screen-cases .deposit-reward-state span,
+#screen-cases .deposit-reward-state b,
+#screen-cases .deposit-reward-loading span,
+#screen-cases .deposit-reward-badge,
+#screen-cases .deposit-reward-action,
+.case-spin-item .item-name,
+.lb-entry-kicker,
+.lb-entry-state,
+.lb-image-editor-transform span,
+.lb-image-editor-transform strong,
+.analytics-row-head small,
+.analytics-toggle-row > div:first-child small,
+.analytics-toggle-value span,
+.analytics-recent-row small,
+.craft-readout small,
+.craft-mode-tab,
+.mines-board-status,
+.mines-readouts span,
+.mines-control-label small,
+.rocket-machine-plate,
+.rocket-side-gauge > span,
+.rocket-side-gauge > b,
+.rocket-side-gauge > small,
+.rocket-readout-label,
+.rocket-readout span,
+.rocket-stage-stats span,
+.rocket-input-group label,
+.rocket-input-group label small,
+.rocket-input-note,
+.profile-editor-heading small,
+.profile-choice-title,
+.profile-choice-title span,
+.profile-editor-fields label > span,
+.profile-accent-option > span,
+.profile-privacy-grid span small,
+.profile-level-roadmap article span small,
+.profile-style-option b,
+.profile-level-next span,
+.profile-avatar-options label span small,
+.achievement-copy p,
+.achievement-copy > small,
+.achievement-copy .achievement-reward,
+.public-achievement-showcase article span small,
+.profile-style-group > summary small,
+.profile-username-body > p,
+.profile-next-unlocks.is-complete b,
+.profile-workshop-tabs button,
+.profile-workshop-tabs button i,
+.profile-pane-intro span,
+.profile-style-group > header span,
+.profile-editor-heading p,
+.profile-editor-status > span,
+.profile-editor-status > button,
+.profile-featured-badge b,
+.profile-featured-empty span,
+.achievement-shop > p,
+.achievement-shop-item > button b {
+  font-size: 9px !important;
+  line-height: 1.35 !important;
+}
+
+@media (max-width: 600px) {
+  #screen-cases .daily-case-copy p,
+  #screen-cases .deposit-reward-heading p,
+  .achievement-copy p,
+  .profile-editor-heading p,
+  .rocket-input-note {
+    font-size: 10px !important;
+  }
+}
+
+#ticket-modal > div > div:first-child,
+#ticket-create-modal > div > div:first-child,
+#admin-player-modal > div > div:first-child,
+#player-profile-overlay > div > button:first-child {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+}
+
+.bet-input-wrap,
+.modal-actions,
+.case-result-actions,
+.craft-actions,
+.inv-item-btns { flex-wrap: wrap; }
+
+.bet-input-wrap > input,
+.bet-input-wrap > textarea,
+.bet-input-wrap > select { flex: 1 1 150px; }
+
+.result-box,
+.bet-area,
+.game-header,
+.shop-card,
+.inv-item,
+.case-card,
+.admin-player-row,
+.ticket-card { overflow-wrap: anywhere; }
+
+@media (max-width: 600px) {
+  .screen { overflow-x: clip; }
+  .game-header { min-height: 0; padding: 12px !important; }
+  .game-title { font-size: clamp(21px, 7vw, 30px) !important; line-height: 1.08 !important; }
+  .game-desc { margin-top: 7px; color: color-mix(in srgb, var(--text, #fff) 70%, var(--text-dim, #8691a4)) !important; }
+  .header-logo { font-size: clamp(18px, 5.4vw, 24px) !important; }
+  .stat-label { font-size: 7px !important; }
+  .stat-value { font-size: 12px !important; }
+  .nav-btn span:not(.nav-icon) { font-size: 8px !important; line-height: 1.15; }
+
+  #inv-select-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+  #inv-select-grid .withdraw-select-item { min-height: 154px; padding: 42px 8px 10px !important; }
+  #inv-select-grid .withdraw-select-item .inv-name { font-size: 12px !important; line-height: 1.2; }
+
+  #inv-withdraw-panel > div[style*="display:flex"] {
+    position: sticky;
+    bottom: calc(var(--bb-safe-bottom, 0px) + 4px);
+    z-index: 20;
+    padding: 8px;
+    border: 1px solid var(--border, #344052);
+    background: color-mix(in srgb, var(--bg, #080b10) 94%, transparent);
+    box-shadow: 0 -8px 24px rgba(0,0,0,.45);
+    backdrop-filter: blur(10px);
+  }
+
+  #inv-withdraw-panel .play-btn {
+    flex: 1 1 140px;
+    min-height: 48px;
+    padding-inline: 10px !important;
+    font-size: 10px !important;
+    white-space: normal;
+  }
+
+  #ticket-modal,
+  #ticket-create-modal,
+  #admin-player-modal,
+  #player-profile-overlay { padding-inline: 8px !important; }
+
+  .snd-card,
+  .csm-card,
+  .lb-image-editor-panel,
+  .ld-panel,
+  .public-profile-modal { width: 100% !important; max-width: 100% !important; }
+
+  .public-profile-modal > #public-profile-content { padding: 10px !important; }
+  .public-profile-hero,
+  .profile-live-preview-card.public-profile-hero { gap: 9px !important; padding: 12px !important; }
+  .public-profile-identity h2 { font-size: 20px !important; }
+
+  button,
+  [role="button"] { min-height: 40px; }
+}
+
+@media (max-width: 360px) {
+  #inv-select-grid { grid-template-columns: 1fr; }
+  #inv-select-grid .withdraw-select-item { min-height: 132px; }
+  .header { padding-inline: 7px !important; }
+  .header-logo { letter-spacing: 1px !important; }
+  .stat-value { max-width: 94px !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #inv-select-grid .withdraw-select-item,
+  .inv-select-state { transition: none !important; }
+}
+
+/* 2026-08: the modern theme gets its own game hardware, not a recolored classic UI. */
+html[data-ui-theme="modern"] #screen-rocket .rocket-terminal {
+  --deck-copper: #d86325;
+  --deck-gold: #ffc247;
+  --deck-green: #64f36e;
+  border: 2px solid #7b351b;
+  background: #160b07;
+  box-shadow: inset 0 0 0 4px #080503, 0 14px 32px rgba(0,0,0,.46);
+}
+
+html[data-ui-theme="modern"] #screen-rocket .rocket-terminal-rail {
+  min-height: 42px;
+  border: 0;
+  border-bottom: 2px solid #8d3f1d;
+  background:
+    repeating-linear-gradient(135deg, #2c120a 0 10px, #180b07 10px 20px);
+  color: #ffd46a;
+  box-shadow: inset 0 -1px #ff8a35;
+}
+
+html[data-ui-theme="modern"] #screen-rocket .rocket-stage::before,
+html[data-ui-theme="modern"] #screen-rocket .rocket-stage::after {
+  width: 14px;
+  border: 0;
+  background:
+    repeating-linear-gradient(180deg, #ef782f 0 5px, #3b160c 5px 13px);
+  box-shadow: inset 0 0 0 3px #160906;
+  opacity: 1;
+}
+
+html[data-ui-theme="modern"] #screen-rocket .rocket-machine-plate {
+  top: 16px;
+  left: 18px;
+  border: 1px solid #9b5428;
+  background: #211007;
+  color: #ffb34b;
+  box-shadow: 3px 3px 0 #060302;
+}
+
+html[data-ui-theme="modern"] #screen-rocket .rocket-bay-lights {
+  top: 18px;
+  right: 20px;
+  padding: 5px;
+  border: 1px solid #6a3921;
+  background: #0c0805;
+}
+
+html[data-ui-theme="modern"] #screen-rocket .rocket-bay-lights i {
+  background: #ff9f2e;
+  box-shadow: 0 0 7px rgba(255,147,40,.8);
+}
+
+html[data-ui-theme="modern"] #screen-rocket .rocket-launch-rig {
+  border-color: #9c4d22;
+  background: #180b06;
+  box-shadow: 4px 4px 0 #050302;
+}
+
+html[data-ui-theme="modern"] #screen-rocket .rocket-stage-stats {
+  right: 22px;
+  bottom: 8px;
+  left: 22px;
+}
+
+html[data-ui-theme="modern"] #screen-rocket .rocket-stage-stats div {
+  border: 1px solid #6f3b20;
+  border-top: 3px solid #ef742d;
+  background: #100a06;
+}
+
+html[data-ui-theme="modern"] #screen-rocket .rocket-stage-stats b { color: #aaff79; }
+
+html[data-ui-theme="modern"] #screen-rocket .rocket-lower {
+  border-top: 2px solid #8b3d1d;
+  background: #120906;
+}
+
+html[data-ui-theme="modern"] #screen-rocket .rocket-input-group,
+html[data-ui-theme="modern"] #screen-rocket .rocket-roster {
+  border-color: #6b341c;
+  background: #190d08;
+}
+
+/* Level case in the modern skin: a compact prize dispenser, not the classic panel. */
+html[data-ui-theme="modern"] #screen-cases .daily-level-case {
+  border: 2px solid #bd551f;
+  background:
+    repeating-linear-gradient(135deg, rgba(255,150,50,.05) 0 8px, transparent 8px 16px),
+    #180b06;
+  box-shadow: inset 0 0 0 4px #070402, 0 10px 24px rgba(0,0,0,.35);
+}
+
+html[data-ui-theme="modern"] #screen-cases .daily-level-case::before {
+  background:
+    linear-gradient(90deg, transparent 0 93%, rgba(99,244,111,.09) 93%),
+    repeating-linear-gradient(0deg, rgba(255,174,56,.035) 0 1px, transparent 1px 5px);
+  background-size: 26px 100%, 100% 5px;
+}
+
+html[data-ui-theme="modern"] #screen-cases .daily-case-kicker {
+  min-height: 38px;
+  border-bottom: 2px solid #9b431d;
+  background: repeating-linear-gradient(135deg, #321408 0 9px, #1d0b06 9px 18px);
+}
+
+html[data-ui-theme="modern"] #screen-cases .daily-case-kicker span { color: #77ff73; }
+html[data-ui-theme="modern"] #screen-cases .daily-case-kicker b { color: #ffc55f; }
+
+html[data-ui-theme="modern"] #screen-cases .daily-case-copy h3 {
+  color: #fff0c6;
+  text-shadow: 2px 2px 0 #7b2d16;
+}
+
+html[data-ui-theme="modern"] #screen-cases .daily-case-preview > span {
+  border: 2px solid #a94a20;
+  background: #261109;
+  box-shadow: 5px 6px 0 #090402;
+}
+
+html[data-ui-theme="modern"] #screen-cases .daily-case-preview > span:nth-child(2) {
+  border-color: #62e96c;
+  background: #10200f;
+}
+
+html[data-ui-theme="modern"] #screen-cases .daily-case-level,
+html[data-ui-theme="modern"] #screen-cases .daily-case-status {
+  border-color: #70371d;
+  background: #0d0805;
+}
+
+html[data-ui-theme="modern"] #screen-cases .daily-case-level > i {
+  border-color: #77391d;
+  background: #050302;
+}
+
+html[data-ui-theme="modern"] #screen-cases .daily-case-level > i > b {
+  background: repeating-linear-gradient(90deg, #6df273 0 10px, #c9ff68 10px 13px);
+}
+
+html[data-ui-theme="modern"] #screen-cases .daily-case-action:not(:disabled) {
+  border-color: #81ff70;
+  background: #69e866;
+  box-shadow: inset 0 0 0 3px #b7ff83, 0 4px 0 #1d6726;
+}
+
+/* Event recipes are contracts: clearly separate inputs, output and shared quota. */
+#screen-craft .craft-mode-tab.event:not(:disabled) {
+  position: relative;
+  border-width: 2px;
+  color: #ffd0f3;
+}
+
+#screen-craft .craft-mode-tab.event:not(:disabled)::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  margin-right: 6px;
+  border-radius: 50%;
+  background: #ff5bd2;
+  box-shadow: 0 0 8px #ff5bd2;
+  animation: craftEventLive 1.4s steps(2,end) infinite;
+}
+
+@keyframes craftEventLive { 50% { opacity: .25; } }
+
+#screen-craft .craft-event-card {
+  padding: 12px;
+  border: 2px solid #d44fb7;
+  background:
+    linear-gradient(rgba(240,92,208,.045) 1px, transparent 1px) 0 0 / 100% 18px,
+    #160914;
+}
+
+#screen-craft .craft-event-head b { font-size: 16px; line-height: 1.18; }
+#screen-craft .craft-event-head small { font-size: 8px; }
+#screen-craft .craft-event-card > p { font-size: 10px; line-height: 1.45; }
+
+#screen-craft .craft-event-callout {
+  display: grid;
+  grid-template-columns: 100px minmax(0,1fr);
+  gap: 10px;
+  margin: 0 0 10px;
+  padding: 9px;
+  border: 1px solid rgba(255,205,93,.55);
+  border-left: 4px solid #ffd05d;
+  background: #211507;
+}
+
+#screen-craft .craft-event-callout b {
+  color: #ffda75;
+  font: 800 9px/1.25 'Space Mono', monospace;
+}
+
+#screen-craft .craft-event-callout span {
+  color: #d5c4d0;
+  font: 700 9px/1.45 'Space Mono', monospace;
+}
+
+#screen-craft .craft-event-recipes { grid-template-columns: 1fr; gap: 10px; }
+
+#screen-craft .craft-event-recipe {
+  padding: 11px;
+  border: 1px solid rgba(239,91,212,.5);
+  background: #10080f;
+}
+
+#screen-craft .craft-event-recipe.selected {
+  border: 2px solid #ffe06e;
+  background: #24101f;
+  box-shadow: inset 5px 0 #5cea76, 0 0 18px rgba(239,91,212,.18);
+}
+
+#screen-craft .craft-event-recipe-index {
+  display: inline-block;
+  margin-bottom: 6px;
+  padding: 3px 5px;
+  border: 1px solid #a94691;
+  color: #ff9fe9;
+  font: 800 7px/1 'Space Mono', monospace;
+  letter-spacing: .8px;
+}
+
+#screen-craft .craft-event-recipe-top b { font-size: 13px; }
+#screen-craft .craft-event-recipe-top strong { font-size: 9px; }
+#screen-craft .craft-event-recipe-copy { min-height: 0; font-size: 9px; line-height: 1.4; }
+#screen-craft .craft-event-recipe-value,
+#screen-craft .craft-event-case-rule { font-size: 8px; }
+
+#screen-craft .craft-event-formula {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) 24px minmax(112px,.42fr);
+  align-items: stretch;
+  gap: 7px;
+  margin-top: 4px;
+  padding-top: 9px;
+}
+
+#screen-craft .craft-event-formula > i { align-self: center; text-align: center; }
+
+#screen-craft .craft-event-side {
+  min-width: 0;
+  padding: 7px;
+  border: 1px solid rgba(213,113,190,.32);
+  background: rgba(0,0,0,.22);
+}
+
+#screen-craft .craft-event-side > em {
+  display: block;
+  margin-bottom: 6px;
+  color: #c591bb;
+  font: normal 700 7px/1.2 'Space Mono', monospace;
+  letter-spacing: .5px;
+}
+
+#screen-craft .craft-event-inputs {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 4px;
+}
+
+#screen-craft .craft-event-recipe-part {
+  width: 100%;
+  min-height: 39px;
+  padding: 4px;
+}
+
+#screen-craft .craft-event-recipe-part b { font-size: 8px; }
+#screen-craft .craft-event-recipe-part small { font-size: 7px; }
+
+#screen-craft .craft-event-output {
+  display: flex;
+  flex-direction: column;
+  border-color: rgba(255,214,91,.62);
+  background: rgba(65,37,5,.34);
+}
+
+#screen-craft .craft-event-output .craft-event-recipe-part.target {
+  flex: 1 1 auto;
+  width: 100%;
+  border: 0;
+  background: transparent;
+}
+
+#screen-craft .craft-event-recipe-foot {
+  display: grid;
+  grid-template-columns: auto minmax(70px,1fr);
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  color: #ffd66d;
+  font-size: 8px;
+}
+
+#screen-craft .craft-event-recipe-foot > i {
+  height: 6px;
+  border: 1px solid #73335f;
+  background: #090407;
+}
+
+#screen-craft .craft-event-recipe-foot u {
+  display: block;
+  height: 100%;
+  background: #ee5acb;
+  text-decoration: none;
+}
+
+.lb-period-row {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.lb-period-btn { min-width: 0; white-space: normal; }
+
+@media (max-width: 620px) {
+  html[data-ui-theme="modern"] #screen-rocket .rocket-stage-stats { right: 14px; left: 14px; }
+
+  html[data-ui-theme="modern"] #screen-cases .daily-case-kicker { min-height: 28px; }
+
+  #screen-craft .craft-event-callout { grid-template-columns: 1fr; gap: 4px; }
+  #screen-craft .craft-event-formula { grid-template-columns: 1fr; }
+  #screen-craft .craft-event-formula > i { transform: rotate(90deg); }
+  #screen-craft .craft-event-inputs { grid-template-columns: repeat(2,minmax(0,1fr)); }
+
+  .lb-period-row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 5px;
+    padding: 5px;
+  }
+  .lb-period-btn {
+    min-height: 38px;
+    padding: 6px 5px !important;
+    color: #a98d75;
+    font-size: 8px !important;
+    line-height: 1.3;
+    letter-spacing: .35px;
+    overflow-wrap: anywhere;
+  }
+  .lb-period-btn.active { color: #ffd86a; }
+}

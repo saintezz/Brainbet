@@ -1,0 +1,277 @@
+/* ROTDECK scratch ticket — loaded last so both active themes share the same interaction. */
+.resonance-signal-zone {
+  grid-template-columns: minmax(24px, 1fr) auto minmax(170px, 1fr);
+  grid-template-areas:
+    ". scratch-label ."
+    ". scratch-ticket scratch-tools";
+  align-items: center;
+  column-gap: clamp(16px, 3vw, 44px);
+  min-height: 270px;
+  padding: 18px 18px 10px;
+}
+
+.resonance-signal-label {
+  grid-area: scratch-label;
+  justify-self: center;
+}
+
+.resonance-scratch-stage {
+  grid-area: scratch-ticket;
+  position: relative;
+  z-index: 2;
+  width: clamp(154px, 13vw, 196px);
+  aspect-ratio: .86;
+  isolation: isolate;
+  filter: drop-shadow(0 16px 18px rgba(0, 0, 0, .45));
+}
+
+.resonance-scratch-stage::before {
+  content: "ROTDECK // СКРЕТЧ-КОД";
+  position: absolute;
+  z-index: 6;
+  right: 8px;
+  bottom: 7px;
+  max-width: calc(100% - 16px);
+  overflow: hidden;
+  color: rgba(223, 255, 255, .48);
+  font: 700 5px/1 "IBM Plex Mono", monospace;
+  letter-spacing: .13em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.resonance-scratch-stage .resonance-signal-card {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+}
+
+.resonance-scratch-stage.is-scratch-ready .resonance-signal-card {
+  animation: none;
+  transform: translateZ(0);
+}
+
+.resonance-scratch-stage.is-scratch-ready::after {
+  content: "БИЛЕТ ЗАФИКСИРОВАН";
+  position: absolute;
+  z-index: 7;
+  top: -23px;
+  left: 50%;
+  padding: 4px 8px;
+  border: 1px solid rgba(242, 211, 111, .45);
+  color: #f4d56d;
+  background: #0a0d11;
+  font: 800 6px/1 "IBM Plex Mono", monospace;
+  letter-spacing: .15em;
+  white-space: nowrap;
+  transform: translateX(-50%);
+  box-shadow: 0 0 16px rgba(244, 213, 109, .12);
+}
+
+.resonance-scratch-stage.is-hand-editable::after {
+  content: "ДО КАСАНИЯ МОЖНО ЗАМЕНИТЬ";
+  border-color: rgba(91, 225, 241, .45);
+  color: #9bf7ff;
+  box-shadow: 0 0 16px rgba(91, 225, 241, .13);
+}
+
+.resonance-scratch-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(94, 245, 226, .72);
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  cursor: grab;
+  touch-action: none;
+  transition: opacity .32s ease, filter .32s ease, transform .32s ease;
+  box-shadow:
+    0 0 0 1px rgba(242, 204, 82, .16),
+    0 0 28px rgba(48, 222, 211, .2),
+    inset 0 0 22px rgba(53, 224, 213, .08);
+}
+
+.resonance-scratch-canvas:active { cursor: grabbing; }
+.resonance-scratch-canvas.is-cleared {
+  opacity: 0;
+  filter: blur(5px) brightness(1.4);
+  transform: scale(1.035);
+  pointer-events: none;
+}
+
+.resonance-scratch-coin {
+  position: absolute;
+  z-index: 9;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 2px solid #ffe487;
+  border-radius: 50%;
+  color: #593f02;
+  background:
+    radial-gradient(circle at 34% 28%, #fff5b6 0 6%, transparent 7%),
+    radial-gradient(circle, #f8d94e 0 54%, #bd8014 56% 65%, #ffe477 67% 72%, #8f5b0e 74%);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, .42), 0 0 16px rgba(249, 204, 57, .35);
+  transform: translate(-50%, -50%) rotate(-11deg);
+  pointer-events: none;
+}
+
+.resonance-scratch-coin i {
+  font-size: 16px;
+  font-style: normal;
+  filter: sepia(.3) saturate(.8);
+}
+
+.resonance-ticket-cut {
+  position: absolute;
+  z-index: 8;
+  top: 50%;
+  width: 13px;
+  height: 26px;
+  border: 1px solid rgba(244, 213, 109, .62);
+  border-radius: 50%;
+  background: #070b10;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+.ticket-cut-left { left: -8px; }
+.ticket-cut-right { right: -8px; }
+
+.resonance-scratch-tools {
+  grid-area: scratch-tools;
+  justify-self: start;
+  display: grid;
+  gap: 10px;
+  width: min(220px, 100%);
+  padding: 13px;
+  border: 1px solid rgba(91, 225, 241, .24);
+  background: linear-gradient(145deg, rgba(12, 27, 34, .93), rgba(6, 10, 15, .96));
+  box-shadow: inset 3px 0 #40d8e8, 0 12px 28px rgba(0, 0, 0, .3);
+}
+
+.resonance-scratch-tools[hidden],
+.resonance-scratch-canvas[hidden],
+.resonance-scratch-coin[hidden] { display: none !important; }
+
+.resonance-scratch-instruction { display: grid; gap: 5px; }
+.resonance-scratch-instruction b {
+  color: #c6fbff;
+  font: 900 9px/1.1 "IBM Plex Mono", monospace;
+  letter-spacing: .08em;
+}
+.resonance-scratch-instruction span {
+  color: #6f8992;
+  font: 600 7px/1.45 "IBM Plex Mono", monospace;
+}
+
+.resonance-scratch-progress {
+  position: relative;
+  overflow: hidden;
+  height: 23px;
+  border: 1px solid #263d46;
+  background: #05080c;
+}
+.resonance-scratch-progress i {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0;
+  background: linear-gradient(90deg, #1ea6b9, #63f1cb, #f3d663);
+  box-shadow: 0 0 15px rgba(72, 226, 215, .45);
+  transition: width .12s linear;
+}
+.resonance-scratch-progress b {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #eefeff;
+  font: 900 8px/1 "IBM Plex Mono", monospace;
+  text-shadow: 0 1px 2px #000;
+}
+
+#resonance-quick-scratch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 39px;
+  border: 1px solid #e2bc49;
+  color: #1d1604;
+  background: linear-gradient(100deg, #f8de74, #c99321);
+  font: 900 8px/1 "IBM Plex Mono", monospace;
+  letter-spacing: .09em;
+  cursor: pointer;
+  box-shadow: 0 7px 18px rgba(212, 164, 35, .16), inset 0 1px rgba(255, 255, 255, .55);
+  transition: transform .18s ease, filter .18s ease;
+}
+#resonance-quick-scratch:hover { transform: translateY(-2px); filter: brightness(1.09); }
+#resonance-quick-scratch:disabled { cursor: wait; filter: saturate(.35); transform: none; }
+
+.resonance-scratch-dust {
+  position: absolute;
+  z-index: 10;
+  width: 4px;
+  height: 2px;
+  border-radius: 50%;
+  background: #63eee0;
+  box-shadow: 0 0 4px #65f6e7, 5px 2px 0 -1px #c186ff, -4px 3px 0 -1px #f3ce61;
+  pointer-events: none;
+  animation: rotdeckDust .62s ease-out forwards;
+}
+
+.resonance-scratch-stage.is-revealed {
+  animation: rotdeckTicketReveal .56s cubic-bezier(.18, .82, .2, 1);
+}
+
+html[data-ui-theme="classic"] .resonance-scratch-tools {
+  border-color: rgba(239, 154, 42, .45);
+  background: linear-gradient(145deg, rgba(48, 20, 7, .95), rgba(11, 10, 8, .97));
+  box-shadow: inset 3px 0 #ef6d27, 0 12px 28px rgba(0, 0, 0, .34);
+}
+html[data-ui-theme="classic"] .resonance-scratch-instruction b { color: #ffe6a1; }
+
+@keyframes rotdeckDust {
+  to { opacity: 0; transform: translate(var(--dust-x), var(--dust-y)) rotate(170deg); }
+}
+
+@keyframes rotdeckTicketReveal {
+  0% { filter: drop-shadow(0 16px 18px rgba(0, 0, 0, .45)) brightness(1); }
+  48% { filter: drop-shadow(0 0 32px rgba(88, 239, 230, .9)) brightness(1.7); transform: scale(1.035); }
+  100% { filter: drop-shadow(0 16px 18px rgba(0, 0, 0, .45)) brightness(1); transform: scale(1); }
+}
+
+@media (max-width: 760px) {
+  .resonance-signal-zone {
+    grid-template-columns: 1fr;
+    grid-template-areas: "scratch-label" "scratch-ticket" "scratch-tools";
+    row-gap: 13px;
+    min-height: 0;
+    padding: 22px 12px 8px;
+  }
+  .resonance-scratch-stage { width: min(46vw, 176px); }
+  .resonance-scratch-tools {
+    justify-self: center;
+    grid-template-columns: minmax(0, 1fr) auto;
+    width: min(360px, 100%);
+  }
+  .resonance-scratch-instruction { grid-column: 1 / -1; }
+  .resonance-scratch-progress { align-self: center; }
+  #resonance-quick-scratch { min-width: 135px; padding-inline: 11px; }
+  .resonance-score-display { right: 8px !important; top: 15px !important; bottom: auto !important; }
+}
+
+@media (max-width: 410px) {
+  .resonance-scratch-tools { grid-template-columns: 1fr; }
+  .resonance-scratch-instruction { grid-column: auto; }
+  .resonance-scratch-stage { width: min(52vw, 168px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .resonance-scratch-dust,
+  .resonance-scratch-stage.is-revealed { animation: none !important; }
+  .resonance-scratch-canvas,
+  .resonance-scratch-progress i { transition: none !important; }
+}
